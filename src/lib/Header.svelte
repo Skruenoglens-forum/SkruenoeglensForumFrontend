@@ -10,22 +10,18 @@
 </script>
 
 <style>
-	/* Tilpasninger af knapstil */
 	.button {
 	  @apply px-4 py-2 rounded-md font-semibold transition duration-300 ease-in-out;
 	}
   
-	/* Grøn knapstil */
 	.login-button {
 	  @apply bg-green-500 text-white hover:bg-green-600;
 	}
   
-	/* Rød knapstil */
 	.logout-button {
 	  @apply bg-red-500 text-white hover:bg-red-600;
 	}
 
-	/* Rød knapstil */
 	.signup-button {
 	  @apply bg-blue-500 text-white hover:bg-blue-600;
 	}
@@ -39,7 +35,7 @@
 	}
 </style>
 
-<header>
+<header class="mb-10">
 	<nav class="flex justify-between items-center py-4 px-6 bg-white text-black shadow-lg">
 		<a href="/" class="flex items-center mr-5">
 			<img src="../favicon.png" alt="logo" class="h-8 w-auto">
@@ -62,7 +58,7 @@
 			</a>
 			<a href="/signup" class="button signup-button">Opret bruger</a>
 			<a href="/login" class="button login-button">Log ind</a>
-			<a href="/logout" class="button logout-button">Log ud</a>
+			<a href="/" class="button logout-button">Log ud</a>
 		</div>
 		<button on:click={toggleMenu} data-collapse-toggle="mobile-menu-2" type="button" class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200" aria-controls="mobile-menu-2" aria-expanded="false">
 			<span class="sr-only">Open main menu</span>
@@ -114,7 +110,7 @@
 							<a href="/login" on:click={toggleMenu} class="w-full max-w-md block button login-button">Log ind</a>
 						</div>
 						<div class="flex-1 flex justify-center">
-							<a href="/logout" on:click={toggleMenu} class="w-full max-w-md block button logout-button">Log ud</a>
+							<a href="/" on:click={toggleMenu} class="w-full max-w-md block button logout-button">Log ud</a>
 						</div>
 					</div>
 				</div>

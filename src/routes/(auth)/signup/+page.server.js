@@ -23,7 +23,7 @@ const signup = async ({ request }) => {
 	}
 
 	// MAKE POST SIGNUP REQUEST
-	const response = await fetch('http://172.17.0.3:8585/api/v1/users', {
+	const response = await fetch('https://userapi.emilstorgaard/api/v1/users', {
 		method: 'POST',
 		headers: {
 		  'Content-Type': 'application/json'

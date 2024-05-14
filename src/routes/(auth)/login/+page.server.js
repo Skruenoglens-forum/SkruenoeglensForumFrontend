@@ -17,7 +17,7 @@ const login = async ({ cookies, request }) => {
 	}
 
 	// MAKE POST LOGIN REQUEST
-	const response = await fetch('http://172.17.0.3:8585/api/v1/auth/login', {
+	const response = await fetch('https://userapi.emilstorgaard.dk/api/v1/auth/login', {
 		method: 'POST',
 		headers: {
 		  'Content-Type': 'application/json'

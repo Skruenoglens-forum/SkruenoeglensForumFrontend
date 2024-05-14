@@ -32,8 +32,6 @@ const login = async ({ cookies, request }) => {
 	// get response text
 	const resp = await response.json();
 
-	console.log(resp.token),
-
 	cookies.set('jwt', resp.token, {
 		// send cookie for every page
 		path: '/',

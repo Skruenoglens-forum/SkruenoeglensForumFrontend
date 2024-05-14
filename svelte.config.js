@@ -10,7 +10,11 @@ const config = {
 		adapter: adapter(),
 		csrf: {
 			checkOrigin: false,
+<<<<<<< HEAD
 		}
+=======
+		  }
+>>>>>>> defc3b63033fba6ef598ec7fa2288f33c374ac27
 	},
 	preprocess: vitePreprocess()
 };

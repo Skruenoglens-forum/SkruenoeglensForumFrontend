@@ -6,7 +6,7 @@
                     Admin
                 </h1>
                 <form class="space-y-4 md:space-y-6" action="#">
-                    <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+                    <p class="text-sm font-light text-gray-500">
                         Admindata kommer snart...
                     </p>
                 </form>

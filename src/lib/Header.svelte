@@ -47,18 +47,28 @@
 		</div>			
 
 		<div class="hidden lg:flex items-center space-x-4 ml-5">
+			{#if $page.data.user}
 			<a href="/notifications" class="button default-button w-max-md">
 				<img class="h-6 w-auto" src="../bell.png" alt="notifications">
 			</a>
 			<a href="/profile" class="button default-button">
 				<img class="h-6 w-auto" src="../user.png" alt="profile">
 			</a>
+			{#if $page.data.user.role_id == 1}
 			<a href="/admin" class="button default-button">
 				<img class="h-6 w-auto" src="../admin.png" alt="admin">
 			</a>
+			{/if}
+			{/if}
+			{#if !$page.data.user}
 			<a href="/signup" class="button signup-button">Opret bruger</a>
 			<a href="/login" class="button login-button">Log ind</a>
-			<a href="/" class="button logout-button">Log ud</a>
+			{/if}
+			{#if $page.data.user}
+			<form action="/logout" method="POST">
+				<button type="submit" class="button logout-button">Log ud</button>
+			</form>
+			{/if}
 		</div>
 		<button on:click={toggleMenu} data-collapse-toggle="mobile-menu-2" type="button" class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200" aria-controls="mobile-menu-2" aria-expanded="false">
 			<span class="sr-only">Open main menu</span>
@@ -86,6 +96,7 @@
 						<div class="flex-1 flex justify-center">
 							<input type="text" placeholder="Search" class="search-input">
 						</div>
+						{#if $page.data.user}
 						<div class="flex-1 flex justify-center">
 							<a href="/notifications" on:click={toggleMenu} class="w-full max-w-md block button default-button flex justify-center items-center">
 								<img class="h-6 w-auto" src="../bell.png" alt="notifications">
@@ -96,22 +107,29 @@
 								<img class="h-6 w-auto" src="../user.png" alt="profile">
 							</a>
 						</div>
+						{#if $page.data.user.role_id == 1}
 						<div class="flex-1 flex justify-center">
 							<a href="/admin" on:click={toggleMenu} class="w-full max-w-md block button default-button flex justify-center items-center">
 								<img class="h-6 w-auto" src="../admin.png" alt="admin">
 							</a>
 						</div>
+						{/if}
+						{/if}
 					</div>
 					<div class="space-y-2 py-6 mx-auto max-w-5xs text-center">
+						{#if !$page.data.user}
 						<div class="flex-1 flex justify-center">
 							<a href="/signup" on:click={toggleMenu} class="w-full max-w-md block button signup-button">Opret bruger</a>
 						</div>
 						<div class="flex-1 flex justify-center">
 							<a href="/login" on:click={toggleMenu} class="w-full max-w-md block button login-button">Log ind</a>
 						</div>
+						{/if}
+						{#if $page.data.user}
 						<div class="flex-1 flex justify-center">
 							<a href="/" on:click={toggleMenu} class="w-full max-w-md block button logout-button">Log ud</a>
 						</div>
+						{/if}
 					</div>
 				</div>
     		</div>

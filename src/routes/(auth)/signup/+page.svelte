@@ -10,6 +10,10 @@
 	}
 </style>
 
+<script>
+	export let form
+</script>
+
 <section class="bg-gray-0">
     <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0">
         <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900">
@@ -43,3 +47,15 @@
         </div>
     </div>
   </section>
+
+{#if form?.invalid}
+  <p>Invalid values.</p>
+{/if}
+
+{#if form?.pwdMatch}
+  <p>Password does not match.</p>
+{/if}
+
+{#if form?.user}
+  <p>Email is taken.</p>
+{/if}

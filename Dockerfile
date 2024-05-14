@@ -7,6 +7,13 @@ COPY . .
 
 # Installér afhængigheder og byg Svelte-appen
 RUN npm install
+
+# manually install jsonwebtoken
+RUN npm install jsonwebtoken
+
+# remove potential security issues
+RUN npm audit fix
+
 RUN npm run build
 
 # Eksponér port 8888

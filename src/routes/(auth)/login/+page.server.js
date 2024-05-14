@@ -17,7 +17,7 @@ const login = async ({ cookies, request }) => {
 	}
 
 	// MAKE POST LOGIN REQUEST
-	const response = await fetch('http://192.168.1.135:8585/api/v1/auth/login', {
+	const response = await fetch('https://api.emilstorgaard.dk/api/v1/auth/login', {
 		method: 'POST',
 		headers: {
 		  'Content-Type': 'application/json'
@@ -32,6 +32,8 @@ const login = async ({ cookies, request }) => {
 	// get response text
 	const resp = await response.json();
 
+	console.log(resp.token),
+
 	cookies.set('jwt', resp.token, {
 		// send cookie for every page
 		path: '/',
@@ -39,7 +41,7 @@ const login = async ({ cookies, request }) => {
 		httpOnly: true,
 		// only requests from same site can send cookies
 		// https://developer.mozilla.org/en-US/docs/Glossary/CSRF
-		sameSite: 'strict',
+		//sameSite: 'strict',
 		// only sent over HTTPS in production
 		secure: process.env.NODE_ENV === 'production',
 		// set cookie to expire after 15min

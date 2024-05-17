@@ -23,7 +23,7 @@ const signup = async ({ request }) => {
 	}
 
 	// MAKE POST SIGNUP REQUEST
-	const response = await fetch('https://api.emilstorgaard.dk/api/v1/users', {
+	const response = await fetch('https://svendeapi.emilstorgaard.dk/api/v1/users', {
 		method: 'POST',
 		headers: {
 		  'Content-Type': 'application/json'

@@ -41,10 +41,13 @@
 							</div>
 							<div class="mt-4 sm:mt-0 sm:ml-auto flex items-center space-x-4">
 								<span class="text-sm text-gray-500">
-									<a href="/login" class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md transition duration-300 ease-in-out">Rediger</a>
+									<a href="/users/{user.id}/edit" class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md transition duration-300 ease-in-out">Rediger</a>
 								</span>
 								<span class="text-sm text-gray-500">
-									<a href="/login" class="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md transition duration-300 ease-in-out">Slet</a>
+									<form action="?/deleteUser" method="POST">
+										<input type="hidden" name="userID" value={user.id}>  
+										<button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md transition duration-300 ease-in-out">Slet</button>
+									</form>
 								</span>
 							</div>
 						</div>

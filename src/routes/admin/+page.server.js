@@ -22,3 +22,34 @@ export const load = async ({ locals }) => {
 	  users
 	};
 }
+
+const deleteUser = async ({ request, locals, cookies }) => {
+	const data = await request.formData()
+	const userID = data.get('userID')
+	
+	// MAKE POST LOGIN REQUEST
+	await fetch(`https://svendeapi.emilstorgaard.dk/api/v1/users/${userID}`, {
+		method: 'DELETE',
+		headers: {
+		  'Content-Type': 'application/json',
+		  'Authorization': `Bearer ${locals.user.jwt}`
+		}
+	});
+
+	// If user delete it self
+	if (locals.user.uid == userID) {
+		// eat the cookie
+		cookies.set('jwt', '', {
+			path: '/',
+			httpOnly: true,
+			//expires: new Date(Date.now() - 3600000), // new Date(0)
+			maxAge: 0,
+			secure: process.env.NODE_ENV === 'production',
+		})
+
+		// redirect the user
+		throw redirect(302, '/login')
+	}
+}
+
+export const actions = { deleteUser }

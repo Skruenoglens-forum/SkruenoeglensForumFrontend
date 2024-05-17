@@ -125,9 +125,9 @@
 						</div>
 						{/if}
 						{#if $page.data.user}
-						<div class="flex-1 flex justify-center">
-							<a href="/" on:click={toggleMenu} class="w-full max-w-md block button logout-button">Log ud</a>
-						</div>
+						<form action="/logout" method="POST" class="flex-1 flex justify-center">
+							<button type="submit" class="w-full max-w-md block button logout-button">Log ud</button>
+						</form>
 						{/if}
 					</div>
 				</div>

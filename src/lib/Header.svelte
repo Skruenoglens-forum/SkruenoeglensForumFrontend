@@ -50,7 +50,7 @@
 			<a href="/notifications" class="button default-button w-max-md">
 				<img class="h-6 w-auto" src="../bell.png" alt="notifications">
 			</a>
-			<a href="/profile" class="button default-button">
+			<a href="/users/{$page.data.user.uid}" class="button default-button">
 				<img class="h-6 w-auto" src="../user.png" alt="profile">
 			</a>
 			{#if $page.data.user.roleId == 1}

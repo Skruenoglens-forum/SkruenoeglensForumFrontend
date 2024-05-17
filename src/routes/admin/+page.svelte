@@ -34,17 +34,17 @@
 								<img class="w-16 h-16 rounded-full" src="/user.png" alt="{user.name}">
 							</div>
 							<div class="flex-1 min-w-0">
-								<p class="text-lg font-medium text-gray-900 truncate">{user.name}</p>
+								<p class="text-lg font-medium text-gray-900 truncate">{user.id} - {user.name}</p>
 								<p class="text-sm text-gray-500 truncate">{user.email}</p>
-								<p class="text-sm text-gray-500 truncate">Created: {convertDateString(user.createdAt)}</p>
-								<p class="text-sm text-gray-500 truncate">Updated: {convertDateString(user.updatedAt)}</p>
+								<p class="text-sm text-gray-500 truncate">Oprettet: {convertDateString(user.createdAt)}</p>
+								<p class="text-sm text-gray-500 truncate">Redigeret: {convertDateString(user.updatedAt)}</p>
 							</div>
 							<div class="mt-4 sm:mt-0 sm:ml-auto flex items-center space-x-4">
 								<span class="text-sm text-gray-500">
-									<a href="/login" class="button edit-button">Edit</a>
+									<a href="/login" class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md transition duration-300 ease-in-out">Rediger</a>
 								</span>
 								<span class="text-sm text-gray-500">
-									<a href="/login" class="button delete-button">Delete</a>
+									<a href="/login" class="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md transition duration-300 ease-in-out">Slet</a>
 								</span>
 							</div>
 						</div>
@@ -59,14 +59,5 @@
 </div>
 
 <style>
-	.button {
-	  @apply px-4 py-2 rounded-md font-semibold transition duration-300 ease-in-out;
-	}
-  
-	.edit-button {
-	  @apply bg-blue-500 text-white hover:bg-blue-600;
-	}
-	.delete-button {
-	  @apply bg-red-500 text-white hover:bg-red-600;
-	}
+
 </style>

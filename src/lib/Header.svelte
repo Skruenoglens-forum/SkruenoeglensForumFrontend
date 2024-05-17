@@ -102,7 +102,7 @@
 							</a>
 						</div>
 						<div class="flex-1 flex justify-center">
-							<a href="/profile" on:click={toggleMenu} class="w-full max-w-md block button default-button flex justify-center items-center">
+							<a href="/users/{$page.data.user.uid}" on:click={toggleMenu} class="w-full max-w-md block button default-button flex justify-center items-center">
 								<img class="h-6 w-auto" src="../user.png" alt="profile">
 							</a>
 						</div>

@@ -53,7 +53,7 @@
 			<a href="/profile" class="button default-button">
 				<img class="h-6 w-auto" src="../user.png" alt="profile">
 			</a>
-			{#if $page.data.user.role_id == 1}
+			{#if $page.data.user.roleId == 1}
 			<a href="/admin" class="button default-button">
 				<img class="h-6 w-auto" src="../admin.png" alt="admin">
 			</a>
@@ -106,7 +106,7 @@
 								<img class="h-6 w-auto" src="../user.png" alt="profile">
 							</a>
 						</div>
-						{#if $page.data.user.role_id == 1}
+						{#if $page.data.user.roleId == 1}
 						<div class="flex-1 flex justify-center">
 							<a href="/admin" on:click={toggleMenu} class="w-full max-w-md block button default-button flex justify-center items-center">
 								<img class="h-6 w-auto" src="../admin.png" alt="admin">

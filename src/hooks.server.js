@@ -38,14 +38,14 @@ export const handle = async ({ event, resolve }) => {
 		const decodedToken = jwt.verify(token, 'gfg_jwt_secret_key');
 	
 		// GET CLAIMS FROM JWT TOKEN
-		const { email, uid, role_id } = decodedToken;
+		const { email, uid, roleId } = decodedToken;
 	
 		// if `user` exists set `events.local`
-		if (email && uid && role_id) {
+		if (email && uid && roleId) {
 			event.locals.user = {
 				email: email,
 				uid: uid,
-				role_id: role_id,
+				roleId: roleId,
 				jwt: token,
 			}
 		}

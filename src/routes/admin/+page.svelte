@@ -1,54 +1,72 @@
 <script>
 	export let data;
+
+	function convertDateString(dateString) {
+		// Create a new Date object from the input string
+		const date = new Date(dateString);
+		
+		// Extract the date and time components
+		const year = date.getFullYear();
+		const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
+		const day = String(date.getDate()).padStart(2, '0');
+		const hours = String(date.getHours()).padStart(2, '0');
+		const minutes = String(date.getMinutes()).padStart(2, '0');
+		const seconds = String(date.getSeconds()).padStart(2, '0');
+
+		// Construct the desired format
+		const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+
+		return formattedDate;
+	}
 </script>
 
-<section class="bg-gray-0">
-    <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0">
-        <div class="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
-            <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-                <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
-                    Admin
-                </h1>
-                <form class="space-y-4 md:space-y-6" action="#">
-                    <p class="text-sm font-light text-gray-500">
-                        Admindata kommer snart...
-                    </p>
-                </form>
-            </div>
+<div class="max-w-4xl mx-auto p-6">
+    <div class="p-6 bg-white rounded-xl border shadow-lg sm:p-10">
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="text-2xl font-extrabold leading-tight text-gray-900">Users</h3>
         </div>
-    </div>
-</section>
-
-<div class="max-w-4xl mx-auto">
-
-	<div class="p-4 m-6 bg-white rounded-lg border shadow-md sm:p-8">
-    	<div class="flex justify-between items-center mb-4">
-        	<h3 class="text-xl font-bold leading-none text-gray-900">Users</h3>
-   		</div>
-        	<ul role="list" class="divide-y divide-gray-200">
-
-			{#each data.users as user}
-				<li class="py-3 sm:py-4 hover:bg-gray-100">
-					<a href="/users/{user.id}">
-						<div class="flex items-center space-x-4">
-							<div class="flex-shrink-0">
-								<img class="w-8 h-8 rounded-full" src="/favicon.png" alt="">
+        <ul role="list" class="divide-y divide-gray-200">
+            {#each data.users as user}
+				<li class="py-4 hover:bg-gray-50 transition-colors duration-200 ease-in-out">
+					<a href="/users/{user.id}" class="block">
+						<div class="flex flex-col sm:flex-row items-center sm:space-x-6">
+							<div class="flex-shrink-0 mb-4 sm:mb-0">
+								<img class="w-16 h-16 rounded-full" src="/user.png" alt="{user.name}">
 							</div>
 							<div class="flex-1 min-w-0">
-								<p class="text-sm font-medium text-gray-900 truncate">{user.name}</p>
+								<p class="text-lg font-medium text-gray-900 truncate">{user.name}</p>
 								<p class="text-sm text-gray-500 truncate">{user.email}</p>
+								<p class="text-sm text-gray-500 truncate">Created: {convertDateString(user.createdAt)}</p>
+								<p class="text-sm text-gray-500 truncate">Updated: {convertDateString(user.updatedAt)}</p>
 							</div>
-							<div class="inline-flex items-center text-base font-semibold text-gray-900">
-								{user.role_id}
+							<div class="mt-4 sm:mt-0 sm:ml-auto flex items-center space-x-4">
+								<span class="text-sm text-gray-500">
+									<a href="/login" class="button edit-button">Edit</a>
+								</span>
+								<span class="text-sm text-gray-500">
+									<a href="/login" class="button delete-button">Delete</a>
+								</span>
 							</div>
 						</div>
 					</a>
 				</li>
-			{:else}
-				<!-- this block renders when users.length === 0 -->
-				<p>No users</p>
-			{/each}
-
-        	</ul>
-   		</div>
+				
+            {:else}
+                <p class="py-4 text-center text-gray-500">No users</p>
+            {/each}
+        </ul>
+    </div>
 </div>
+
+<style>
+	.button {
+	  @apply px-4 py-2 rounded-md font-semibold transition duration-300 ease-in-out;
+	}
+  
+	.edit-button {
+	  @apply bg-blue-500 text-white hover:bg-blue-600;
+	}
+	.delete-button {
+	  @apply bg-red-500 text-white hover:bg-red-600;
+	}
+</style>

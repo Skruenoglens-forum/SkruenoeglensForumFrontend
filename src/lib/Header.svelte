@@ -37,7 +37,7 @@
 <header class="mb-10">
 	<nav class="flex justify-between items-center py-4 px-6 bg-white text-black shadow-lg">
 		<a href="/" class="flex items-center mr-5">
-			<img src="../favicon.png" alt="logo" class="h-8 w-auto">
+			<img src="/favicon.png" alt="logo" class="h-8 w-auto">
 			<span class="text-lg font-semibold">Skruenøglens Forum</span>
 		</a>
 
@@ -48,14 +48,14 @@
 		<div class="hidden lg:flex items-center space-x-4 ml-5">
 			{#if $page.data.loggedInUser}
 			<a href="/notifications" class="button default-button w-max-md">
-				<img class="h-6 w-auto" src="../bell.png" alt="notifications">
+				<img class="h-6 w-auto" src="/bell.png" alt="notifications">
 			</a>
 			<a href="/users/{$page.data.loggedInUser.uid}" class="button default-button">
-				<img class="h-6 w-auto" src="../user.png" alt="profile">
+				<img class="h-6 w-auto" src="/user.png" alt="profile">
 			</a>
 			{#if $page.data.loggedInUser.roleId == 1}
 			<a href="/admin" class="button default-button">
-				<img class="h-6 w-auto" src="../admin.png" alt="admin">
+				<img class="h-6 w-auto" src="/admin.png" alt="admin">
 			</a>
 			{/if}
 			{/if}
@@ -80,7 +80,7 @@
 		<div class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
 			<div class="flex items-center justify-between">
 				<a href="#" class="-m-1.5 p-1.5">
-					<img class="h-8 w-auto" src="../favicon.png" alt="">
+					<img class="h-8 w-auto" src="/favicon.png" alt="">
 				</a>
 				<button on:click={toggleMenu} type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700">
 					<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -98,18 +98,18 @@
 						{#if $page.data.loggedInUser}
 						<div class="flex-1 flex justify-center">
 							<a href="/notifications" on:click={toggleMenu} class="w-full max-w-md block button default-button flex justify-center items-center">
-								<img class="h-6 w-auto" src="../bell.png" alt="notifications">
+								<img class="h-6 w-auto" src="/bell.png" alt="notifications">
 							</a>
 						</div>
 						<div class="flex-1 flex justify-center">
 							<a href="/users/{$page.data.loggedInUser.uid}" on:click={toggleMenu} class="w-full max-w-md block button default-button flex justify-center items-center">
-								<img class="h-6 w-auto" src="../user.png" alt="profile">
+								<img class="h-6 w-auto" src="/user.png" alt="profile">
 							</a>
 						</div>
 						{#if $page.data.loggedInUser.roleId == 1}
 						<div class="flex-1 flex justify-center">
 							<a href="/admin" on:click={toggleMenu} class="w-full max-w-md block button default-button flex justify-center items-center">
-								<img class="h-6 w-auto" src="../admin.png" alt="admin">
+								<img class="h-6 w-auto" src="/admin.png" alt="admin">
 							</a>
 						</div>
 						{/if}

@@ -8,7 +8,7 @@ export const load = async ({ locals, params }) => {
 
 	let user = [];
 
-	const res = await fetch(`https://svendeapi.emilstorgaard.dk/api/v1/users/${params.id}`, {
+	let res = await fetch(`https://svendeapi.emilstorgaard.dk/api/v1/users/${params.id}`, {
 		method: 'GET',
 		headers: {
 		  'Content-Type': 'application/json',
@@ -18,7 +18,38 @@ export const load = async ({ locals, params }) => {
 
 	user = await res.json()
 
+	let cars = [];
+
+	res = await fetch(`https://svendeapi.emilstorgaard.dk/api/v1/cars/user/${params.id}`, {
+		method: 'GET',
+		headers: {
+		  'Content-Type': 'application/json'
+		},
+	});
+
+	cars = await res.json()
+
 	return {
-	  user
+	  user,
+	  cars
 	};
 }
+
+const deleteCar = async ({ request, locals }) => {
+	const data = await request.formData()
+	const carID = data.get('carID')
+	
+	// MAKE DELETE REQUEST
+	await fetch(`https://svendeapi.emilstorgaard.dk/api/v1/cars/${carID}`, {
+		method: 'DELETE',
+		headers: {
+		  'Content-Type': 'application/json',
+		  'Authorization': `Bearer ${locals.user.jwt}`
+		}
+	});
+
+	// redirect the user
+	throw redirect(302, `/users/${locals.user.uid}`)
+}
+
+export const actions = { deleteCar }

@@ -46,24 +46,24 @@
 		</div>			
 
 		<div class="hidden lg:flex items-center space-x-4 ml-5">
-			{#if $page.data.user}
+			{#if $page.data.loggedInUser}
 			<a href="/notifications" class="button default-button w-max-md">
 				<img class="h-6 w-auto" src="../bell.png" alt="notifications">
 			</a>
-			<a href="/users/{$page.data.user.uid}" class="button default-button">
+			<a href="/users/{$page.data.loggedInUser.uid}" class="button default-button">
 				<img class="h-6 w-auto" src="../user.png" alt="profile">
 			</a>
-			{#if $page.data.user.roleId == 1}
+			{#if $page.data.loggedInUser.roleId == 1}
 			<a href="/admin" class="button default-button">
 				<img class="h-6 w-auto" src="../admin.png" alt="admin">
 			</a>
 			{/if}
 			{/if}
-			{#if !$page.data.user}
+			{#if !$page.data.loggedInUser}
 			<a href="/signup" class="button signup-button">Opret bruger</a>
 			<a href="/login" class="button login-button">Log ind</a>
 			{/if}
-			{#if $page.data.user}
+			{#if $page.data.loggedInUser}
 			<form action="/logout" method="POST">
 				<button type="submit" class="button logout-button">Log ud</button>
 			</form>
@@ -95,18 +95,18 @@
 						<div class="flex-1 flex justify-center">
 							<input type="text" placeholder="Search" class="search-input">
 						</div>
-						{#if $page.data.user}
+						{#if $page.data.loggedInUser}
 						<div class="flex-1 flex justify-center">
 							<a href="/notifications" on:click={toggleMenu} class="w-full max-w-md block button default-button flex justify-center items-center">
 								<img class="h-6 w-auto" src="../bell.png" alt="notifications">
 							</a>
 						</div>
 						<div class="flex-1 flex justify-center">
-							<a href="/users/{$page.data.user.uid}" on:click={toggleMenu} class="w-full max-w-md block button default-button flex justify-center items-center">
+							<a href="/users/{$page.data.loggedInUser.uid}" on:click={toggleMenu} class="w-full max-w-md block button default-button flex justify-center items-center">
 								<img class="h-6 w-auto" src="../user.png" alt="profile">
 							</a>
 						</div>
-						{#if $page.data.user.roleId == 1}
+						{#if $page.data.loggedInUser.roleId == 1}
 						<div class="flex-1 flex justify-center">
 							<a href="/admin" on:click={toggleMenu} class="w-full max-w-md block button default-button flex justify-center items-center">
 								<img class="h-6 w-auto" src="../admin.png" alt="admin">
@@ -116,7 +116,7 @@
 						{/if}
 					</div>
 					<div class="space-y-2 py-6 mx-auto max-w-5xs text-center">
-						{#if !$page.data.user}
+						{#if !$page.data.loggedInUser}
 						<div class="flex-1 flex justify-center">
 							<a href="/signup" on:click={toggleMenu} class="w-full max-w-md block button signup-button">Opret bruger</a>
 						</div>
@@ -124,7 +124,7 @@
 							<a href="/login" on:click={toggleMenu} class="w-full max-w-md block button login-button">Log ind</a>
 						</div>
 						{/if}
-						{#if $page.data.user}
+						{#if $page.data.loggedInUser}
 						<form action="/logout" method="POST" class="flex-1 flex justify-center">
 							<button type="submit" class="w-full max-w-md block button logout-button">Log ud</button>
 						</form>

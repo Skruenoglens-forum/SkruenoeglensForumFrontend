@@ -36,6 +36,16 @@
     </div>
 </section>
 
+{#if $page.data.loggedInUser}
+<section class="bg-gray-0">
+    <div class="flex flex-ol items-center justify-center px-6 py-8 mx-auto lg:py-0">
+        <div class="flex items-center mb-6 text-2xl font-semibold text-gray-900">
+            <a href="/posts/add" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-4">Tilføj opslag</a>
+        </div>
+    </div>
+</section>
+{/if}
+
 <div class="bg-white">
     <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
         <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">

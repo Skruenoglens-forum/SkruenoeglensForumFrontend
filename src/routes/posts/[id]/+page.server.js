@@ -1,11 +1,6 @@
 import { redirect } from '@sveltejs/kit'
 
-export const load = async ({ locals, params }) => {
-	// redirect user if not logged in TODO: remember to only allow to edit owned users
-	if (!locals.user) {
-		throw redirect(302, '/login')
-	}
-
+export const load = async ({ params }) => {
 	let post = [];
 
 	let res = await fetch(`https://svendeapi.emilstorgaard.dk/api/v1/posts/${params.id}`, {
@@ -22,8 +17,7 @@ export const load = async ({ locals, params }) => {
 	res = await fetch(`https://svendeapi.emilstorgaard.dk/api/v1/posts/${params.id}/comments`, {
 		method: 'GET',
 		headers: {
-		  'Content-Type': 'application/json',
-		  'Authorization': `Bearer ${locals.user.jwt}`
+		  'Content-Type': 'application/json'
 		},
 	});
 
@@ -41,6 +35,11 @@ const addComment = async ({ request, locals, params }) => {
 	const title = data.get('title')
 	const description = data.get('description')
 	const parentId = params.id
+
+	// redirect user if not logged in
+	if (!locals.user) {
+		throw redirect(302, '/login')
+	}
 	
 	// MAKE POST REQUEST
 	await fetch(`https://svendeapi.emilstorgaard.dk/api/v1/posts`, {

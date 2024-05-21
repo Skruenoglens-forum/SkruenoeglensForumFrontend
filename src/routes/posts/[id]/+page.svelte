@@ -85,7 +85,7 @@
           <form action="?/addComment" method="POST"  class="mt-10">
             <input type="text" name="title" id="title" class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200" placeholder="Titel..." required="">
             <div class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200">
-              <textarea id="comment" rows="6"
+              <textarea name="description" id="description" rows="6"
                   class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none"
                   placeholder="Skriv en kommentar..." required></textarea>
           </div>

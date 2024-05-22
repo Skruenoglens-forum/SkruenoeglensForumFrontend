@@ -28,8 +28,6 @@
       ...dropdownVisible,
       [commentId]: !dropdownVisible[commentId]
     };
-
-    console.log("visible:", dropdownVisible)
   }
 </script>
 
@@ -55,7 +53,8 @@
   
       <div class="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
         <div class="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
-          <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{data.post.title}</h1>
+          <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl mb-4">{data.post.title}</h1>
+          <a href="/posts/{data.post.id}/edit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4">Rediger</a>
         </div>
       
         <!-- Description and details -->

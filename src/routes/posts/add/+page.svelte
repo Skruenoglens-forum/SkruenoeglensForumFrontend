@@ -1,3 +1,7 @@
+<script>
+    export let data;
+</script>
+
 <section>
 <div class="flex flex-col items-center justify-center px-6 py-8 mt-8 lg:py-0">
     <div class="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
@@ -34,8 +38,17 @@
                     <label for="carFirstRegistration" class="block mb-2 text-sm font-medium text-gray-900">Bilens Første Registrering</label>
                     <input type="date" name="carFirstRegistration" id="carFirstRegistration" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="2000.23.12" required="">
                 </div>
+                <div>
+                    <label for="categoryId" class="block mb-2 text-sm font-medium text-gray-900">Kategori</label>
+                    <select name="categoryId" id="categoryId" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" required="">
+                    <option value="" disabled selected>Vælg en kategori</option>
+                    {#each data.categories as category}
+                        <option value="{category.id}">{category.categoryName}</option>
+                    {/each}
+                    </select>
+                </div>
                 
-                <button type="submit" class="w-full text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Tilføj bil</button>
+                <button type="submit" class="w-full text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Tilføj Opslag</button>
             </form>
         </div>
     </div>

@@ -3,6 +3,21 @@
 
     export let data;
 
+    let posts = data.posts;
+    let categorySearch = "";
+
+    async function getPostsByCategoryId(categoryId) {
+        categorySearch = data.categories[categoryId-1].categoryName
+        let res = await fetch(`https://svendeapi.emilstorgaard.dk/api/v1/posts/category/${categoryId}`, {
+            method: 'GET',
+            headers: {
+            'Content-Type': 'application/json'
+            },
+        });
+
+        posts = await res.json()
+    }
+
     function convertDateString(dateString) {
         // Create a new Date object from the input string
         const date = new Date(dateString);
@@ -36,6 +51,53 @@
     </div>
 </section>
 
+
+<div class="bg-white">
+    <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+        <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-1 lg:grid-cols-2 xl:gap-x-8">
+
+
+            <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-lg">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th>
+                                {#if categorySearch}
+<h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">{categorySearch}</h1>
+{/if} 
+                            </th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Forumkategorier
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Seneste svar
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        {#each data.categories as category}
+                            <tr on:click={getPostsByCategoryId(category.id)} class="py-4 hover:bg-gray-50 transition-colors duration-200 ease-in-out">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                    {category.categoryName}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    4. maj
+                                </td>
+                            </tr>
+                        {/each}
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- License Plate Seach here -->
+
+        </div>
+    </div>
+</div>
+
 {#if $page.data.loggedInUser}
 <section class="bg-gray-0">
     <div class="flex flex-ol items-center justify-center px-6 py-8 mx-auto lg:py-0">
@@ -50,7 +112,7 @@
     <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
         <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
 
-            {#each data.posts as post}
+            {#each posts as post}
             <div class="group relative">
                 <h2 class="text-center text-lg font-semibold">{post.title}</h2>
                 <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
@@ -68,9 +130,12 @@
                         <img src="/clock.png" alt="tid" class="h-4 w-4 ml-1">
                     </div>
                 </div>
-                <div class="mt-4 flex px-2">
+                <div class="mt-4 flex justify-between px-2">
                     <div class="flex items-center">
                         <p class="text-sm text-gray-500">{post.userId}</p>
+                    </div>
+                    <div class="flex items-center">
+                        <p class="text-sm text-gray-500">{post.categoryId}</p>
                     </div>
                 </div>
             </div>

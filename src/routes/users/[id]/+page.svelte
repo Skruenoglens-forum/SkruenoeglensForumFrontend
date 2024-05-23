@@ -1,4 +1,6 @@
 <script>
+    import { page } from '$app/stores'
+
   export let data;
 
   function convertDateString(dateString) {
@@ -36,8 +38,8 @@
                 </p>
                 <div class="px-6 mt-4">
                     <p class="text-gray-600 text-base">
-                        <strong>Oprettet:</strong> {convertDateString(data.user.createdAt)}<br>
-                        <strong>Redigeret:</strong> {convertDateString(data.user.updatedAt)}<br>
+                        <strong>Oprettet:</strong> {convertDateString(data.user.created_at)}<br>
+                        <strong>Redigeret:</strong> {convertDateString(data.user.updated_at)}<br>
                     </p>
                 </div>
             </div>
@@ -51,14 +53,16 @@
     <section class="bg-gray-0">
         <div class="flex flex-ol items-center justify-center px-6 py-8 mx-auto lg:py-0">
             <div class="flex items-center mb-6 text-2xl font-semibold text-gray-900">
-                <h1>Dine biler</h1>
+                <h1>{data.user.name}'s biler</h1>
             </div>
         </div>
+        {#if $page.data.loggedInUser.uid === data.user.id || $page.data.loggedInUser.roleId == 1}
         <div class="flex flex-ol items-center justify-center px-6 py-8 mx-auto lg:py-0">
             <div class="flex items-center mb-6 text-2xl font-semibold text-gray-900">
                 <a href="/users/{data.user.id}/cars/add" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-4">Tilføj bil</a>
             </div>
         </div>
+        {/if}
     </section>
 
 
@@ -78,7 +82,7 @@
                         <p class="text-sm text-gray-500">Nummerplade</p>
                     </div>
                     <div class="flex items-center">
-                        <p class="text-sm text-gray-500">{car.licensePlate}</p>
+                        <p class="text-sm text-gray-500">{car.license_plate}</p>
                     </div>
                 </div>
 
@@ -105,7 +109,7 @@
                         <p class="text-sm text-gray-500">Første registrering</p>
                     </div>
                     <div class="flex items-center">
-                        <p class="text-sm text-gray-500">{convertDateString(car.firstRegistration)}</p>
+                        <p class="text-sm text-gray-500">{convertDateString(car.first_registration)}</p>
                     </div>
                 </div>
 
@@ -114,7 +118,7 @@
                         <p class="text-sm text-gray-500">Oprettet</p>
                     </div>
                     <div class="flex items-center">
-                        <p class="text-sm text-gray-500">{convertDateString(car.createdAt)}</p>
+                        <p class="text-sm text-gray-500">{convertDateString(car.created_at)}</p>
                     </div>
                 </div>
 
@@ -123,7 +127,7 @@
                         <p class="text-sm text-gray-500">Redigeret</p>
                     </div>
                     <div class="flex items-center">
-                        <p class="text-sm text-gray-500">{convertDateString(car.updatedAt)}</p>
+                        <p class="text-sm text-gray-500">{convertDateString(car.updated_at)}</p>
                     </div>
                 </div>
                 <div class="mt-8 flex justify-center pb-6">

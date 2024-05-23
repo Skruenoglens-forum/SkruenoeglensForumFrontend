@@ -1,9 +1,10 @@
 import { redirect } from '@sveltejs/kit'
+import { API_HOST } from '$env/static/private';
 
 export const load = async ({ params }) => {
 	let post = [];
 
-	let res = await fetch(`https://svendeapi.emilstorgaard.dk/api/v1/posts/${params.id}`, {
+	let res = await fetch(`${API_HOST}/posts/${params.id}`, {
 		method: 'GET',
 		headers: {
 		  'Content-Type': 'application/json'
@@ -12,20 +13,9 @@ export const load = async ({ params }) => {
 
 	post = await res.json()
 
-	let comments = [];
-
-	res = await fetch(`https://svendeapi.emilstorgaard.dk/api/v1/posts/${params.id}/comments`, {
-		method: 'GET',
-		headers: {
-		  'Content-Type': 'application/json'
-		},
-	});
-
-	comments = await res.json()
-
 	let categories = [];
 
-	res = await fetch(`https://svendeapi.emilstorgaard.dk/api/v1/categories`, {
+	res = await fetch(`${API_HOST}/categories`, {
 		method: 'GET',
 		headers: {
 		  'Content-Type': 'application/json'
@@ -36,7 +26,6 @@ export const load = async ({ params }) => {
 
 	return {
 	  post,
-	  comments,
 	  categories
 	};
 }
@@ -58,7 +47,7 @@ const edit = async ({ locals, request, params }) => {
 	const categoryId = data.get('categoryId')
 
 	// MAKE PUT REQUEST
-	const response = await fetch(`https://svendeapi.emilstorgaard.dk/api/v1/posts/${params.id}`, {
+	const response = await fetch(`${API_HOST}/posts/${params.id}`, {
 		method: 'PUT',
 		headers: {
 		  'Content-Type': 'application/json',

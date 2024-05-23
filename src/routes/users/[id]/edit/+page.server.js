@@ -1,4 +1,5 @@
 import { fail, redirect } from '@sveltejs/kit'
+import { API_HOST } from '$env/static/private';
 
 export const load = async ({ locals, params }) => {
 	// redirect user if not logged TODO: remember to only allow to edit owned users
@@ -8,7 +9,7 @@ export const load = async ({ locals, params }) => {
 
 	let user = [];
 
-	const res = await fetch(`https://svendeapi.emilstorgaard.dk/api/v1/users/${params.id}`, {
+	const res = await fetch(`${API_HOST}/users/${params.id}`, {
 		method: 'GET',
 		headers: {
 		  'Content-Type': 'application/json',
@@ -34,7 +35,7 @@ const edit = async ({ locals, request, params }) => {
 	}
 
 	// MAKE PUT EDIT REQUEST
-	const response = await fetch(`https://svendeapi.emilstorgaard.dk/api/v1/users/${params.id}`, {
+	const response = await fetch(`${API_HOST}/users/${params.id}`, {
 		method: 'PUT',
 		headers: {
 		  'Content-Type': 'application/json',
@@ -60,7 +61,7 @@ const newpassword = async ({ locals, request, params }) => {
 	}
 
 	// MAKE PUT NEW PASSWORD REQUEST
-	const response = await fetch(`https://svendeapi.emilstorgaard.dk/api/v1/auth/new/password/${params.id}`, {
+	const response = await fetch(`${API_HOST}/auth/new/password/${params.id}`, {
 		method: 'PUT',
 		headers: {
 		  'Content-Type': 'application/json',

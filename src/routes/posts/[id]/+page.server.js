@@ -1,9 +1,10 @@
 import { redirect } from '@sveltejs/kit'
+import { API_HOST } from '$env/static/private';
 
 export const load = async ({ params }) => {
 	let post = [];
 
-	let res = await fetch(`https://svendeapi.emilstorgaard.dk/api/v1/posts/${params.id}`, {
+	let res = await fetch(`${API_HOST}/posts/${params.id}`, {
 		method: 'GET',
 		headers: {
 		  'Content-Type': 'application/json'
@@ -14,7 +15,7 @@ export const load = async ({ params }) => {
 
 	let comments = [];
 
-	res = await fetch(`https://svendeapi.emilstorgaard.dk/api/v1/posts/${params.id}/comments`, {
+	res = await fetch(`${API_HOST}/comments/posts/${params.id}`, {
 		method: 'GET',
 		headers: {
 		  'Content-Type': 'application/json'
@@ -32,9 +33,8 @@ export const load = async ({ params }) => {
 
 const addComment = async ({ request, locals, params }) => {
 	const data = await request.formData()
-	const title = data.get('title')
 	const description = data.get('description')
-	const parentId = params.id
+	const parentId = data.get('parentId')
 
 	// redirect user if not logged in
 	if (!locals.user) {
@@ -42,17 +42,34 @@ const addComment = async ({ request, locals, params }) => {
 	}
 	
 	// MAKE POST REQUEST
-	await fetch(`https://svendeapi.emilstorgaard.dk/api/v1/posts`, {
+	await fetch(`${API_HOST}/comments/posts/${params.id}`, {
 		method: 'POST',
 		headers: {
 		  'Content-Type': 'application/json',
 		  'Authorization': `Bearer ${locals.user.jwt}`
 		},
-		body: JSON.stringify({title, description, parentId})
+		body: JSON.stringify({description, parentId})
 	});
 
 	// redirect the user
 	throw redirect(302, `/posts/${params.id}`)
 }
 
-export const actions = { addComment }
+const deleteComment = async ({ request, locals, params }) => {
+	const data = await request.formData()
+	const commentId = data.get('commentId')
+	
+	// MAKE DELETE REQUEST
+	await fetch(`${API_HOST}/comments/${commentId}`, {
+		method: 'DELETE',
+		headers: {
+		  'Content-Type': 'application/json',
+		  'Authorization': `Bearer ${locals.user.jwt}`
+		}
+	});
+
+	// redirect the user
+	throw redirect(302, `/posts/${params.id}`)
+}
+
+export const actions = { addComment, deleteComment }

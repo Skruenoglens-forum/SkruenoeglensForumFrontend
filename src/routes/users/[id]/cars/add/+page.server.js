@@ -1,4 +1,5 @@
 import { redirect } from '@sveltejs/kit'
+import { API_HOST } from '$env/static/private';
 
 const add = async ({ locals, request, params }) => {
 	const data = await request.formData()
@@ -11,7 +12,7 @@ const add = async ({ locals, request, params }) => {
 	const vin = data.get('vin')
 
 	// MAKE POST REQUEST
-	const response = await fetch(`https://svendeapi.emilstorgaard.dk/api/v1/cars`, {
+	const response = await fetch(`${API_HOST}/cars`, {
 		method: 'POST',
 		headers: {
 		  'Content-Type': 'application/json',

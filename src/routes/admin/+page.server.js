@@ -1,4 +1,5 @@
 import { redirect } from '@sveltejs/kit'
+import { API_HOST } from '$env/static/private';
 
 export const load = async ({ locals }) => {
 	// redirect user if not logged in or admin role id
@@ -8,7 +9,7 @@ export const load = async ({ locals }) => {
 
 	let users = [];
 
-	const res = await fetch(`https://svendeapi.emilstorgaard.dk/api/v1/users`, {
+	const res = await fetch(`${API_HOST}/users`, {
 		method: 'GET',
 		headers: {
 		  'Content-Type': 'application/json',
@@ -28,7 +29,7 @@ const deleteUser = async ({ request, locals, cookies }) => {
 	const userID = data.get('userID')
 	
 	// MAKE POST LOGIN REQUEST
-	await fetch(`https://svendeapi.emilstorgaard.dk/api/v1/users/${userID}`, {
+	await fetch(`${API_HOST}/users/${userID}`, {
 		method: 'DELETE',
 		headers: {
 		  'Content-Type': 'application/json',
@@ -49,6 +50,9 @@ const deleteUser = async ({ request, locals, cookies }) => {
 
 		// redirect the user
 		throw redirect(302, '/login')
+	} else {
+		// redirect the user
+		throw redirect(302, '/admin')
 	}
 }
 

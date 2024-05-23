@@ -20,30 +20,30 @@
               </div>
               <div>
                   <label for="carBrand" class="block mb-2 text-sm font-medium text-gray-900">Bilmærke</label>
-                  <input value={data.post.carBrand} type="text" name="carBrand" id="carBrand" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="VW" required="">
+                  <input value={data.post.car_brand} type="text" name="carBrand" id="carBrand" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="VW" required="">
               </div>
               <div>
                   <label for="carModel" class="block mb-2 text-sm font-medium text-gray-900">Bilmodel</label>
-                  <input value={data.post.carModel} type="text" name="carModel" id="carModel" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="UP" required="">
+                  <input value={data.post.car_model} type="text" name="carModel" id="carModel" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="UP" required="">
               </div>
               <div>
                   <label for="carMotor" class="block mb-2 text-sm font-medium text-gray-900">Bilens motor</label>
-                  <input value={data.post.carMotor} type="text" name="carMotor" id="carMotor" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder=1.4 required="">
+                  <input value={data.post.car_motor} type="text" name="carMotor" id="carMotor" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder=1.4 required="">
               </div>
               <div>
                   <label for="carType" class="block mb-2 text-sm font-medium text-gray-900">Drivmiddel</label>
-                  <input value={data.post.carType} type="text" name="carType" id="carType" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="Benzin" required="">
+                  <input value={data.post.car_type} type="text" name="carType" id="carType" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="Benzin" required="">
               </div>
               <div>
                   <label for="carFirstRegistration" class="block mb-2 text-sm font-medium text-gray-900">Bilens Første Registrering</label>
-                  <input value={data.post.carFirstRegistration} type="date" name="carFirstRegistration" id="carFirstRegistration" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="2000.23.12" required="">
+                  <input value={data.post.car_first_registration} type="date" name="carFirstRegistration" id="carFirstRegistration" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="2000.23.12" required="">
               </div>
               <div>
                   <label for="categoryId" class="block mb-2 text-sm font-medium text-gray-900">Kategori</label>
                   <select name="categoryId" id="categoryId" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" required="">
-                  <option value={data.post.categoryId} disabled selected>{data.categories[data.post.categoryId-1].categoryName}</option>
+                  <option value={data.post.category_id} disabled selected>{data.categories[data.post.category_id-1].name}</option>
                   {#each data.categories as category}
-                      <option value="{category.id}">{category.categoryName}</option>
+                      <option value="{category.id}">{category.name}</option>
                   {/each}
                   </select>
               </div>

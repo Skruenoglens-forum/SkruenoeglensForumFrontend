@@ -1,9 +1,15 @@
 import { redirect } from '@sveltejs/kit'
+import { API_HOST } from '$env/static/private';
 
-export const load = async () => {
+export const load = async ({ locals }) => {
+	// redirect user if not logged in
+	if (!locals.user) {
+		throw redirect(302, `/`)
+	}
+
 	let categories = [];
 
-	const res = await fetch(`https://svendeapi.emilstorgaard.dk/api/v1/categories`, {
+	let res = await fetch(`${API_HOST}/categories`, {
 		method: 'GET',
 		headers: {
 		  'Content-Type': 'application/json'
@@ -12,8 +18,20 @@ export const load = async () => {
 
 	categories = await res.json()
 
+	let cars = [];
+
+	res = await fetch(`${API_HOST}/cars/users/${locals.user.uid}`, {
+		method: 'GET',
+		headers: {
+		  'Content-Type': 'application/json'
+		},
+	});
+
+	cars = await res.json()
+
 	return {
-		categories
+		categories,
+		cars
 	};
 }
 
@@ -29,7 +47,7 @@ const add = async ({ locals, request }) => {
 	const categoryId = data.get('categoryId')
 
 	// MAKE POST REQUEST
-	const response = await fetch(`https://svendeapi.emilstorgaard.dk/api/v1/posts`, {
+	const response = await fetch(`${API_HOST}/posts`, {
 		method: 'POST',
 		headers: {
 		  'Content-Type': 'application/json',

@@ -1,7 +1,9 @@
+import { API_HOST } from '$env/static/private';
+
 export const load = async () => {
 	let posts = [];
 
-	let res = await fetch(`https://svendeapi.emilstorgaard.dk/api/v1/posts`, {
+	let res = await fetch(`${API_HOST}/posts`, {
 		method: 'GET',
 		headers: {
 		  'Content-Type': 'application/json'
@@ -12,7 +14,7 @@ export const load = async () => {
 
 	let categories = [];
 
-	res = await fetch(`https://svendeapi.emilstorgaard.dk/api/v1/categories`, {
+	res = await fetch(`${API_HOST}/categories`, {
 		method: 'GET',
 		headers: {
 		  'Content-Type': 'application/json'

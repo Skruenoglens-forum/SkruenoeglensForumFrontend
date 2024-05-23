@@ -1,4 +1,5 @@
 import { redirect } from '@sveltejs/kit'
+import { API_HOST } from '$env/static/private';
 
 export const load = async ({ locals, params }) => {
 	// redirect user if not logged in TODO: remember to only allow to edit owned users
@@ -8,7 +9,7 @@ export const load = async ({ locals, params }) => {
 
 	let user = [];
 
-	let res = await fetch(`https://svendeapi.emilstorgaard.dk/api/v1/users/${params.id}`, {
+	let res = await fetch(`${API_HOST}/users/${params.id}`, {
 		method: 'GET',
 		headers: {
 		  'Content-Type': 'application/json',
@@ -20,7 +21,7 @@ export const load = async ({ locals, params }) => {
 
 	let cars = [];
 
-	res = await fetch(`https://svendeapi.emilstorgaard.dk/api/v1/cars/user/${params.id}`, {
+	res = await fetch(`${API_HOST}/cars/users/${params.id}`, {
 		method: 'GET',
 		headers: {
 		  'Content-Type': 'application/json'
@@ -40,7 +41,7 @@ const deleteCar = async ({ request, locals }) => {
 	const carID = data.get('carID')
 	
 	// MAKE DELETE REQUEST
-	await fetch(`https://svendeapi.emilstorgaard.dk/api/v1/cars/${carID}`, {
+	await fetch(`${API_HOST}/cars/${carID}`, {
 		method: 'DELETE',
 		headers: {
 		  'Content-Type': 'application/json',

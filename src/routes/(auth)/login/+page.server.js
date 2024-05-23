@@ -1,4 +1,5 @@
 import { fail, redirect } from '@sveltejs/kit'
+import { API_HOST } from '$env/static/private';
 
 export const load = async ({ locals }) => {
 	// redirect user if logged in
@@ -17,7 +18,7 @@ const login = async ({ cookies, request }) => {
 	}
 
 	// MAKE POST LOGIN REQUEST
-	const response = await fetch('https://svendeapi.emilstorgaard.dk/api/v1/auth/login', {
+	const response = await fetch(`${API_HOST}/auth/login`, {
 		method: 'POST',
 		headers: {
 		  'Content-Type': 'application/json'

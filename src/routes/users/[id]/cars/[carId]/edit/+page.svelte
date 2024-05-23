@@ -12,7 +12,7 @@
                 <form action="?/edit" method="POST" class="space-y-4 md:space-y-6">
                     <div>
                         <label for="licensePlate" class="block mb-2 text-sm font-medium text-gray-900">Nummerplade</label>
-                        <input value={data.car.licensePlate} type="text" name="licensePlate" id="licensePlate" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="AB12345" required="">
+                        <input value={data.car.license_plate} type="text" name="licensePlate" id="licensePlate" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="AB12345" required="">
                     </div>
                     <div>
                         <label for="brand" class="block mb-2 text-sm font-medium text-gray-900">Mærke</label>
@@ -32,7 +32,7 @@
                     </div>
                     <div>
                         <label for="firstRegistration" class="block mb-2 text-sm font-medium text-gray-900">Første Registrering</label>
-                        <input value={data.car.firstRegistration} type="date" name="firstRegistration" id="firstRegistration" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="2014.10.10" required="">
+                        <input value={data.car.first_registration} type="date" name="firstRegistration" id="firstRegistration" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="2014.10.10" required="">
                     </div>
                     <div>
                         <label for="vin" class="block mb-2 text-sm font-medium text-gray-900">Stelnummer</label>

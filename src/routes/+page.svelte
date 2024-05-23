@@ -7,8 +7,8 @@
     let categorySearch = "";
 
     async function getPostsByCategoryId(categoryId) {
-        categorySearch = data.categories[categoryId-1].categoryName
-        let res = await fetch(`https://svendeapi.emilstorgaard.dk/api/v1/posts/category/${categoryId}`, {
+        categorySearch = data.categories[categoryId-1].name
+        let res = await fetch(`http://localhost:8585/api/v1/posts/category/${categoryId}`, {
             method: 'GET',
             headers: {
             'Content-Type': 'application/json'
@@ -63,8 +63,8 @@
                         <tr>
                             <th>
                                 {#if categorySearch}
-<h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">{categorySearch}</h1>
-{/if} 
+                                    <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">{categorySearch}</h1>
+                                {/if} 
                             </th>
                             <th></th>
                         </tr>
@@ -81,7 +81,7 @@
                         {#each data.categories as category}
                             <tr on:click={getPostsByCategoryId(category.id)} class="py-4 hover:bg-gray-50 transition-colors duration-200 ease-in-out">
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                    {category.categoryName}
+                                    {category.name}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                     4. maj
@@ -126,16 +126,16 @@
                         <img src="/chat.png" alt="kommentare" class="h-4 w-4 ml-1">
                     </div>
                     <div class="flex items-center">
-                        <p class="text-sm text-gray-500">{convertDateString(post.createdAt)}</p>
+                        <p class="text-sm text-gray-500">{convertDateString(post.created_at)}</p>
                         <img src="/clock.png" alt="tid" class="h-4 w-4 ml-1">
                     </div>
                 </div>
                 <div class="mt-4 flex justify-between px-2">
                     <div class="flex items-center">
-                        <p class="text-sm text-gray-500">{post.userId}</p>
+                        <p class="text-sm text-gray-500">{post.user_id}</p>
                     </div>
                     <div class="flex items-center">
-                        <p class="text-sm text-gray-500">{post.categoryId}</p>
+                        <p class="text-sm text-gray-500">{post.category_id}</p>
                     </div>
                 </div>
             </div>

@@ -1,5 +1,18 @@
 <script>
   export let data;
+
+  let imageUrl = '';
+
+function handleFileUpload(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            imageUrl = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+}
 </script>
 
 <section>
@@ -9,7 +22,17 @@
                 <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
                     Rediger bil
                 </h1>
-                <form action="?/edit" method="POST" class="space-y-4 md:space-y-6">
+                <form action="?/edit" method="POST" class="space-y-4 md:space-y-6" enctype="multipart/form-data">
+                    <div class="w-32 h-32 rounded-full overflow-hidden bg-gray-200 flex items-center justify-center mx-auto">
+                        {#if imageUrl}
+                            <img src={imageUrl} alt="car" class="object-cover w-full h-full"/>
+                        {:else}
+                            <span class="text-gray-500 flex items-center justify-center h-full">Mangler</span>
+                        {/if}
+                    </div>
+                    <div class="relative mx-auto">
+                        <input on:change={handleFileUpload} type="file" name="carImage" accept="image/*" />
+                    </div>
                     <div>
                         <label for="licensePlate" class="block mb-2 text-sm font-medium text-gray-900">Nummerplade</label>
                         <input value={data.car.license_plate} type="text" name="licensePlate" id="licensePlate" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="AB12345" required="">

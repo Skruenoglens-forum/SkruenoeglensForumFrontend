@@ -132,10 +132,13 @@
                 </div>
                 <div class="mt-4 flex justify-between px-2">
                     <div class="flex items-center">
-                        <p class="text-sm text-gray-500">{post.user_id}</p>
+                        <p class="inline-flex items-center mr-3 text-sm text-gray-900">
+                            <img class="mr-2 w-6 h-6 rounded-full" src="data:image/png;base64, {post.profile_image}" alt="user">
+                            {post.user_name}
+                          </p>
                     </div>
                     <div class="flex items-center">
-                        <p class="text-sm text-gray-500">{post.category_id}</p>
+                        <p class="text-sm text-gray-500">{post.category_name}</p>
                     </div>
                 </div>
             </div>

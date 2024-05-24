@@ -12,8 +12,7 @@ export const load = async ({ locals, params }) => {
 	let res = await fetch(`${API_HOST}/users/${params.id}`, {
 		method: 'GET',
 		headers: {
-		  'Content-Type': 'application/json',
-		  'Authorization': `Bearer ${locals.user.jwt}`
+		  'Content-Type': 'application/json'
 		},
 	});
 

@@ -114,8 +114,8 @@
             <div class="flex items-center">
               <a href="/users/{comment.user_id}">
                 <p class="inline-flex items-center mr-3 text-sm text-gray-900">
-                  <img class="mr-2 w-6 h-6 rounded-full" src="/user.png" alt="user">
-                  {comment.user_id}
+                  <img class="mr-2 w-6 h-6 rounded-full" src="data:image/png;base64, {comment.profile_image}" alt="user">
+                  {comment.name}
                 </p>
               </a>
               <p class="text-sm text-gray-600">{convertDateString(comment.created_at)}</p>

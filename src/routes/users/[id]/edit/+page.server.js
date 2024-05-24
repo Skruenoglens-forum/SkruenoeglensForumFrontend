@@ -26,12 +26,19 @@ export const load = async ({ locals, params }) => {
 
 const edit = async ({ locals, request, params }) => {
 	const data = await request.formData()
+	const profileImage = data.get('profileImage');
     const name = data.get('name')
 	const email = data.get('email')
 	const description = data.get('description')
 
 	if (typeof name !== 'string' || typeof email !== 'string' || typeof description !== 'string' || !name || !email || !description) {
 		return fail(400, { invalid: true });
+	}
+
+	let base64String = null;
+	if (profileImage && profileImage instanceof Blob) {
+		const arrayBuffer = await profileImage.arrayBuffer();
+		base64String = btoa(String.fromCharCode(...new Uint8Array(arrayBuffer)));
 	}
 
 	// MAKE PUT EDIT REQUEST
@@ -41,7 +48,7 @@ const edit = async ({ locals, request, params }) => {
 		  'Content-Type': 'application/json',
 		  'Authorization': `Bearer ${locals.user.jwt}`
 		},
-		body: JSON.stringify({ name: name, email: email, description: description })
+		body: JSON.stringify({ name, email, description, profileImage: base64String })
 	});
 	
 	if (!response.ok) {

@@ -31,7 +31,7 @@
 					<a href="/users/{user.id}" class="block">
 						<div class="flex flex-col sm:flex-row items-center sm:space-x-6">
 							<div class="flex-shrink-0 mb-4 sm:mb-0">
-								<img class="w-16 h-16 rounded-full" src="/user.png" alt="{user.name}">
+								<img class="w-16 h-16 rounded-full" src="data:image/png;base64, {user.profile_image}" alt="{user.name}">
 							</div>
 							<div class="flex-1 min-w-0">
 								<p class="text-lg font-medium text-gray-900 truncate">{user.id} - {user.name}</p>

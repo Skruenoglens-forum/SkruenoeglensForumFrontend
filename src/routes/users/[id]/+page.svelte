@@ -27,7 +27,7 @@
         <div class="rounded overflow-hidden shadow-md bg-white">
             <div class="absolute -mt-20 w-full flex justify-center">
                 <div class="h-32 w-32">
-                    <img src="/user.png" class="rounded-full object-cover h-full w-full shadow-md" />
+                    <img src="data:image/png;base64, {data.user.profile_image}" alt="profile" class="rounded-full object-cover h-full w-full shadow-md" />
                 </div>
             </div>
             <div class="px-6 mt-16">
@@ -74,7 +74,7 @@
             <div class="group relative">
                 <h2 class="text-center text-lg font-semibold">{car.brand} {car.model}</h2>
                 <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
-                    <img src="/bilImg.png" alt="bil" class="h-full w-full object-cover object-center lg:h-full lg:w-full">
+                    <img src="data:image/png;base64, {car.image}" alt="bil" class="h-full w-full object-cover object-center lg:h-full lg:w-full">
                 </div>
 
                 <div class="mt-4 flex justify-between px-2">

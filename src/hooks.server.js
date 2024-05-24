@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import { JWT_SECRET_KEY } from '$env/static/private';
 
 export const handle = async ({ event, resolve }) => {
 	// get cookies from browser
@@ -11,7 +12,7 @@ export const handle = async ({ event, resolve }) => {
 
 	try {
 		// VALIDATE JWT TOKEN
-		const decodedToken = jwt.verify(token, 'gfg_jwt_secret_key');
+		const decodedToken = jwt.verify(token, JWT_SECRET_KEY);
 	
 		// GET CLAIMS FROM JWT TOKEN
 		const { email, uid, roleId } = decodedToken;

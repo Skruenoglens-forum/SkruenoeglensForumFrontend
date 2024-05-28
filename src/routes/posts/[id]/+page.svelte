@@ -114,7 +114,7 @@
             <div class="flex items-center">
               <a href="/users/{comment.user_id}">
                 <p class="inline-flex items-center mr-3 text-sm text-gray-900">
-                  <img class="mr-2 w-6 h-6 rounded-full" src="data:image/png;base64, {comment.profile_image}" alt="user">
+                  <img class="mr-2 w-6 h-6 rounded-full" src="{data.API_HOST}/users/{comment.user_id}/image" alt="user">
                   {comment.name}
                 </p>
               </a>

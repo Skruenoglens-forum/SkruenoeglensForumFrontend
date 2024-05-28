@@ -25,27 +25,29 @@ const signup = async ({ request }) => {
 		return fail(400, { pwdMatch: true });
 	}
 
-	let base64String = null;
-	if (profileImage && profileImage instanceof Blob) {
-		const arrayBuffer = await profileImage.arrayBuffer();
-		base64String = btoa(String.fromCharCode(...new Uint8Array(arrayBuffer)));
-	}
+	// Create form data
+	const formData = new FormData();
+	formData.append('file', profileImage);
+	formData.append('name', name);
+	formData.append('email', email);
+	formData.append('description', description);
+	formData.append('password', password);
 
 	// MAKE POST SIGNUP REQUEST
 	const response = await fetch(`${API_HOST}/users`, {
-		method: 'POST',
-		headers: {
-		  'Content-Type': 'application/json'
-		},
-		body: JSON.stringify({ name, email, password, description, profileImage: base64String })
+			method: 'POST',
+			body: formData
 	});
-	
+
+	console.log(response.status)
+
 	if (!response.ok) {
 		console.log(response.status)
 		return fail(400, { user: true });
 	}
 
 	throw redirect(303, '/login')
+
 }
 
 export const actions = { signup }

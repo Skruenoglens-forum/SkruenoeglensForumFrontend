@@ -5,15 +5,15 @@ node_modules
 build
 
 # Ignore any development-specific files
-# *.log
-# .DS_Store
+*.log
+.DS_Store
 # .env
-# .env.local
-# .env.*.local
-# .cachedir
-# cache
-# tmp
-# .svelte-kit
+.env.local
+.env.*.local
+.cachedir
+cache
+tmp
+.svelte-kit
 
 # Ignore package manager lock files
 yarn.lock

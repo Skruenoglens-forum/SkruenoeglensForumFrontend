@@ -31,7 +31,8 @@ export const load = async ({ locals, params }) => {
 
 	return {
 	  user,
-	  cars
+	  cars,
+	  API_HOST
 	};
 }
 

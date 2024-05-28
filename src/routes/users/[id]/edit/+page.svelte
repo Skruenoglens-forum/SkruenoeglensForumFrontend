@@ -8,8 +8,11 @@
         if (file) {
             const reader = new FileReader();
             reader.onload = (e) => {
-                imageUrl = e.target.result;
+                imageUrl = reader.result; //e.target.result;
             };
+            reader.onerror = (error) => {
+                console.error('Error: ', error);
+            }
             reader.readAsDataURL(file);
         }
     }

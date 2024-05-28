@@ -25,39 +25,38 @@ export const load = async ({ locals, params }) => {
 }
 
 const edit = async ({ locals, request, params }) => {
-	const data = await request.formData()
-	const profileImage = data.get('profileImage');
-    const name = data.get('name')
-	const email = data.get('email')
-	const description = data.get('description')
+    const data = await request.formData();
+    const profileImage = data.get('profileImage');
+    const name = data.get('name');
+    const email = data.get('email');
+    const description = data.get('description');
 
-	if (typeof name !== 'string' || typeof email !== 'string' || typeof description !== 'string' || !name || !email || !description) {
-		return fail(400, { invalid: true });
-	}
+	// Create form data
+	const formData = new FormData();
+	formData.append('file', profileImage);
+	formData.append('name', name);
+	formData.append('email', email);
+	formData.append('description', description);
 
-	let base64String = null;
-	if (profileImage && profileImage instanceof Blob) {
-		const arrayBuffer = await profileImage.arrayBuffer();
-		base64String = btoa(String.fromCharCode(...new Uint8Array(arrayBuffer)));
-	}
+	console.log(`${API_HOST}/users/${params.id}`)
+	console.log(formData)
 
-	// MAKE PUT EDIT REQUEST
+	// Make PUT request to the endpoint
 	const response = await fetch(`${API_HOST}/users/${params.id}`, {
 		method: 'PUT',
 		headers: {
-		  'Content-Type': 'application/json',
-		  'Authorization': `Bearer ${locals.user.jwt}`
+			'Authorization': `Bearer ${locals.user.jwt}`
 		},
-		body: JSON.stringify({ name, email, description, profileImage: base64String })
+		body: formData
 	});
-	
+
 	if (!response.ok) {
-		console.log(response.status)
+		console.log(response.status);
 		return fail(400, { user: true });
 	}
 
-	throw redirect(303, `/users/${params.id}`)
-}
+	throw redirect(303, `/users/${params.id}`);
+};
 
 const newpassword = async ({ locals, request, params }) => {
 	const data = await request.formData()

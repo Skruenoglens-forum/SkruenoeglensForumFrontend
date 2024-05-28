@@ -26,7 +26,8 @@ export const load = async ({ params }) => {
 
 	return {
 	  post,
-	  comments
+	  comments,
+	  API_HOST
 	};
 }
 

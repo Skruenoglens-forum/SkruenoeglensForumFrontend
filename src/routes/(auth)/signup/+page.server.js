@@ -39,8 +39,6 @@ const signup = async ({ request }) => {
 			body: formData
 	});
 
-	console.log(response.status)
-
 	if (!response.ok) {
 		console.log(response.status)
 		return fail(400, { user: true });

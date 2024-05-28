@@ -56,6 +56,64 @@ const addComment = async ({ request, locals, params }) => {
 	throw redirect(302, `/posts/${params.id}`)
 }
 
+const editComment = async ({ request, locals, params }) => {
+	const data = await request.formData()
+	const description = data.get('description')
+	const commentId = data.get('commentId')
+
+	// redirect user if not logged in
+	if (!locals.user) {
+		throw redirect(302, '/login')
+	}
+	
+	// MAKE PUT REQUEST
+	await fetch(`${API_HOST}/comments/${commentId}`, {
+		method: 'PUT',
+		headers: {
+		  'Content-Type': 'application/json',
+		  'Authorization': `Bearer ${locals.user.jwt}`
+		},
+		body: JSON.stringify({description})
+	});
+
+	// redirect the user
+	throw redirect(302, `/posts/${params.id}`)
+}
+
+const markCommentAsSolution = async ({ request, locals, params }) => {
+	const data = await request.formData()
+	const commentId = data.get('commentId')
+	
+	// MAKE PUT REQUEST
+	await fetch(`${API_HOST}/comments/${commentId}/solution/1`, {
+		method: 'PUt',
+		headers: {
+		  'Content-Type': 'application/json',
+		  'Authorization': `Bearer ${locals.user.jwt}`
+		}
+	});
+
+	// redirect the user
+	throw redirect(302, `/posts/${params.id}`)
+}
+
+const removeCommentAsSolution = async ({ request, locals, params }) => {
+	const data = await request.formData()
+	const commentId = data.get('commentId')
+	
+	// MAKE PUT REQUEST
+	await fetch(`${API_HOST}/comments/${commentId}/solution/0`, {
+		method: 'PUt',
+		headers: {
+		  'Content-Type': 'application/json',
+		  'Authorization': `Bearer ${locals.user.jwt}`
+		}
+	});
+
+	// redirect the user
+	throw redirect(302, `/posts/${params.id}`)
+}
+
 const deleteComment = async ({ request, locals, params }) => {
 	const data = await request.formData()
 	const commentId = data.get('commentId')
@@ -73,4 +131,4 @@ const deleteComment = async ({ request, locals, params }) => {
 	throw redirect(302, `/posts/${params.id}`)
 }
 
-export const actions = { addComment, deleteComment }
+export const actions = { addComment, editComment, markCommentAsSolution, removeCommentAsSolution, deleteComment }

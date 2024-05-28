@@ -9,7 +9,7 @@
 </svelte:head>
 
 <Header />
-<main>
+<main class="mb-24">
     <slot />
 </main>
 <Footer year="2024" domain="Skruenøglensforum.dk" name="Emil Storgaard & Alexander Olsen" />

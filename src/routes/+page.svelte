@@ -8,7 +8,7 @@
 
     async function getPostsByCategoryId(categoryId) {
         categorySearch = data.categories[categoryId-1].name
-        let res = await fetch(`http://localhost:8585/api/v1/posts/category/${categoryId}`, {
+        let res = await fetch(`http://localhost:8585/api/v1/posts/categories/${categoryId}`, {
             method: 'GET',
             headers: {
             'Content-Type': 'application/json'

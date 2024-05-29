@@ -58,89 +58,82 @@
 
 </script>
 
-<div class="bg-white">
     <div class="pt-6">  
-      <!-- Image gallery -->
-      <div class="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
-        {#if data.images[0]}
-        <div class="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block">
-          <img src="{data.API_HOST}/posts/image/{data.images[0].id}" alt="bil" class="h-full w-full object-cover object-center">
-        </div>
-        {/if}
-        <div class="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
-          {#if data.images[1]}
-          <div class="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
-            <img src="{data.API_HOST}/posts/image/{data.images[1].id}" alt="bil" class="h-full w-full object-cover object-center">
-          </div>
-          {/if}
-          {#if data.images[2]}
-          <div class="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
-            <img src="{data.API_HOST}/posts/image/{data.images[2].id}" alt="bil" class="h-full w-full object-cover object-center">
-          </div>
-          {/if}
-        </div>
-        {#if data.images[3]}
-        <div class="aspect-h-5 aspect-w-4 lg:aspect-h-4 lg:aspect-w-3 sm:overflow-hidden sm:rounded-lg">
-          <img src="{data.API_HOST}/posts/image/{data.images[3].id}" alt="bil" class="h-full w-full object-cover object-center">
-        </div>
-        {/if}
-      </div>
-  
-      <div class="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
-        <div class="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
-          <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl mb-4">{data.post.title}</h1>
-          <div class="mt-4 sm:mt-0 sm:ml-auto flex items-center space-x-4">
-            <span class="text-sm text-gray-500">
-              <a href="/posts/{data.post.id}/edit" class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md transition duration-300 ease-in-out">Rediger</a>
-            </span>
-            <span class="text-sm text-gray-500">
-              <form action="?/deletePost" method="POST">
-                <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md transition duration-300 ease-in-out">Slet</button>
-              </form>
-            </span>
-          </div>
-        </div>
-      
-        <!-- Description and details -->
-        <div class="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
-          <div>  
-            <div class="space-y-6">
-              <p class="text-base text-gray-900">{data.post.description}</p>
-            </div>
-          </div>
-          <div class="mt-10">
-            <h3 class="text-sm font-medium text-gray-900">Mere information</h3>
-            <div class="mt-4">
-              <ul role="list" class="list-disc space-y-2 pl-4 text-sm">
-                <li class="text-gray-400"><span class="text-gray-600">Mærke: {data.post.car_brand}</span></li>
-                <li class="text-gray-400"><span class="text-gray-600">Model: {data.post.car_model}</span></li>
-                <li class="text-gray-400"><span class="text-gray-600">Motor: {data.post.car_motor}</span></li>
-                <li class="text-gray-400"><span class="text-gray-600">Drivmiddel: {data.post.car_type}</span></li>
-                <li class="text-gray-400"><span class="text-gray-600">Første registrering: {convertDateString(data.post.car_first_registration)}</span></li>
-                <li class="text-gray-400"><span class="text-gray-600">Kategori: {data.post.category_id}</span></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      
-        <!-- Options -->
-        <div class="mt-4 lg:row-span-3 lg:mt-0">
-          <p class="text-3xl tracking-tight text-gray-900">Skriv en kommentar</p>
-          <form action="?/addComment" method="POST"  class="mt-10">
-            <div class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200">
-              <textarea name="description" id="description" rows="6"
-                  class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none"
-                  placeholder="Skriv en kommentar..." required></textarea>
-            </div>
-            <button type="submit" class="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Send</button>
-          </form>
-        </div>
-      </div>
-      
-    </div>
-  </div>
 
-<section class="bg-white py-8 lg:py-16 antialiased">
+        <div class="mx-auto max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8">
+            {#if data.images[0]}
+            <div class="aspect-h-5 aspect-w-4 lg:aspect-h-4 lg:aspect-w-3 sm:overflow-hidden sm:rounded-lg">
+                <img src="{data.API_HOST}/posts/image/{data.images[0].id}" alt="bil" class="h-full w-full object-cover object-center">
+            </div>
+            {/if}
+            <div class="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
+                {#if data.images[1]}
+                <div class="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
+                    <img src="{data.API_HOST}/posts/image/{data.images[1].id}" alt="bil" class="h-full w-full object-cover object-center">
+                </div>
+                {/if}
+                {#if data.images[2]}
+                <div class="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
+                    <img src="{data.API_HOST}/posts/image/{data.images[2].id}" alt="bil" class="h-full w-full object-cover object-center">
+                </div>
+                {/if}
+            </div>
+            {#if data.images[3]}
+            <div class="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block">
+                <img src="{data.API_HOST}/posts/image/{data.images[3].id}" alt="bil" class="h-full w-full object-cover object-center">
+            </div>
+            {/if}
+      </div>
+        <div class="mx-auto max-w-2xl px-4 pb-4 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8">
+            <div class="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
+                <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl mb-4">{data.post.title}</h1>
+                <div class="mt-4 sm:mt-0 sm:ml-auto flex items-center space-x-4">
+                    <span class="text-sm text-gray-500">
+                        <a href="/posts/{data.post.id}/edit" class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md transition duration-300 ease-in-out">Rediger</a>
+                    </span>
+                    <span class="text-sm text-gray-500">
+                        <form action="?/deletePost" method="POST">
+                            <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md transition duration-300 ease-in-out">Slet</button>
+                        </form>
+                    </span>
+                </div>
+            </div>
+            <div class="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
+                <div>  
+                    <div class="space-y-6">
+                        <p class="text-base text-gray-900">{data.post.description}</p>
+                    </div>
+                </div>
+                <div class="mt-10">
+                    <h3 class="text-sm font-medium text-gray-900">Mere information</h3>
+                    <div class="mt-4">
+                        <ul role="list" class="list-disc space-y-2 pl-4 text-sm">
+                            <li class="text-gray-400"><span class="text-gray-600">Mærke: {data.post.car_brand}</span></li>
+                            <li class="text-gray-400"><span class="text-gray-600">Model: {data.post.car_model}</span></li>
+                            <li class="text-gray-400"><span class="text-gray-600">Motor: {data.post.car_motor}</span></li>
+                            <li class="text-gray-400"><span class="text-gray-600">Drivmiddel: {data.post.car_type}</span></li>
+                            <li class="text-gray-400"><span class="text-gray-600">Første registrering: {convertDateString(data.post.car_first_registration)}</span></li>
+                            <li class="text-gray-400"><span class="text-gray-600">Kategori: {data.post.category_id}</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+      
+            <div class="mt-4 lg:row-span-3 lg:mt-0">
+                <p class="text-3xl tracking-tight text-gray-900">Skriv en kommentar</p>
+                <form action="?/addComment" method="POST"  class="mt-10">
+                    <div class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200">
+                        <textarea name="description" id="description" rows="6"
+                            class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none"
+                            placeholder="Skriv en kommentar..." required></textarea>
+                    </div>
+                    <button type="submit" class="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Send</button>
+                </form>
+            </div>
+        </div>  
+
+    </div>
+
   <div class="max-w-2xl mx-auto px-4">
     {#each data.comments as comment}
         <article class="{!comment.parent_id ? '' : "mb-3 ml-6 lg:ml-12"} p-6 text-base bg-white rounded-lg">
@@ -245,6 +238,5 @@
     {/each}
            
   </div>
-</section>
 
 

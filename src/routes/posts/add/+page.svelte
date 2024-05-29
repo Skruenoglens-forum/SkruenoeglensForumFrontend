@@ -22,7 +22,6 @@
     }
 </script>
 
-<section>
 <div class="flex flex-col items-center justify-center px-6 py-8 mt-8 lg:py-0">
     <div class="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
         <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
@@ -33,13 +32,13 @@
                 {#each imageUrls as imageUrl (imageUrl)}
                 <div class="w-32 h-32 rounded-full overflow-hidden bg-gray-200 flex items-center justify-center mx-auto">
                     {#if imageUrl}
-                        <img src={imageUrl} alt="Profile" class="object-cover w-full h-full"/>
+                    <img src={imageUrl} alt="Profile" class="object-cover w-full h-full"/>
                     {/if}
                 </div>
-            {/each}
-            <div class="relative mx-auto">
-                <input on:change={handleFileUpload} type="file" name="postImages" accept="image/*" multiple />
-            </div>
+                {/each}
+                <div class="relative mx-auto">
+                    <input on:change={handleFileUpload} class="block w-full text-sm text-gray-500 file:me-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-gray-400 file:text-white hover:file:bg-gray-600 file:disabled:opacity-50 file:disabled:pointer-events-none" type="file" name="postImages" accept="image/*" multiple />
+                </div>
                 <div>
                     <label for="carId" class="block mb-2 text-sm font-medium text-gray-900">Udfyld med data fra egen bil (valgfri)</label>
                     <select on:change={(event) => car = data.cars[0]} name="carId" id="carId" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5">
@@ -86,10 +85,8 @@
                     {/each}
                     </select>
                 </div>
-                
                 <button type="submit" class="w-full text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Tilføj Opslag</button>
             </form>
         </div>
     </div>
 </div>
-</section>

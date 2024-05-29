@@ -96,9 +96,7 @@
 {/if}
 
 <div class="mx-auto max-w-2xl px-6 py-6 lg:max-w-7xl">
- 
     <div class="grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-1 lg:grid-cols-2">
-
         <section>
             <div class="flex flex-col items-center justify-center">
                 <div class="w-full bg-white rounded-lg shadow sm:max-w-md">
@@ -114,7 +112,6 @@
                 </div>
             </div>
         </section>
-
         <section>
             <div class="flex flex-col items-center justify-center">
                 <div class="w-full bg-white rounded-lg shadow sm:max-w-md">
@@ -132,14 +129,11 @@
                 </div>
             </div>
         </section>
-
     </div>
 </div>
 
-<!-- mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8 -->
 <div class="mx-auto max-w-2xl px-6 py-6 lg:max-w-7xl">
     <div class="grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2 lg:grid-cols-4">
-
         {#each posts as post}
         <div class="group relative">
             <h2 class="text-center text-lg font-semibold">{post.title}</h2>
@@ -178,6 +172,5 @@
                 <p class="py-4 text-center text-gray-500">Ingen opslag</p>
             {/if} 
         {/each}
-
     </div>
 </div>

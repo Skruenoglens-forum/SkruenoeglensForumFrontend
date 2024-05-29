@@ -29,7 +29,7 @@ function handleFileUpload(event) {
                         {/if}
                     </div>
                     <div class="relative mx-auto">
-                        <input on:change={handleFileUpload} type="file" name="carImage" accept="image/*" />
+                        <input on:change={handleFileUpload} class="block w-full text-sm text-gray-500 file:me-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-gray-400 file:text-white hover:file:bg-gray-600 file:disabled:opacity-50 file:disabled:pointer-events-none" type="file" name="carImage" accept="image/*" />
                     </div>
                     <div>
                         <label for="licensePlate" class="block mb-2 text-sm font-medium text-gray-900">Nummerplade</label>

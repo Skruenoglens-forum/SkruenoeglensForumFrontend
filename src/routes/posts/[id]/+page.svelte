@@ -62,26 +62,43 @@
     <div class="pt-6">  
       <!-- Image gallery -->
       <div class="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
+        {#if data.images[0]}
         <div class="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block">
-          <img src="/bil.png" alt="bil" class="h-full w-full object-cover object-center">
+          <img src="{data.API_HOST}/posts/image/{data.images[0].id}" alt="bil" class="h-full w-full object-cover object-center">
         </div>
+        {/if}
         <div class="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
+          {#if data.images[1]}
           <div class="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
-            <img src="/bil.png" alt="bil" class="h-full w-full object-cover object-center">
+            <img src="{data.API_HOST}/posts/image/{data.images[1].id}" alt="bil" class="h-full w-full object-cover object-center">
           </div>
+          {/if}
+          {#if data.images[2]}
           <div class="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
-            <img src="/bil.png" alt="bil" class="h-full w-full object-cover object-center">
+            <img src="{data.API_HOST}/posts/image/{data.images[2].id}" alt="bil" class="h-full w-full object-cover object-center">
           </div>
+          {/if}
         </div>
+        {#if data.images[3]}
         <div class="aspect-h-5 aspect-w-4 lg:aspect-h-4 lg:aspect-w-3 sm:overflow-hidden sm:rounded-lg">
-          <img src="/bil.png" alt="bil" class="h-full w-full object-cover object-center">
+          <img src="{data.API_HOST}/posts/image/{data.images[3].id}" alt="bil" class="h-full w-full object-cover object-center">
         </div>
+        {/if}
       </div>
   
       <div class="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
         <div class="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
           <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl mb-4">{data.post.title}</h1>
-          <a href="/posts/{data.post.id}/edit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4">Rediger</a>
+          <div class="mt-4 sm:mt-0 sm:ml-auto flex items-center space-x-4">
+            <span class="text-sm text-gray-500">
+              <a href="/posts/{data.post.id}/edit" class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md transition duration-300 ease-in-out">Rediger</a>
+            </span>
+            <span class="text-sm text-gray-500">
+              <form action="?/deletePost" method="POST">
+                <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md transition duration-300 ease-in-out">Slet</button>
+              </form>
+            </span>
+          </div>
         </div>
       
         <!-- Description and details -->
@@ -224,7 +241,7 @@
           </article>
 
     {:else}
-        <p class="py-4 text-center text-gray-500">No comments</p>
+        <p class="py-4 text-center text-gray-500">Ingen kommentare</p>
     {/each}
            
   </div>

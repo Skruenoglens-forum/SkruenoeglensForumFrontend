@@ -1,5 +1,23 @@
 <script>
   export let data;
+
+  let imageUrls = [];
+
+function handleFileUpload(event) {
+    const files = event.target.files;
+    imageUrls = [];
+
+    for (let i = 0; i < files.length && i < 4; i++) {
+        const file = files[i];
+        const reader = new FileReader();
+        
+        reader.onload = (e) => {
+            imageUrls = [...imageUrls, e.target.result];
+        };
+
+        reader.readAsDataURL(file);
+    }
+}
 </script>
 
 <section>
@@ -9,8 +27,18 @@
           <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
               Rediger opslag
           </h1>
-          <form action="?/edit" method="POST" class="space-y-4 md:space-y-6">
-              <div>
+          <form action="?/edit" method="POST" class="space-y-4 md:space-y-6" enctype="multipart/form-data">
+            {#each imageUrls as imageUrl (imageUrl)}
+            <div class="w-32 h-32 rounded-full overflow-hidden bg-gray-200 flex items-center justify-center mx-auto">
+                {#if imageUrl}
+                    <img src={imageUrl} alt="Profile" class="object-cover w-full h-full"/>
+                {/if}
+            </div>
+        {/each}
+        <div class="relative mx-auto">
+            <input on:change={handleFileUpload} type="file" name="postImages" accept="image/*" multiple />
+        </div>  
+            <div>
                   <label for="title" class="block mb-2 text-sm font-medium text-gray-900">Titel</label>
                   <input value={data.post.title} type="text" name="title" id="title" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="Titel..." required="">
               </div>
@@ -41,7 +69,7 @@
               <div>
                   <label for="categoryId" class="block mb-2 text-sm font-medium text-gray-900">Kategori</label>
                   <select name="categoryId" id="categoryId" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" required="">
-                  <option value={data.post.category_id} disabled selected>{data.categories[data.post.category_id-1].name}</option>
+                  <option value={data.post.category_id}>{data.categories[data.post.category_id-1].name}</option>
                   {#each data.categories as category}
                       <option value="{category.id}">{category.name}</option>
                   {/each}

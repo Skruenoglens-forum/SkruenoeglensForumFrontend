@@ -13,6 +13,17 @@ export const load = async ({ params }) => {
 
 	post = await res.json()
 
+	let images = [];
+
+	res = await fetch(`${API_HOST}/posts/${params.id}/images`, {
+		method: 'GET',
+		headers: {
+		  'Content-Type': 'application/json'
+		},
+	});
+
+	images = await res.json()
+
 	let comments = [];
 
 	res = await fetch(`${API_HOST}/comments/posts/${params.id}`, {
@@ -26,6 +37,7 @@ export const load = async ({ params }) => {
 
 	return {
 	  post,
+	  images,
 	  comments,
 	  API_HOST
 	};
@@ -131,4 +143,18 @@ const deleteComment = async ({ request, locals, params }) => {
 	throw redirect(302, `/posts/${params.id}`)
 }
 
-export const actions = { addComment, editComment, markCommentAsSolution, removeCommentAsSolution, deleteComment }
+const deletePost = async ({ locals, params }) => {	
+	// MAKE DELETE REQUEST
+	await fetch(`${API_HOST}/posts/${params.id}`, {
+		method: 'DELETE',
+		headers: {
+		  'Content-Type': 'application/json',
+		  'Authorization': `Bearer ${locals.user.jwt}`
+		}
+	});
+
+	// redirect the user
+	throw redirect(302, `/`)
+}
+
+export const actions = { addComment, editComment, markCommentAsSolution, removeCommentAsSolution, deleteComment, deletePost }

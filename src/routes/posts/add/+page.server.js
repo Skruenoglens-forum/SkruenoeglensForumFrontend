@@ -37,6 +37,7 @@ export const load = async ({ locals }) => {
 
 const add = async ({ locals, request }) => {
 	const data = await request.formData()
+	const postImages = data.getAll('postImages')
     const title = data.get('title')
 	const description = data.get('description')
 	const carBrand = data.get('carBrand')
@@ -46,14 +47,28 @@ const add = async ({ locals, request }) => {
 	const carFirstRegistration = data.get('carFirstRegistration')
 	const categoryId = data.get('categoryId')
 
+	// Create form data
+	const formData = new FormData();
+	// Assuming postImages is an array of File objects
+	postImages.forEach((file) => {
+		formData.append('images', file);
+	});
+	formData.append('title', title);
+	formData.append('description', description);
+	formData.append('carBrand', carBrand);
+	formData.append('carModel', carModel);
+	formData.append('carMotor', carMotor);
+	formData.append('carType', carType);
+	formData.append('carFirstRegistration', carFirstRegistration);
+	formData.append('categoryId', categoryId);
+
 	// MAKE POST REQUEST
 	const response = await fetch(`${API_HOST}/posts`, {
 		method: 'POST',
 		headers: {
-		  'Content-Type': 'application/json',
 		  'Authorization': `Bearer ${locals.user.jwt}`
 		},
-		body: JSON.stringify({title, description, carBrand, carModel, carMotor, carFirstRegistration, carType, categoryId})
+		body: formData
 	});
 	
 	if (!response.ok) {

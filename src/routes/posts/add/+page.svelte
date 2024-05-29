@@ -2,6 +2,24 @@
     export let data;
 
     let car = {}
+
+    let imageUrls = [];
+
+    function handleFileUpload(event) {
+        const files = event.target.files;
+        imageUrls = [];
+
+        for (let i = 0; i < files.length && i < 4; i++) {
+            const file = files[i];
+            const reader = new FileReader();
+            
+            reader.onload = (e) => {
+                imageUrls = [...imageUrls, e.target.result];
+            };
+
+            reader.readAsDataURL(file);
+        }
+    }
 </script>
 
 <section>
@@ -11,7 +29,17 @@
             <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
                 Tilføj opslag
             </h1>
-            <form action="?/add" method="POST" class="space-y-4 md:space-y-6">
+            <form action="?/add" method="POST" class="space-y-4 md:space-y-6" enctype="multipart/form-data">
+                {#each imageUrls as imageUrl (imageUrl)}
+                <div class="w-32 h-32 rounded-full overflow-hidden bg-gray-200 flex items-center justify-center mx-auto">
+                    {#if imageUrl}
+                        <img src={imageUrl} alt="Profile" class="object-cover w-full h-full"/>
+                    {/if}
+                </div>
+            {/each}
+            <div class="relative mx-auto">
+                <input on:change={handleFileUpload} type="file" name="postImages" accept="image/*" multiple />
+            </div>
                 <div>
                     <label for="carId" class="block mb-2 text-sm font-medium text-gray-900">Udfyld med data fra egen bil (valgfri)</label>
                     <select on:change={(event) => car = data.cars[0]} name="carId" id="carId" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5">

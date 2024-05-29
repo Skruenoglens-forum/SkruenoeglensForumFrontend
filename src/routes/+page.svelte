@@ -1,14 +1,16 @@
 <script>
     import { page } from '$app/stores'
+    
 
     export let data;
 
     let posts = data.posts;
     let categorySearch = "";
-
+    let bil;
+    let licensplateInput; 
     async function getPostsByCategoryId(categoryId) {
         categorySearch = data.categories[categoryId-1].name
-        let res = await fetch(`http://localhost:8585/api/v1/posts/categories/${categoryId}`, {
+        let res = await fetch(`${data.API_HOST}/posts/categories/${categoryId}`, {
             method: 'GET',
             headers: {
             'Content-Type': 'application/json'
@@ -17,7 +19,18 @@
 
         posts = await res.json()
     }
+    async function getCarByLicensePlate(licenseplate){
+        let res = await fetch(`https://lp.skruenøglen.dk/getcarbylp?licenseplate=${licenseplate}`,{
+            method :'GET',
+            headers:{
+                'Content-Type':'application/json',
+                'Access-Control-Allow-Origin': '*'
 
+            },
+        })
+        bil = await res.json()
+        console.log(bil);
+    }
     function convertDateString(dateString) {
         // Create a new Date object from the input string
         const date = new Date(dateString);
@@ -59,6 +72,12 @@
 
             <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-lg">
                 <table class="min-w-full divide-y divide-gray-200">
+                    <div>
+                        <form class="m-4 flex">
+                          <input bind:value={licensplateInput} class="rounded-l-lg p-4 border-t mr-0 border-b border-l text-gray-800 border-red-200 bg-white" placeholder="AB 12 123"/>
+                          <button class="px-8 rounded-r-lg bg-blue-400  text-white-800 font-bold p-4 uppercase border-red-500 border-t border-b border-r" on:click={getCarByLicensePlate(licensplateInput)}>Søg</button>
+                      </form>
+                  </div>
                     <thead class="bg-gray-50">
                         <tr>
                             <th>

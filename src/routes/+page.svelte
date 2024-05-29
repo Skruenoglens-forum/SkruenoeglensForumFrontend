@@ -35,16 +35,37 @@
     let bil;
     let licensplateInput; 
     async function getCarByLicensePlate(licenseplate){
-        let res = await fetch(`https://lp.skruenøglen.dk/getcarbylp?licenseplate=${licenseplate}`,{
-            method :'GET',
-            headers:{
-                'Content-Type':'application/json',
-                'Access-Control-Allow-Origin': '*'
+        try {
 
-            },
-        })
-        bil = await res.json()
-        console.log(bil);
+            bilIsLoading = true;
+
+            let res = await fetch(`https://lp.skruenøglen.dk/getcarbylp?licenseplate=${licenseplate}`,{
+                method :'GET',
+                headers:{
+                    'Content-Type':'application/json',
+                    'Access-Control-Allow-Origin': '*'
+
+                },
+            })
+        
+            if( res.status ==200){
+                bil = await res.json()
+            }
+            else {
+                bil = undefined
+            }
+            console.log(bil);
+        }catch (e) {
+
+            // Alert
+            alert("It fucked up!")
+
+        }finally {
+
+            // Not loading
+            bilIsLoading = false;
+
+        }
     }
     function convertDateString(dateString) {
         // Create a new Date object from the input string

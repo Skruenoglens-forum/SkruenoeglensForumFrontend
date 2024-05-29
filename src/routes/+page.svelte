@@ -1,9 +1,11 @@
 <script>
     import { page } from '$app/stores'
-    
+    import {ProgressRadial} from '@skeletonlabs/skeleton'
+    import { getToastStore } from '@skeletonlabs/skeleton';
 
     export let data;
 
+    const toastStore = getToastStore();
     let posts = data.posts;
     let categorySearch = "";
     let bil;
@@ -39,6 +41,7 @@
             }
             else {
                 bil = undefined
+                toastStore.trigger()
             }
             console.log(bil);
         }catch (e) {
@@ -98,15 +101,12 @@
                 <div class="w-full gap-2 flex flex-col justify-center items-center px-4">
                     <form class="m-4 flex">
                         <input disabled={bilIsLoading} bind:value={licensplateInput} class="rounded-l-lg p-4 border-t mr-0 border-b border-l uppercase text-gray-800 border-red-500 bg-white" placeholder="AB 12 123"/>
-                        {#if !bilIsLoading}
-                        <button class=" px-8 rounded-r-lg bg-blue-400  text-white-800 font-bold p-4 uppercase border-red-500 border-t border-b border-r" on:click={getCarByLicensePlate(licensplateInput)}>Søg</button>
-                        {:else}
                         
-                        {/if}
+                        <button disabled={bilIsLoading} class=" flex items-center justify-center px-8 rounded-r-lg bg-blue-400 min-w-28 text-white-800 font-bold p-4 uppercase border-red-500 border-t border-b border-r" on:click={getCarByLicensePlate(licensplateInput)}>{#if !bilIsLoading}Søg{:else}<ProgressRadial width='w-6' class ="m-0"/>{/if}</button>
+                        
                     </form>
-                    {#if bilIsLoading}
-                        <div>Jeg indlæser lige nu ;P</div>
-                    {:else if bil}
+                   
+                    {#if bil}
                         <div class="justify-center w-full bg-white border border-gray-200 rounded-lg shadow-md p-4">
                             <h3 class="text-lg font-semibold text-gray-900 mb-4">Biloplysninger</h3>
                             <div class="flex justify-between items-center mb-2">

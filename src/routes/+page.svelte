@@ -1,8 +1,11 @@
 <script>
     import { page } from '$app/stores'
-    
+    import {ProgressRadial} from '@skeletonlabs/skeleton'
+    import { getToastStore } from '@skeletonlabs/skeleton';
+
     export let data;
 
+    const toastStore = getToastStore();
     let posts = data.posts;
 
     let categorySearch = "";
@@ -53,6 +56,7 @@
             }
             else {
                 bil = undefined
+                toastStore.trigger()
             }
             console.log(bil);
         }catch (e) {
@@ -126,6 +130,54 @@
                             {/each}
                         </select>
                     </div>
+
+
+<div class="bg-white">
+    <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+        <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-1 lg:grid-cols-2 xl:gap-x-8">
+
+            
+
+            <div class="  max-w-4xl mx-auto bg-white shadow-lg rounded-lg">
+
+                <div class="w-full gap-2 flex flex-col justify-center items-center px-4">
+                    <form class="m-4 flex">
+                        <input disabled={bilIsLoading} bind:value={licensplateInput} class="rounded-l-lg p-4 border-t mr-0 border-b border-l uppercase text-gray-800 border-red-500 bg-white" placeholder="AB 12 123"/>
+                        
+                        <button disabled={bilIsLoading} class=" flex items-center justify-center px-8 rounded-r-lg bg-blue-400 min-w-28 text-white-800 font-bold p-4 uppercase border-red-500 border-t border-b border-r" on:click={getCarByLicensePlate(licensplateInput)}>{#if !bilIsLoading}Søg{:else}<ProgressRadial width='w-6' class ="m-0"/>{/if}</button>
+                        
+                    </form>
+                   
+                    {#if bil}
+                        <div class="justify-center w-full bg-white border border-gray-200 rounded-lg shadow-md p-4">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-4">Biloplysninger</h3>
+                            <div class="flex justify-between items-center mb-2">
+                            <span class="text-gray-600"><i class="fas fa-car"></i> Mærke:</span>
+                            <span class="text-gray-800">{bil.brandnavn}</span>
+                            </div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-gray-600"><i class="fas fa-tachometer-alt"></i> Model:</span>
+                                <span class="text-gray-800">{bil.modelnavn}</span>
+                            </div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-gray-600"><i class="fas fa-tachometer-alt"></i> Variant:</span>
+                                <span class="text-gray-800">{bil.køretøjVariantnavn}</span>
+                            </div>
+                            <div class="flex justify-between items-center mb-2">
+                            <span class="text-gray-600"><i class="fas fa-calendar-alt"></i> Indregisteringsår:</span>
+                            <span class="text-gray-800">{new Date(bil.førsteRegistreringDato).getFullYear()}</span>
+                            </div>
+                            
+                            <div class="flex justify-between items-center">
+                            <span class="text-gray-600"><i class="fas fa-gas-pump"></i> Brændstof:</span>
+                            <span class="text-gray-800">{bil.drivkaftType}</span>
+                            </div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-gray-600"><i class="fas fa-tachometer-alt"></i> VIN:</span>
+                                <span class="text-gray-800">{bil.stelnummer}</span>
+                            </div>
+                        </div>
+                    {/if}
                 </div>
             </div>
         </section>

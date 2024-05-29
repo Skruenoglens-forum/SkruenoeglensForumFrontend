@@ -22,7 +22,9 @@
   // State for the visibility of each dropdown
   let dropdownVisible = {};
 
-  let commentReplyTextFielVisible = {};
+  let commentReplyTextFieldVisible = {};
+
+  let commentEditTextFieldVisible = {};
 
   // Toggle dropdown visibility
   function toggleDropdown(commentId) {
@@ -30,15 +32,30 @@
       ...dropdownVisible,
       [commentId]: !dropdownVisible[commentId]
     };
+
+    commentEditTextFieldVisible = {
+        ...commentEditTextFieldVisible,
+        [commentId]: false
+      };
+    
   }
 
       // Toggle comment reply text field
     function toggleCommentReplyTextField(commentId) {
-      commentReplyTextFielVisible = {
-        ...commentReplyTextFielVisible,
-        [commentId]: !commentReplyTextFielVisible[commentId]
-    };
-  }
+      commentReplyTextFieldVisible = {
+        ...commentReplyTextFieldVisible,
+        [commentId]: !commentReplyTextFieldVisible[commentId]
+      };
+    }
+
+    // Toggle comment reply text field
+    function toggleCommentEditTextField(commentId) {
+      commentEditTextFieldVisible = {
+        ...commentEditTextFieldVisible,
+        [commentId]: !commentEditTextFieldVisible[commentId]
+      };
+    }
+
 </script>
 
 <div class="bg-white">
@@ -119,6 +136,13 @@
                 </p>
               </a>
               <p class="text-sm text-gray-600">{convertDateString(comment.created_at)}</p>
+              <!-- add green checkmark -->
+              {#if comment.solution}
+              <svg class="ml-2 w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-10.707a1 1 0 10-1.414-1.414L9 9.586 7.707 8.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              {/if}
+
             </div>
             {#if dropdownVisible[comment.id]}
             <button on:click={() => toggleDropdown(comment.id)} id="dropdownComment1Button" data-dropdown-toggle="dropdownComment1" class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50" type="button">
@@ -140,8 +164,22 @@
             <div id="dropdownComment1" class="{dropdownVisible[comment.id] ? '' : 'hidden'} z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow">
               <ul class="py-1 text-sm text-gray-700" aria-labelledby="dropdownMenuIconHorizontalButton">
                 <li>
+                  {#if !comment.solution}
+                    <form action="?/markCommentAsSolution" method="POST" class="block text-green-600 py-2 px-4 hover:bg-gray-100">
+                      <input type="hidden" name="commentId" value={comment.id}>  
+                      <button type="submit" >Løsning</button>
+                    </form>
+                  {/if}
+                  {#if comment.solution}
+                    <form action="?/removeCommentAsSolution" method="POST" class="block text-green-600 py-2 px-4 hover:bg-gray-100">
+                      <input type="hidden" name="commentId" value={comment.id}>  
+                      <button type="submit" >Fjern løsning</button>
+                    </form>
+                  {/if}
+                </li>
+                <li>
                   <div class="block text-blue-600 py-2 px-4 hover:bg-gray-100">
-                    <button>Rediger</button>
+                    <button on:click={() => toggleCommentEditTextField(comment.id)}>Rediger</button>
                   </div>
                 </li>
                 <li>
@@ -153,7 +191,18 @@
               </ul>
             </div>
           </footer>
-          <p class="text-gray-500">{comment.description}</p>
+          <p class="{!commentEditTextFieldVisible[comment.id] ? '' : 'hidden'} text-gray-500">{comment.description}</p>
+
+          <form action="?/editComment" method="POST"  class="{commentEditTextFieldVisible[comment.id] ? '' : 'hidden'} mt-10">
+            <div class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200">
+              <input type="hidden" name="commentId" value={comment.id}>
+              <textarea name="description" id="description" rows="6"
+                  class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none"
+                  value="{comment.description}" required></textarea>
+            </div>
+            <button type="submit" class="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Rediger kommentar</button>
+          </form>
+
           <div class="flex items-center mt-4 space-x-4">
             <button on:click={() => toggleCommentReplyTextField(comment.id)} type="button" class="flex items-center text-sm text-gray-500 hover:underline font-medium">
               <svg class="mr-1.5 w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
@@ -163,7 +212,7 @@
             </button>
           </div>
           <!-- Dropdown menu -->
-            <form action="?/addComment" method="POST"  class="{commentReplyTextFielVisible[comment.id] ? '' : 'hidden'} mt-10">
+            <form action="?/addComment" method="POST"  class="{commentReplyTextFieldVisible[comment.id] ? '' : 'hidden'} mt-10">
               <div class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200">
                 <input type="hidden" name="parentId" value={comment.id}>  
                 <textarea name="description" id="description" rows="6"

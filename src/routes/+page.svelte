@@ -162,7 +162,12 @@
                 </div>
             </div>
             {:else}
-            <p class="py-4 text-center text-gray-500">No posts</p>
+                {#if categorySearch}
+                    <p class="py-4 text-center text-gray-500">Ingen opslag med kategorien {categorySearch}</p>
+                {/if} 
+                {#if !categorySearch}
+                    <p class="py-4 text-center text-gray-500">Ingen opslag</p>
+                {/if} 
             {/each}
 
         </div>

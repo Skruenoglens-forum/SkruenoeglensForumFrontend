@@ -24,8 +24,6 @@
                 <div class="w-32 h-32 rounded-full overflow-hidden bg-gray-200 flex items-center justify-center mx-auto">
                     {#if imageUrl}
                         <img src={imageUrl} alt="car" class="object-cover w-full h-full"/>
-                    {:else}
-                        <span class="text-gray-500 flex items-center justify-center h-full">Mangler</span>
                     {/if}
                 </div>
                 <div class="relative mx-auto">

@@ -38,9 +38,6 @@ const edit = async ({ locals, request, params }) => {
 	formData.append('email', email);
 	formData.append('description', description);
 
-	console.log(`${API_HOST}/users/${params.id}`)
-	console.log(formData)
-
 	// Make PUT request to the endpoint
 	const response = await fetch(`${API_HOST}/users/${params.id}`, {
 		method: 'PUT',

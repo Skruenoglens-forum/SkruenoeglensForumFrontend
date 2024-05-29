@@ -27,7 +27,7 @@
         <div class="rounded overflow-hidden shadow-md bg-white">
             <div class="absolute -mt-20 w-full flex justify-center">
                 <div class="h-32 w-32">
-                    <img src="{data.API_HOST}/users/1/image" alt="profile" class="rounded-full object-cover h-full w-full shadow-md" />
+                    <img src="{data.API_HOST}/users/{data.user.id}/image" alt="profile" class="rounded-full object-cover h-full w-full shadow-md" />
                 </div>
             </div>
             <div class="px-6 mt-16">

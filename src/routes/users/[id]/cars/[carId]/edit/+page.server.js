@@ -35,20 +35,24 @@ const edit = async ({ locals, request, params }) => {
 	const firstRegistration = data.get('firstRegistration')
 	const vin = data.get('vin')
 
-	let base64String = null;
-	if (carImage && carImage instanceof Blob) {
-		const arrayBuffer = await carImage.arrayBuffer();
-		base64String = btoa(String.fromCharCode(...new Uint8Array(arrayBuffer)));
-	}
+	// Create form data
+	const formData = new FormData();
+	formData.append('file', carImage);
+	formData.append('licensePlate', licensePlate);
+	formData.append('brand', brand);
+	formData.append('model', model);
+	formData.append('motor', motor);
+	formData.append('type', type);
+	formData.append('firstRegistration', firstRegistration);
+	formData.append('vin', vin);
 
 	// MAKE PUT REQUEST
 	const response = await fetch(`${API_HOST}/cars/${params.carId}`, {
 		method: 'PUT',
 		headers: {
-		  'Content-Type': 'application/json',
 		  'Authorization': `Bearer ${locals.user.jwt}`
 		},
-		body: JSON.stringify({brand, motor, firstRegistration, model, type, licensePlate, vin, image: base64String})
+		body: formData
 	});
 	
 	if (!response.ok) {

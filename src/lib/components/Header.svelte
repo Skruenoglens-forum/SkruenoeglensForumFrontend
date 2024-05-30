@@ -21,9 +21,6 @@
 
 		<div class="hidden lg:flex items-center space-x-4 ml-5">
 			{#if $page.data.loggedInUser}
-				<a href="/notifications" class="button default-button w-max-md">
-					<img class="h-6 w-auto" src="/bell.png" alt="notifications" />
-				</a>
 				<a href="/users/{$page.data.loggedInUser.uid}" class="button default-button">
 					<img class="h-6 w-auto rounded-full" src="{$page.data.API_HOST}/users/{$page.data.loggedInUser.uid}/image" alt="profile" />
 				</a>
@@ -98,15 +95,6 @@
 							<input type="text" placeholder="Search" class="search-input" />
 						</div>
 						{#if $page.data.loggedInUser}
-							<div class="flex-1 flex justify-center">
-								<a
-									href="/notifications"
-									on:click={toggleMenu}
-									class="w-full max-w-md block button default-button flex justify-center items-center"
-								>
-									<img class="h-6 w-auto" src="/bell.png" alt="notifications" />
-								</a>
-							</div>
 							<div class="flex-1 flex justify-center">
 								<a
 									href="/users/{$page.data.loggedInUser.uid}"

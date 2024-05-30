@@ -1,5 +1,5 @@
 <script>
-	import { getDate } from '../../../../../../lib/utils/utils';
+	import { getDate } from '../../../../lib/utils/utils';
 	export let data;
 
 	let imageUrl = '';

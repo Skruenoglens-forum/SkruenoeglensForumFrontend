@@ -47,6 +47,21 @@
 						<p class="text-sm text-gray-500">{post.category_name}</p>
 					</div>
 				</div>
+				<div class="mt-8 flex justify-center pb-6">
+					<a
+						href="/posts/{post.id}/edit"
+						class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4"
+						>Rediger</a
+					>
+					<form action="?/deletePost" method="POST">
+						<input type="hidden" name="postId" value={post.id} />
+						<button
+							type="submit"
+							class="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md transition duration-300 ease-in-out"
+							>Slet</button
+						>
+					</form>
+				</div>
 			</div>
 		{:else}
 			{#if categorySearch}

@@ -1,7 +1,14 @@
 import { redirect } from '@sveltejs/kit';
 import { API_HOST } from '$env/static/private';
 
-const add = async ({ locals, request, params }) => {
+export const load = async ({ locals }) => {
+	// redirect user if not logged in
+	if (!locals.user) {
+		throw redirect(302, '/login');
+	}	
+};
+
+const add = async ({ locals, request }) => {
 	const data = await request.formData();
 	const carImage = data.get('carImage');
 	const licensePlate = data.get('licensePlate');
@@ -36,7 +43,7 @@ const add = async ({ locals, request, params }) => {
 		console.log(response.status);
 	}
 
-	throw redirect(303, `/users/${params.id}`);
+	throw redirect(303, `/users/${locals.user.uid}`);
 };
 
 export const actions = { add };

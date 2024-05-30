@@ -76,7 +76,7 @@
 					</div>
 					<div class="mt-8 flex justify-center pb-6">
 						<a
-							href="/users/{user.id}/cars/{car.id}/edit"
+							href="/cars/{car.id}/edit"
 							class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4"
 							>Rediger</a
 						>
@@ -90,6 +90,8 @@
 						</form>
 					</div>
 				</div>
+			{:else}
+				<p class="py-4 text-center text-gray-500">Ingen biler</p>
 			{/each}
 		</div>
 	</div>

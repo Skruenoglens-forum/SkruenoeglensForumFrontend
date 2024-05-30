@@ -7,32 +7,67 @@ export const load = async ({ locals, params }) => {
 		throw redirect(302, '/login');
 	}
 
-	let user = [];
+	let user;
+	try {
+		let res = await fetch(`${API_HOST}/users/${params.id}`, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		});
 
-	let res = await fetch(`${API_HOST}/users/${params.id}`, {
-		method: 'GET',
-		headers: {
-			'Content-Type': 'application/json'
+		// Check if the response status is OK (status code 2xx)
+		if (!res.ok) {
+			throw new Error('User not found');
 		}
-	});
 
-	user = await res.json();
+		user = await res.json();
+	} catch (error) {
+		throw redirect(302, '/');
+	}
 
 	let cars = [];
+	try {
+		let res = await fetch(`${API_HOST}/cars/users/${params.id}`, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		});
 
-	res = await fetch(`${API_HOST}/cars/users/${params.id}`, {
-		method: 'GET',
-		headers: {
-			'Content-Type': 'application/json'
+		// Check if the response status is OK (status code 2xx)
+		if (!res.ok) {
+			throw new Error('Error');
 		}
-	});
 
-	cars = await res.json();
+		cars = await res.json();
+	} catch (error) {
+		throw redirect(302, '/');
+	}
+
+	let posts = [];
+	try {
+		let res = await fetch(`${API_HOST}/posts/users/${params.id}`, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		});
+
+		// Check if the response status is OK (status code 2xx)
+		if (!res.ok) {
+			throw new Error('Error');
+		}
+
+		posts = await res.json();
+	} catch (error) {
+		throw redirect(302, '/');
+	}
 
 	return {
 		user,
 		cars,
-		API_HOST
+		posts
 	};
 };
 
@@ -53,4 +88,21 @@ const deleteCar = async ({ request, locals }) => {
 	throw redirect(302, `/users/${locals.user.uid}`);
 };
 
-export const actions = { deleteCar };
+const deletePost = async ({ request, locals }) => {
+	const data = await request.formData();
+	const postId = data.get('postId');
+
+	// MAKE DELETE REQUEST
+	await fetch(`${API_HOST}/posts/${postId}`, {
+		method: 'DELETE',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${locals.user.jwt}`
+		}
+	});
+
+	// redirect the user
+	throw redirect(302, `/users/${locals.user.uid}`);
+};
+
+export const actions = { deleteCar, deletePost };

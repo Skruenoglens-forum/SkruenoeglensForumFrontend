@@ -9,7 +9,7 @@ export const load = async ({ locals, params }) => {
 
 	let car = [];
 
-	const res = await fetch(`${API_HOST}/cars/${params.carId}`, {
+	const res = await fetch(`${API_HOST}/cars/${params.id}`, {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
@@ -47,7 +47,7 @@ const edit = async ({ locals, request, params }) => {
 	formData.append('vin', vin);
 
 	// MAKE PUT REQUEST
-	const response = await fetch(`${API_HOST}/cars/${params.carId}`, {
+	const response = await fetch(`${API_HOST}/cars/${params.id}`, {
 		method: 'PUT',
 		headers: {
 			Authorization: `Bearer ${locals.user.jwt}`
@@ -59,7 +59,7 @@ const edit = async ({ locals, request, params }) => {
 		console.log(response.status);
 	}
 
-	throw redirect(303, `/users/${params.id}`);
+	throw redirect(303, `/users/${locals.user.uid}`);
 };
 
 export const actions = { edit };

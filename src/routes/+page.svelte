@@ -11,26 +11,66 @@
 
 	let categorySearch = '';
 	async function getPostsByCategoryId(categoryId) {
-		if (categoryId) {
+		data.categoryId = categoryId
+		let res
+		if(data.car && categoryId){
+			res = await fetch(`${$page.data.API_HOST}/posts/categories/${data.categoryId}/${data.car.brandnavn}/${data.car.modelnavn}`, {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			});
+		}
+		else if (categoryId) {
 			categorySearch = data.categories[categoryId - 1].name;
-			let res = await fetch(`${$page.data.API_HOST}/posts/categories/${categoryId}`, {
+			res = await fetch(`${$page.data.API_HOST}/posts/categories/${categoryId}`, {
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json'
 				}
 			});
 
-			posts = await res.json();
 		} else {
 			categorySearch = 'Alle';
-			let res = await fetch(`${$page.data.API_HOST}/posts`, {
+			res = await fetch(`${$page.data.API_HOST}/posts`, {
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json'
 				}
 			});
-			posts = await res.json();
 		}
+		posts = await res.json();
+
+	}
+	async function getPostsByLicensPlate (){
+		let res;
+		if(data.car && data.categoryId){
+			res = await fetch(`${$page.data.API_HOST}/posts/categories/${data.categoryId}/${data.car.brandnavn}/${data.car.modelnavn}`, {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			});
+		}
+		else if(data.car){
+			res = await fetch(`${$page.data.API_HOST}/posts/cars/${data.car.brandnavn}/${data.car.modelnavn}`, {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			});
+		}
+		else{
+			categorySearch = 'Alle';
+			res = await fetch(`${$page.data.API_HOST}/posts`, {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			});
+			
+		}
+		posts = await res.json();
 	}
 </script>
 
@@ -49,10 +89,10 @@
 <div class="mx-auto max-w-2xl px-6 py-6 lg:max-w-7xl">
 	<div class="grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-1 lg:grid-cols-2">
 		<section>
-			<LicensePlateSearch />
+			<LicensePlateSearch bind:car={data.car} handle = {getPostsByLicensPlate}  />
 		</section>
 		<section>
-			<CategorySelector categories={data.categories} handle={getPostsByCategoryId} />
+			<CategorySelector bind:categories={data.categories} handle={getPostsByCategoryId} />
 		</section>
 	</div>
 </div>

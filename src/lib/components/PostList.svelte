@@ -6,8 +6,8 @@
 	export let categorySearch = '';
 </script>
 
-<div class="mx-auto max-w-2xl px-6 py-6 lg:max-w-7xl">
-	<div class="grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2 lg:grid-cols-4">
+<div class="mt-8 mx-auto max-w-2xl px-4 py-4 sm:px-6 sm:py-4 lg:max-w-7xl lg:px-8">
+	<div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
 		{#each posts as post}
 			<div class="group relative">
 				<h2 class="text-center text-lg font-semibold">{post.title}</h2>

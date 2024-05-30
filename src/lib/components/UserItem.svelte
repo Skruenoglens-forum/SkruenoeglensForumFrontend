@@ -16,7 +16,7 @@
 				/>
 			</div>
 			<div class="flex-1 min-w-0">
-				<p class="text-lg font-medium text-gray-900 truncate">{user.id} - {user.name}</p>
+				<p class="text-lg font-medium text-gray-900 truncate">{user.id} - {user.name} - {user.role_name}</p>
 				<p class="text-sm text-gray-500 truncate">{user.email}</p>
 				<p class="text-sm text-gray-500 truncate">
 					Oprettet: {getDateTime(user.created_at)}

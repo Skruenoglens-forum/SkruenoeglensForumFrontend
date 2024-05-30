@@ -10,28 +10,25 @@
 <div class="w-full pt-10">
 	<Profile user={data.user} />
 
-	<section class="bg-gray-0">
+	<div class="flex flex-ol items-center justify-center px-6 py-8 mx-auto lg:py-0">
+		<div class="flex items-center mb-6 text-2xl font-semibold text-gray-900">
+			<h1>{data.user.name}'s biler</h1>
+		</div>
+	</div>
+	{#if $page.data.loggedInUser.uid === data.user.id}
 		<div class="flex flex-ol items-center justify-center px-6 py-8 mx-auto lg:py-0">
-			<div class="flex items-center mb-6 text-2xl font-semibold text-gray-900">
-				<h1>{data.user.name}'s biler</h1>
+			<div class="flex items-center text-2xl font-semibold text-gray-900">
+				<a
+					href="/cars/add"
+					class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-4"
+					>Tilføj bil</a
+				>
 			</div>
 		</div>
-		{#if $page.data.loggedInUser.uid === data.user.id}
-			<div class="flex flex-ol items-center justify-center px-6 py-8 mx-auto lg:py-0">
-				<div class="flex items-center mb-6 text-2xl font-semibold text-gray-900">
-					<a
-						href="/cars/add"
-						class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-4"
-						>Tilføj bil</a
-					>
-				</div>
-			</div>
-		{/if}
-	</section>
+	{/if}
 
-	<CarList cars={data.cars} user={data.user} />
+	<CarList cars={data.cars} />
 
-	<section class="bg-gray-0">
 		<div class="flex flex-ol items-center justify-center px-6 py-8 mx-auto lg:py-0">
 			<div class="flex items-center mb-6 text-2xl font-semibold text-gray-900">
 				<h1>{data.user.name}'s opslag</h1>
@@ -39,7 +36,7 @@
 		</div>
 		{#if $page.data.loggedInUser.uid === data.user.id}
 			<div class="flex flex-ol items-center justify-center px-6 py-8 mx-auto lg:py-0">
-				<div class="flex items-center mb-6 text-2xl font-semibold text-gray-900">
+				<div class="flex items-center text-2xl font-semibold text-gray-900">
 					<a
 						href="../posts/add"
 						class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-4"
@@ -48,6 +45,5 @@
 				</div>
 			</div>
 		{/if}
-	</section>
 	<PostList posts={data.posts} />
 </div>

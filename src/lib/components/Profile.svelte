@@ -4,7 +4,7 @@
 	export let user;
 </script>
 
-<div class="relative mt-16 mb-32 max-w-sm mx-auto mt-24">
+<div class="relative mt-12 mb-12 max-w-sm mx-auto">
 	<div class="rounded overflow-hidden shadow-md bg-white">
 		<div class="absolute -mt-20 w-full flex justify-center">
 			<div class="h-32 w-32">

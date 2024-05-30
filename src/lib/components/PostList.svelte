@@ -16,7 +16,7 @@
 				>
 					<a href="/posts/{post.id}">
 						<img
-							src="/bil.png"
+							src="{$page.data.API_HOST}/posts/image/{post.image_ids[0]}"
 							alt="bil"
 							class="h-full w-full object-cover object-center lg:h-full lg:w-full"
 						/>
@@ -24,7 +24,7 @@
 				</div>
 				<div class="mt-4 flex justify-between px-2">
 					<div class="flex items-center">
-						<p class="text-sm text-gray-500">20</p>
+						<p class="text-sm text-gray-500">{post.comment_count}</p>
 						<img src="/chat.png" alt="kommentare" class="h-4 w-4 ml-1" />
 					</div>
 					<div class="flex items-center">

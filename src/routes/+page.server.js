@@ -6,26 +6,25 @@ export const load = async () => {
 	let res = await fetch(`${API_HOST}/posts`, {
 		method: 'GET',
 		headers: {
-		  'Content-Type': 'application/json'
-		},
+			'Content-Type': 'application/json'
+		}
 	});
 
-	posts = await res.json()
+	posts = await res.json();
 
 	let categories = [];
 
 	res = await fetch(`${API_HOST}/categories`, {
 		method: 'GET',
 		headers: {
-		  'Content-Type': 'application/json'
-		},
+			'Content-Type': 'application/json'
+		}
 	});
 
-	categories = await res.json()
+	categories = await res.json();
 
 	return {
-	  posts,
-	  categories,
-	  API_HOST
+		posts,
+		categories
 	};
-}
+};

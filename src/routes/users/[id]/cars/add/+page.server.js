@@ -1,16 +1,16 @@
-import { redirect } from '@sveltejs/kit'
+import { redirect } from '@sveltejs/kit';
 import { API_HOST } from '$env/static/private';
 
 const add = async ({ locals, request, params }) => {
-	const data = await request.formData()
+	const data = await request.formData();
 	const carImage = data.get('carImage');
-    const licensePlate = data.get('licensePlate')
-	const brand = data.get('brand')
-	const model = data.get('model')
-	const motor = data.get('motor')
-	const type = data.get('type')
-	const firstRegistration = data.get('firstRegistration')
-	const vin = data.get('vin')
+	const licensePlate = data.get('licensePlate');
+	const brand = data.get('brand');
+	const model = data.get('model');
+	const motor = data.get('motor');
+	const type = data.get('type');
+	const firstRegistration = data.get('firstRegistration');
+	const vin = data.get('vin');
 
 	// Create form data
 	const formData = new FormData();
@@ -27,16 +27,16 @@ const add = async ({ locals, request, params }) => {
 	const response = await fetch(`${API_HOST}/cars`, {
 		method: 'POST',
 		headers: {
-		  'Authorization': `Bearer ${locals.user.jwt}`
+			Authorization: `Bearer ${locals.user.jwt}`
 		},
 		body: formData
 	});
-	
+
 	if (!response.ok) {
-		console.log(response.status)
+		console.log(response.status);
 	}
 
-	throw redirect(303, `/users/${params.id}`)
-}
+	throw redirect(303, `/users/${params.id}`);
+};
 
-export const actions = { add }
+export const actions = { add };

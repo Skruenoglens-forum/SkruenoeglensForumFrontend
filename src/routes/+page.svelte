@@ -29,7 +29,6 @@
 					'Content-Type': 'application/json'
 				}
 			});
-
 			posts = await res.json();
 		}
 	}

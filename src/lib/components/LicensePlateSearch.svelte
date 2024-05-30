@@ -4,6 +4,7 @@
 	let carIsLoading;
 	let licensplateInput;
 	async function getCarByLicensePlate(licenseplate) {
+		carIsLoading = true;
 		let res = await fetch(`https://lp.skruenøglen.dk/getcarbylp?licenseplate=${licenseplate}`, {
 			method: 'GET',
 			headers: {

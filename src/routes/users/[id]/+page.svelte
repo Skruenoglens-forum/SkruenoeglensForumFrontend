@@ -1,6 +1,7 @@
 <script>
 	import { page } from '$app/stores';
 	import CarList from '../../../lib/components/CarList.svelte';
+	import UserPostList from '../../../lib/components/UserPostList.svelte';
 	import Profile from '../../../lib/components/Profile.svelte';
 
 	export let data;
@@ -29,4 +30,5 @@
 	</section>
 
 	<CarList cars={data.cars} user={data.user} />
+	<UserPostList posts={data.posts} />
 </div>

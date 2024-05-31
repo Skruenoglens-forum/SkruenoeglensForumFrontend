@@ -2,9 +2,12 @@ import { fail, redirect } from '@sveltejs/kit';
 import { API_HOST } from '$env/static/private';
 
 export const load = async ({ locals, params }) => {
-	// redirect user if not logged TODO: remember to only allow to edit owned users
 	if (!locals.user) {
 		throw redirect(302, '/login');
+	}
+
+	if (locals.user.uid != params.id && locals.user.roleId != 1) {
+		throw redirect(302, `/users/${params.id}`);
 	}
 
 	let user = [];

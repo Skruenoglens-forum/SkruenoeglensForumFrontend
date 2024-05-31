@@ -2,6 +2,7 @@
 	import { page } from '$app/stores';
 	import { getDateTime } from '../utils/utils';
 	export let comments = [];
+	export let post;
 
 	function toggleDropdown(commentId) {
 		dropdownVisible = {
@@ -90,6 +91,8 @@
 					</button>
 				{/if}
 				{#if !dropdownVisible[comment.id]}
+					<!-- Comment Settings visible for owner of post, owner of comment and admin -->
+					{#if $page.data.loggedInUser.uid == comment.user_id || $page.data.loggedInUser.uid == post.user_id || $page.data.loggedInUser.roleId == 1}
 					<button
 						on:click={() => toggleDropdown(comment.id)}
 						id="dropdownComment1Button"
@@ -110,6 +113,7 @@
 						</svg>
 						<span class="sr-only">Comment settings</span>
 					</button>
+					{/if}
 				{/if}
 				<div
 					id="dropdownComment1"
@@ -118,6 +122,8 @@
 						: 'hidden'} z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow"
 				>
 					<ul class="py-1 text-sm text-gray-700" aria-labelledby="dropdownMenuIconHorizontalButton">
+						<!-- Solution visible for owner of post and admin -->
+						{#if $page.data.loggedInUser.uid == post.user_id || $page.data.loggedInUser.roleId == 1}
 						<li>
 							{#if !comment.solution}
 								<form
@@ -140,6 +146,9 @@
 								</form>
 							{/if}
 						</li>
+						{/if}
+						<!-- Edit and delete visible for owner of comment and admin -->
+						{#if $page.data.loggedInUser.uid == comment.user_id || $page.data.loggedInUser.roleId == 1}
 						<li>
 							<div class="block text-blue-600 py-2 px-4 hover:bg-gray-100">
 								<button on:click={() => toggleCommentEditTextField(comment.id)}>Rediger</button>
@@ -155,6 +164,7 @@
 								<button type="submit">Slet</button>
 							</form>
 						</li>
+						{/if}
 					</ul>
 				</div>
 			</footer>

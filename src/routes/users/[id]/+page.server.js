@@ -1,4 +1,4 @@
-import { redirect } from '@sveltejs/kit';
+import { redirect, fail } from '@sveltejs/kit';
 import { API_HOST } from '$env/static/private';
 
 export const load = async ({ locals, params }) => {
@@ -76,13 +76,18 @@ const deleteCar = async ({ request, locals }) => {
 	const carID = data.get('carID');
 
 	// MAKE DELETE REQUEST
-	await fetch(`${API_HOST}/cars/${carID}`, {
+	const response = await fetch(`${API_HOST}/cars/${carID}`, {
 		method: 'DELETE',
 		headers: {
 			'Content-Type': 'application/json',
 			Authorization: `Bearer ${locals.user.jwt}`
 		}
 	});
+
+	const resp = await response.json();
+	if (!response.ok) {
+		return fail(400, { message: resp.error });
+	}
 
 	// redirect the user
 	throw redirect(302, `/users/${locals.user.uid}`);

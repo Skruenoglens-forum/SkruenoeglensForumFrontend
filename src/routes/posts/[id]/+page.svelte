@@ -17,4 +17,4 @@
 	</div>
 </div>
 
-<Comments comments={data.comments} />
+<Comments comments={data.comments} post={data.post} />

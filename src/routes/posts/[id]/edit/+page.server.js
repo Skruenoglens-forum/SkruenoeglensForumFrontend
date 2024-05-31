@@ -1,7 +1,11 @@
 import { redirect } from '@sveltejs/kit';
 import { API_HOST } from '$env/static/private';
 
-export const load = async ({ params }) => {
+export const load = async ({ params, locals }) => {
+	if (!locals.user) {
+		throw redirect(302, '/login');
+	}
+
 	let post = [];
 
 	let res = await fetch(`${API_HOST}/posts/${params.id}`, {
@@ -12,6 +16,10 @@ export const load = async ({ params }) => {
 	});
 
 	post = await res.json();
+	// Check if logged in user owns this post
+	if (locals.user.uid != post.user_id && locals.user.roleId != 1) {
+		throw redirect(302, `/`);
+	}
 
 	let categories = [];
 

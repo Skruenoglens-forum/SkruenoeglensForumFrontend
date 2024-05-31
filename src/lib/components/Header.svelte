@@ -22,11 +22,11 @@
 		<div class="hidden lg:flex items-center space-x-6 ml-5">
 			{#if $page.data.loggedInUser}
 				<a href="/users/{$page.data.loggedInUser.uid}" class="hover:opacity-70">
-					<img class="h-10 w-auto rounded-full" src="{$page.data.API_HOST}/users/{$page.data.loggedInUser.uid}/image" alt="profile" />
+					<img class="h-10 w-auto rounded-full border-2 border-black" src="{$page.data.API_HOST}/users/{$page.data.loggedInUser.uid}/image" alt="profile" />
 				</a>
 				{#if $page.data.loggedInUser.roleId == 1}
 					<a href="/admin" class="hover:opacity-70">
-						<img class="h-10 w-auto rounded-full" src="/admin.png" alt="admin" />
+						<img class="h-10 w-auto rounded-full border-2 border-black" src="/admin.png" alt="admin" />
 					</a>
 				{/if}
 			{/if}
@@ -101,7 +101,7 @@
 									on:click={toggleMenu}
 									class="w-full max-w-md block button default-button flex justify-center items-center"
 								>
-									<img class="h-10 w-auto rounded-full mr-6" src="{$page.data.API_HOST}/users/{$page.data.loggedInUser.uid}/image" alt="profile" />
+									<img class="h-10 w-auto rounded-full border-2 border-black mr-6" src="{$page.data.API_HOST}/users/{$page.data.loggedInUser.uid}/image" alt="profile" />
 									<p class="text-black">Profil</p>
 								</a>
 							</div>
@@ -112,7 +112,7 @@
 										on:click={toggleMenu}
 										class="w-full max-w-md block button default-button flex justify-center items-center"
 									>
-										<img class="h-10 w-auto rounded-full mr-6" src="/admin.png" alt="admin" />
+										<img class="h-10 w-auto rounded-full border-2 border-black mr-6" src="/admin.png" alt="admin" />
 										<p class="text-black">Admin</p>
 									</a>
 								</div>

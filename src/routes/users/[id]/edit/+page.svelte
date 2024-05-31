@@ -1,7 +1,7 @@
 <script>
 	export let data;
 
-	let imageUrl = '';
+	let imageUrl = `${data.API_HOST}/users/${data.user.id}/image`;
 
 	function handleFileUpload(event) {
 		const file = event.target.files[0];

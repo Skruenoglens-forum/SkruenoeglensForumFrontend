@@ -7,6 +7,13 @@
 </script>
 
 <div class="mt-8 mx-auto max-w-2xl px-4 py-4 sm:px-6 sm:py-4 lg:max-w-7xl lg:px-8">
+	{#if !posts || posts.length === 0}
+		{#if categorySearch}
+			<p class="py-4 text-center text-gray-500">Ingen opslag med kategorien {categorySearch}</p>
+		{:else}
+			<p class="py-4 text-center text-gray-500">Ingen opslag</p>
+		{/if}
+	{/if}
 	<div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
 		{#each posts as post}
 			<div class="group relative">
@@ -48,7 +55,7 @@
 					</div>
 				</div>
 				<div class="mt-8 flex justify-center pb-6">
-					{#if $page.data.loggedInUser.uid == post.user_id || $page.data.loggedInUser.roleId == 1}
+					{#if $page.data.loggedInUser?.uid == post.user_id || $page.data.loggedInUser?.roleId == 1}
 					<a
 						href="/posts/{post.id}/edit"
 						class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4"
@@ -65,13 +72,6 @@
 					{/if}
 				</div>
 			</div>
-		{:else}
-			{#if categorySearch}
-				<p class="py-4 text-center text-gray-500">Ingen opslag med kategorien {categorySearch}</p>
-			{/if}
-			{#if !categorySearch}
-				<p class="py-4 text-center text-gray-500">Ingen opslag</p>
-			{/if}
 		{/each}
 	</div>
 </div>

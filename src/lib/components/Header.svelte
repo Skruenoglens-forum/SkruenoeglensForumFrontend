@@ -21,10 +21,10 @@
 
 		<div class="hidden lg:flex items-center space-x-6 ml-5">
 			{#if $page.data.loggedInUser}
-				<a href="/users/{$page.data.loggedInUser.uid}" class="hover:opacity-70">
-					<img class="h-10 w-auto rounded-full border-2 border-black" src="{$page.data.API_HOST}/users/{$page.data.loggedInUser.uid}/image" alt="profile" />
+				<a href="/users/{$page.data.loggedInUser?.uid}" class="hover:opacity-70">
+					<img class="h-10 w-auto rounded-full border-2 border-black" src="{$page.data.API_HOST}/users/{$page.data.loggedInUser?.uid}/image" alt="profile" />
 				</a>
-				{#if $page.data.loggedInUser.roleId == 1}
+				{#if $page.data.loggedInUser?.roleId == 1}
 					<a href="/admin" class="hover:opacity-70">
 						<img class="h-10 w-auto rounded-full border-2 border-black" src="/admin.png" alt="admin" />
 					</a>
@@ -97,7 +97,7 @@
 						{#if $page.data.loggedInUser}
 							<div class="flex-1 flex justify-center">
 								<a
-									href="/users/{$page.data.loggedInUser.uid}"
+									href="/users/{$page.data.loggedInUser?.uid}"
 									on:click={toggleMenu}
 									class="w-full max-w-md block button default-button flex justify-center items-center"
 								>
@@ -105,7 +105,7 @@
 									<p class="text-black">Profil</p>
 								</a>
 							</div>
-							{#if $page.data.loggedInUser.roleId == 1}
+							{#if $page.data.loggedInUser?.roleId == 1}
 								<div class="flex-1 flex justify-center">
 									<a
 										href="/admin"

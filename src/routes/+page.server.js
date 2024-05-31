@@ -1,3 +1,4 @@
+import { redirect } from '@sveltejs/kit';
 import { API_HOST } from '$env/static/private';
 
 export const load = async () => {
@@ -28,3 +29,22 @@ export const load = async () => {
 		categories
 	};
 };
+
+const deletePost = async ({ request, locals }) => {
+	const data = await request.formData();
+	const postId = data.get('postId');
+
+	// MAKE DELETE REQUEST
+	await fetch(`${API_HOST}/posts/${postId}`, {
+		method: 'DELETE',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${locals.user.jwt}`
+		}
+	});
+
+	// redirect the user
+	throw redirect(302, `/`);
+};
+
+export const actions = { deletePost };

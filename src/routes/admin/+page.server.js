@@ -49,7 +49,7 @@ const deleteUser = async ({ request, locals, cookies }) => {
 		});
 
 		// redirect the user
-		throw redirect(302, '/login');
+		throw redirect(302, '/signup');
 	} else {
 		// redirect the user
 		throw redirect(302, '/admin');

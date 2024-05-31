@@ -15,7 +15,7 @@
 			<h1>{data.user.name}'s biler</h1>
 		</div>
 	</div>
-	{#if $page.data.loggedInUser.uid === data.user.id}
+	{#if $page.data.loggedInUser?.uid === data.user.id}
 		<div class="flex flex-ol items-center justify-center px-6 py-8 mx-auto lg:py-0">
 			<div class="flex items-center text-2xl font-semibold text-gray-900">
 				<a
@@ -34,7 +34,7 @@
 				<h1>{data.user.name}'s opslag</h1>
 			</div>
 		</div>
-		{#if $page.data.loggedInUser.uid === data.user.id}
+		{#if $page.data.loggedInUser?.uid === data.user.id}
 			<div class="flex flex-ol items-center justify-center px-6 py-8 mx-auto lg:py-0">
 				<div class="flex items-center text-2xl font-semibold text-gray-900">
 					<a

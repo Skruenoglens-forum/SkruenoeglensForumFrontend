@@ -1,12 +1,7 @@
 import { redirect, fail } from '@sveltejs/kit';
 import { API_HOST } from '$env/static/private';
 
-export const load = async ({ locals, params }) => {
-	// redirect user if not logged in TODO: remember to only allow to edit owned users
-	if (!locals.user) {
-		throw redirect(302, '/login');
-	}
-
+export const load = async ({ params }) => {
 	let user;
 	try {
 		let res = await fetch(`${API_HOST}/users/${params.id}`, {
@@ -71,6 +66,38 @@ export const load = async ({ locals, params }) => {
 	};
 };
 
+const deleteUser = async ({ request, locals, cookies }) => {
+	const data = await request.formData();
+	const userID = data.get('userID');
+
+	// MAKE POST LOGIN REQUEST
+	await fetch(`${API_HOST}/users/${userID}`, {
+		method: 'DELETE',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${locals.user.jwt}`
+		}
+	});
+
+	// If user delete it self
+	if (locals.user.uid == userID) {
+		// eat the cookie
+		cookies.set('jwt', '', {
+			path: '/',
+			httpOnly: true,
+			//expires: new Date(Date.now() - 3600000), // new Date(0)
+			maxAge: 0,
+			secure: process.env.NODE_ENV === 'production'
+		});
+
+		// redirect the user
+		throw redirect(302, '/signup');
+	} else {
+		// redirect the user
+		throw redirect(302, '/admin');
+	}
+};
+
 const deleteCar = async ({ request, locals }) => {
 	const data = await request.formData();
 	const carID = data.get('carID');
@@ -110,4 +137,4 @@ const deletePost = async ({ request, locals }) => {
 	throw redirect(302, `/users/${locals.user.uid}`);
 };
 
-export const actions = { deleteCar, deletePost };
+export const actions = { deleteCar, deletePost, deleteUser };

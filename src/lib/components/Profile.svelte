@@ -31,14 +31,19 @@
 			</div>
 		</div>
 		<div class="mt-8 flex justify-center pb-6">
-			{#if $page.data.loggedInUser.uid == user.id || $page.data.loggedInUser.roleId == 1}
+			{#if $page.data.loggedInUser?.uid == user.id || $page.data.loggedInUser?.roleId == 1}
 				<a
 					href="/users/{user.id}/edit"
 					class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4">Rediger</a
 				>
-				<a href="/login" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-					>Slet</a
-				>
+				<form action="?/deleteUser" method="POST">
+					<input type="hidden" name="userID" value={user.id} />
+					<button
+						type="submit"
+						class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+						>Slet</button
+					>
+				</form>
 			{/if}
 		</div>
 	</div>

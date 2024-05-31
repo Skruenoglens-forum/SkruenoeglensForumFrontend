@@ -1,6 +1,7 @@
 <script>
 	let imageUrl = '';
-
+	let car;
+	let licenseplateInput
 	function handleFileUpload(event) {
 		const file = event.target.files[0];
 		if (file) {
@@ -9,6 +10,23 @@
 				imageUrl = e.target.result;
 			};
 			reader.readAsDataURL(file);
+		}
+	}
+	async function getCarByLicensePlate(licenseplate) {
+		carIsLoading = true;
+		let res = await fetch(`https://lp.skruenøglen.dk/getcarbylp?licenseplate=${licenseplate}`, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		});
+
+		if (res.status == 200) {
+			car = await res.json();
+			console.log(car);
+		}
+		else{
+			car= undefined
 		}
 	}
 </script>
@@ -46,7 +64,10 @@
 						<label for="licensePlate" class="block mb-2 text-sm font-medium text-gray-900"
 							>Nummerplade</label
 						>
-						<input
+						<input 
+							bind:value={licenseplateInput}
+
+							on:change={getCarByLicensePlate(licenseplateInput)}
 							type="text"
 							name="licensePlate"
 							id="licensePlate"

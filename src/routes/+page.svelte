@@ -89,7 +89,7 @@
 <div class="mx-auto max-w-2xl px-6 py-6 lg:max-w-7xl">
 	<div class="grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-1 lg:grid-cols-2">
 		<section>
-			<LicensePlateSearch bind:car={data.car} handle = {getPostsByLicensPlate}  />
+			<LicensePlateSearch bind:car={data.car} handle={getPostsByLicensPlate} />
 		</section>
 		<section>
 			<CategorySelector bind:categories={data.categories} handle={getPostsByCategoryId} />

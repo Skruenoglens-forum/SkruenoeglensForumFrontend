@@ -20,8 +20,7 @@ export const load = async ({ locals }) => {
 	users = await res.json();
 
 	return {
-		users,
-		API_HOST
+		users
 	};
 };
 

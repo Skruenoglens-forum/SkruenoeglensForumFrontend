@@ -20,6 +20,9 @@
 		</div>
 
 		<div class="hidden lg:flex items-center space-x-6 ml-5">
+			<a href="/about" class="hover:opacity-70">
+				<img class="h-10 w-auto rounded-full border-2 border-black" src="/about.png" alt="about" />
+			</a>
 			{#if $page.data.loggedInUser}
 				<a href="/users/{$page.data.loggedInUser?.uid}" class="hover:opacity-70">
 					<img class="h-10 w-auto rounded-full border-2 border-black" src="{$page.data.API_HOST}/users/{$page.data.loggedInUser?.uid}/image" alt="profile" />

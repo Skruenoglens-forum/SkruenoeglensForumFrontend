@@ -6,14 +6,15 @@
 	export let categorySearch = '';
 </script>
 
-<div class="mt-8 mx-auto max-w-2xl px-4 py-4 sm:px-6 sm:py-4 lg:max-w-7xl lg:px-8">
-	{#if !posts || posts.length === 0}
-		{#if categorySearch}
-			<p class="py-4 text-center text-gray-500">Ingen opslag med kategorien {categorySearch}</p>
-		{:else}
-			<p class="py-4 text-center text-gray-500">Ingen opslag</p>
-		{/if}
+{#if !posts || posts.length === 0}
+	{#if categorySearch}
+		<p class="py-4 text-center text-gray-500">Ingen opslag med kategorien {categorySearch}</p>
+	{:else}
+		<p class="py-4 text-center text-gray-500">Ingen opslag</p>
 	{/if}
+{/if}
+<div class="mt-8 mx-auto max-w-2xl px-4 py-4 sm:px-6 sm:py-4 lg:max-w-7xl lg:px-8">
+
 	<div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
 		{#each posts as post}
 			<div class="group relative">

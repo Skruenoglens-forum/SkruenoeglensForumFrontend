@@ -4,10 +4,11 @@
 	export let cars = [];
 </script>
 
+{#if !cars || cars.length === 0}
+<p class="py-4 text-center text-gray-500">Ingen biler</p>
+{/if}
+
 <div class="mt-8 mx-auto max-w-2xl px-4 py-4 sm:px-6 sm:py-4 lg:max-w-7xl lg:px-8">
-	{#if !cars || cars.length === 0}
-		<p class="py-4 text-center text-gray-500">Ingen biler</p>
-	{/if}
 	<div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
 		{#each cars as car}
 			<div class="group relative">

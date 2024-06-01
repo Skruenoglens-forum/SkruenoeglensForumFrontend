@@ -102,9 +102,9 @@
 								<a
 									href="/users/{$page.data.loggedInUser?.uid}"
 									on:click={toggleMenu}
-									class="w-full max-w-md block button default-button flex justify-center items-center"
+									class="w-full max-w-md block button default-button flex justify-center items-center hover:opacity-70"
 								>
-									<img class="h-10 w-auto rounded-full border-2 border-black mr-6" src="{$page.data.API_HOST}/users/{$page.data.loggedInUser.uid}/image" alt="profile" />
+									<img class="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 mr-6" src="{$page.data.API_HOST}/users/{$page.data.loggedInUser.uid}/image" alt="profile" />
 									<p class="text-black">Profil</p>
 								</a>
 							</div>
@@ -113,9 +113,9 @@
 									<a
 										href="/admin"
 										on:click={toggleMenu}
-										class="w-full max-w-md block button default-button flex justify-center items-center"
+										class="w-full max-w-md block button default-button flex justify-center items-center hover:opacity-70"
 									>
-										<img class="h-10 w-auto rounded-full border-2 border-black mr-6" src="/admin.png" alt="admin" />
+										<img class="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 mr-6" src="/admin.png" alt="admin" />
 										<p class="text-black">Admin</p>
 									</a>
 								</div>

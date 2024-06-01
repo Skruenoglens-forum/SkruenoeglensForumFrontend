@@ -21,15 +21,15 @@
 
 		<div class="hidden lg:flex items-center space-x-6 ml-5">
 			<a href="/about" class="hover:opacity-70">
-				<img class="h-10 w-auto rounded-full border-2 border-black" src="/about.png" alt="about" />
+				<img class="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300" src="/about.png" alt="about" />
 			</a>
 			{#if $page.data.loggedInUser}
 				<a href="/users/{$page.data.loggedInUser?.uid}" class="hover:opacity-70">
-					<img class="h-10 w-auto rounded-full border-2 border-black" src="{$page.data.API_HOST}/users/{$page.data.loggedInUser?.uid}/image" alt="profile" />
+					<img class="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300" src="{$page.data.API_HOST}/users/{$page.data.loggedInUser?.uid}/image" alt="profile" />
 				</a>
 				{#if $page.data.loggedInUser?.roleId == 1}
 					<a href="/admin" class="hover:opacity-70">
-						<img class="h-10 w-auto rounded-full border-2 border-black" src="/admin.png" alt="admin" />
+						<img class="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300" src="/admin.png" alt="admin" />
 					</a>
 				{/if}
 			{/if}

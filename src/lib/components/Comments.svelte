@@ -59,33 +59,11 @@
 				{/if}
 			</div>
 			<p class="{!commentEditTextFieldVisible[comment.id] ? '' : 'hidden'} text-sm font-normal py-2.5 text-gray-900">{comment.description}</p>
-			<form
-			action="?/editComment"
-			method="POST"
-			class="{commentEditTextFieldVisible[comment.id] ? '' : 'hidden'} mt-10"
-		>
-			<div class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200">
-				<input type="hidden" name="commentId" value={comment.id} />
-				<textarea
-					name="description"
-					id="description"
-					rows="6"
-					class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none"
-					value={comment.description}
-					required
-				></textarea>
-			</div>
-			<button
-				type="submit"
-				class="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-				>Rediger kommentar</button
-			>
-		</form>
 				{#if $page.data.loggedInUser}
 				<button
 					on:click={() => toggleCommentReplyTextField(comment.id)}
 					type="button"
-					class="flex items-center text-sm text-gray-500 hover:underline font-medium"
+					class="{!commentEditTextFieldVisible[comment.id] ? '' : 'hidden'} flex items-center text-sm text-gray-500 hover:underline font-medium"
 				>
 					<svg
 						class="mr-1.5 w-3.5 h-3.5"
@@ -125,6 +103,28 @@
 					Svar
 				</a>
 				{/if}
+				<form
+			action="?/editComment"
+			method="POST"
+			class="{commentEditTextFieldVisible[comment.id] ? '' : 'hidden'} mt-10"
+		>
+			<div class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200">
+				<input type="hidden" name="commentId" value={comment.id} />
+				<textarea
+					name="description"
+					id="description"
+					rows="6"
+					class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none"
+					value={comment.description}
+					required
+				></textarea>
+			</div>
+			<button
+				type="submit"
+				class="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+				>Rediger kommentar</button
+			>
+		</form>
 			<form
 				action="?/addComment"
 				method="POST"

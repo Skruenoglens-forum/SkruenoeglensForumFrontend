@@ -1,5 +1,6 @@
 <script>
 	import Spinner from "./Spinner.svelte";
+	import toast, {Toaster} from "svelte-french-toast";
 
 	export let car;
 	export let handle
@@ -17,15 +18,18 @@
 
 		if (res.status == 200) {
 			car = await res.json();
+			toast.success('Bil fundet')
 		}
 		else{
+			toast.error("Bilen er ikke fundet. Tjek nummerpladen")
+			
 			car= undefined
 		}
 		carIsLoading = false;
 		handle();
 	}
 </script>
-
+<Toaster toastOptions={{"position":"bottom-center"}}/>
 <form class="flex max-w-60">
     <input
         disabled={carIsLoading}

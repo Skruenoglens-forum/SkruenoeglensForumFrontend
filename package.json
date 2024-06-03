@@ -27,6 +27,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"jsonwebtoken": "^9.0.2"
+		"jsonwebtoken": "^9.0.2",
+		"svelte-french-toast": "^1.2.0"
 	}
 }

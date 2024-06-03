@@ -13,8 +13,12 @@
 
 
 <div class="mx-4">
-	<Search bind:postInputs={postInputs} {getPostsByInput} />
-	<div class="flex flex-col sm:flex-row justify-evenly max-w-2xl mx-auto h-auto sm:h-24  p-4 sm:p-0">
+	<div class="flex flex-col sm:flex-row justify-evenly max-w-2xl mx-auto h-auto p-4 sm:p-0 mb-4">
+		<div class="flex items-center justify-center w-full">
+			<Search bind:postInputs={postInputs} {getPostsByInput} />
+		</div>
+	</div>
+	<div class="flex flex-col sm:flex-row justify-evenly max-w-2xl mx-auto h-auto p-4 sm:p-0">
 		<div class="flex items-center justify-center w-full sm:w-1/3 mb-4 sm:mb-0">
 			<LicensePlateSearch bind:postInputs={postInputs} {getPostsByInput} bind:car={car} />
 		</div>

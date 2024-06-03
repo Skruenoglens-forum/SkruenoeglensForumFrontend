@@ -5,7 +5,21 @@
 	let searchInput;
 </script>
 
-<form class="max-w-xl mx-auto">   
+<form class="flex max-w-60">
+    <input bind:value={searchInput} on:change={() => {
+		postInputs.search = searchInput
+		getPostsByInput()
+	}} type="search" id="default-search"
+        class="bg-white border border-t uppercase border-b border-l border-red-200 text-gray-900 sm:text-sm rounded-l-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 h-10"
+        placeholder="Søg"
+    />
+    <button
+        class="bg-blue-400 text-white text-xs px-4 h-10 rounded-r-lg font-bold uppercase border-red-500 border-t border-b border-r"
+        >Søg</button
+    >
+</form>
+<!-- 
+<form class="flex max-w-60">   
     <div class="relative">
         <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
             <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -38,4 +52,4 @@
 		<span class="sr-only">Search</span>
 	</button>
 	</div>
-</form>
+</form> -->

@@ -17,7 +17,9 @@
 		</div>
 		<div class="px-6 mt-16">
 			<h1 class="font-bold text-3xl text-center mb-1">{user.name}</h1>
+			{#if $page.data.loggedInUser?.uid == user.id || $page.data.loggedInUser?.roleId == 1}
 			<p class="text-gray-800 text-sm text-center">{user.email}</p>
+			{/if}
 			<p class="text-center text-gray-600 text-base pt-3 font-normal">
 				{user.description}
 			</p>

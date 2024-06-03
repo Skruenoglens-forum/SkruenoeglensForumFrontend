@@ -24,6 +24,40 @@ export const load = async ({ locals }) => {
 	};
 };
 
+const banUser = async ({ request, locals }) => {
+	const data = await request.formData();
+	const userID = data.get('userID');
+
+	// MAKE POST LOGIN REQUEST
+	await fetch(`${API_HOST}/users/${userID}/ban`, {
+		method: 'PUT',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${locals.user.jwt}`
+		}
+	});
+
+	// redirect the user
+	throw redirect(302, '/admin');
+};
+
+const unbanUser = async ({ request, locals }) => {
+	const data = await request.formData();
+	const userID = data.get('userID');
+
+	// MAKE POST LOGIN REQUEST
+	await fetch(`${API_HOST}/users/${userID}/unban`, {
+		method: 'PUT',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${locals.user.jwt}`
+		}
+	});
+
+	// redirect the user
+	throw redirect(302, '/admin');
+};
+
 const deleteUser = async ({ request, locals, cookies }) => {
 	const data = await request.formData();
 	const userID = data.get('userID');
@@ -56,4 +90,4 @@ const deleteUser = async ({ request, locals, cookies }) => {
 	}
 };
 
-export const actions = { deleteUser };
+export const actions = { deleteUser, banUser, unbanUser };

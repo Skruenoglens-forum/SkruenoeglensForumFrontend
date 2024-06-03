@@ -33,6 +33,29 @@
 						>Rediger</a
 					>
 				</span>
+				{#if user.role_id != 3}
+				<span class="text-sm text-gray-500">
+					<form action="?/banUser" method="POST">
+						<input type="hidden" name="userID" value={user.id} />
+						<button
+							type="submit"
+							class="bg-yellow-500 hover:bg-yellow-700 text-white font-semibold py-2 px-4 rounded-md transition duration-300 ease-in-out"
+							>Ban</button
+						>
+					</form>
+				</span>
+				{:else}
+				<span class="text-sm text-gray-500">
+					<form action="?/unbanUser" method="POST">
+						<input type="hidden" name="userID" value={user.id} />
+						<button
+							type="submit"
+							class="bg-yellow-500 hover:bg-yellow-700 text-white font-semibold py-2 px-4 rounded-md transition duration-300 ease-in-out"
+							>Unban</button
+						>
+					</form>
+				</span>
+				{/if}
 				<span class="text-sm text-gray-500">
 					<form action="?/deleteUser" method="POST">
 						<input type="hidden" name="userID" value={user.id} />

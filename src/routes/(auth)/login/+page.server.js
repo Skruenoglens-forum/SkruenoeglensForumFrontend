@@ -26,12 +26,10 @@ const login = async ({ cookies, request }) => {
 		body: JSON.stringify({ email: email, password: password })
 	});
 
-	if (!response.ok) {
-		return fail(400, { credentials: true });
-	}
-
-	// get response text
 	const resp = await response.json();
+	if (!response.ok) {
+		return fail(400, { message: resp.error });
+	}
 
 	cookies.set('jwt', resp.token, {
 		// send cookie for every page

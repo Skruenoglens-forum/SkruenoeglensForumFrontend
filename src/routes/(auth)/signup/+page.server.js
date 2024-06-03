@@ -16,20 +16,10 @@ const signup = async ({ request }) => {
 	const description = data.get('description');
 	const password = data.get('password');
 	const repeatPassword = data.get('repeat-password');
-
-	if (
-		typeof name !== 'string' ||
-		typeof email !== 'string' ||
-		typeof password !== 'string' ||
-		typeof description !== 'string' ||
-		!email ||
-		!password
-	) {
-		return fail(400, { invalid: true });
-	}
+	
 
 	if (password !== repeatPassword) {
-		return fail(400, { pwdMatch: true });
+		return fail(400, { message: "Passwords matcher ikke" });
 	}
 
 	// Create form data
@@ -46,9 +36,9 @@ const signup = async ({ request }) => {
 		body: formData
 	});
 
+	const resp = await response.json();
 	if (!response.ok) {
-		console.log(response.status);
-		return fail(400, { user: true });
+		return fail(400, { message: resp.error });
 	}
 
 	throw redirect(303, '/login');

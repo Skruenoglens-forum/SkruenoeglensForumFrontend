@@ -1,4 +1,5 @@
 <script>
+	import { page } from '$app/stores';
 	import { getDate } from '../utils/utils.js';
 	export let post;
 </script>
@@ -7,6 +8,7 @@
 	<h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl mb-4">
 		{post.title}
 	</h1>
+	{#if $page.data.loggedInUser?.uid == post.user_id || $page.data.loggedInUser?.roleId == 1}
 	<div class="mt-4 sm:mt-0 sm:ml-auto flex items-center space-x-4">
 		<span class="text-sm text-gray-500">
 			<a
@@ -25,6 +27,7 @@
 			</form>
 		</span>
 	</div>
+	{/if}
 </div>
 <div
 	class="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6"

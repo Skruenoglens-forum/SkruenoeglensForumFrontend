@@ -20,13 +20,16 @@
 		</div>
 
 		<div class="hidden lg:flex items-center space-x-6 ml-5">
+			<a href="/about" class="hover:opacity-70">
+				<img class="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300" src="/about.png" alt="about" />
+			</a>
 			{#if $page.data.loggedInUser}
-				<a href="/users/{$page.data.loggedInUser.uid}" class="hover:opacity-70">
-					<img class="h-10 w-auto rounded-full" src="{$page.data.API_HOST}/users/{$page.data.loggedInUser.uid}/image" alt="profile" />
+				<a href="/users/{$page.data.loggedInUser?.uid}" class="hover:opacity-70">
+					<img class="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300" src="{$page.data.API_HOST}/users/{$page.data.loggedInUser?.uid}/image" alt="profile" />
 				</a>
-				{#if $page.data.loggedInUser.roleId == 1}
+				{#if $page.data.loggedInUser?.roleId == 1}
 					<a href="/admin" class="hover:opacity-70">
-						<img class="h-10 w-auto rounded-full" src="/admin.png" alt="admin" />
+						<img class="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300" src="/admin.png" alt="admin" />
 					</a>
 				{/if}
 			{/if}
@@ -97,22 +100,22 @@
 						{#if $page.data.loggedInUser}
 							<div class="flex-1 flex justify-center">
 								<a
-									href="/users/{$page.data.loggedInUser.uid}"
+									href="/users/{$page.data.loggedInUser?.uid}"
 									on:click={toggleMenu}
-									class="w-full max-w-md block button default-button flex justify-center items-center"
+									class="w-full max-w-md block button default-button flex justify-center items-center hover:opacity-70"
 								>
-									<img class="h-10 w-auto rounded-full mr-6" src="{$page.data.API_HOST}/users/{$page.data.loggedInUser.uid}/image" alt="profile" />
+									<img class="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 mr-6" src="{$page.data.API_HOST}/users/{$page.data.loggedInUser.uid}/image" alt="profile" />
 									<p class="text-black">Profil</p>
 								</a>
 							</div>
-							{#if $page.data.loggedInUser.roleId == 1}
+							{#if $page.data.loggedInUser?.roleId == 1}
 								<div class="flex-1 flex justify-center">
 									<a
 										href="/admin"
 										on:click={toggleMenu}
-										class="w-full max-w-md block button default-button flex justify-center items-center"
+										class="w-full max-w-md block button default-button flex justify-center items-center hover:opacity-70"
 									>
-										<img class="h-10 w-auto rounded-full mr-6" src="/admin.png" alt="admin" />
+										<img class="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 mr-6" src="/admin.png" alt="admin" />
 										<p class="text-black">Admin</p>
 									</a>
 								</div>

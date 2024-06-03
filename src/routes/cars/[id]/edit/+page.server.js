@@ -2,26 +2,38 @@ import { redirect } from '@sveltejs/kit';
 import { API_HOST } from '$env/static/private';
 
 export const load = async ({ locals, params }) => {
-	// redirect user if not logged TODO: remember to only allow to edit owned users
-	if (!locals.user) {
-		throw redirect(302, '/login');
-	}
-
-	let car = [];
-
-	const res = await fetch(`${API_HOST}/cars/${params.id}`, {
-		method: 'GET',
-		headers: {
-			'Content-Type': 'application/json',
-			Authorization: `Bearer ${locals.user.jwt}`
+	try {
+		// Redirect user if not logged in
+		if (!locals.user) {
+			throw redirect(302, '/login');
 		}
-	});
 
-	car = await res.json();
+		let car = [];
 
-	return {
-		car
-	};
+		const res = await fetch(`${API_HOST}/cars/${params.id}`, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${locals.user.jwt}`
+			}
+		});
+
+		if (!res.ok) {
+			throw new Error('Failed to fetch car data');
+		}
+
+		car = await res.json();
+		// Check if logged in user owns this car
+		if (locals.user.uid != car.user_id && locals.user.roleId != 1) {
+			throw redirect(302, `/`);
+		}
+
+		return {
+			car
+		};
+	} catch (error) {
+		throw redirect(302, '/');
+	}
 };
 
 const edit = async ({ locals, request, params }) => {

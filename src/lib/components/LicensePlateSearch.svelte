@@ -3,9 +3,11 @@
 	import toast, {Toaster} from "svelte-french-toast";
 
 	export let car;
-	export let handle
 	let carIsLoading;
 	let licensplateInput;
+
+	export let getPostsByInput;
+	export let postInputs;
 
 	async function getCarByLicensePlate(licenseplate) {
 		carIsLoading = true;
@@ -26,7 +28,9 @@
 			car= undefined
 		}
 		carIsLoading = false;
-		handle();
+		postInputs.brand = car.brandnavn
+		postInputs.model = car.modelnavn
+		getPostsByInput()
 	}
 </script>
 <Toaster toastOptions={{"position":"bottom-center"}}/>

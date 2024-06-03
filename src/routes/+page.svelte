@@ -9,71 +9,38 @@
 	let posts = data.posts;
 
 	let categorySearch = '';
-	async function getPostsByCategoryId(categoryId) {
-		data.categoryId = categoryId
-		let res
-		if(data.car && categoryId){
-			res = await fetch(`${$page.data.API_HOST}/posts/categories/${data.categoryId}/${data.car.brandnavn}/${data.car.modelnavn}`, {
-				method: 'GET',
-				headers: {
-					'Content-Type': 'application/json'
-				}
-			});
-		}
-		else if (categoryId) {
-			categorySearch = data.categories[categoryId - 1].name;
-			res = await fetch(`${$page.data.API_HOST}/posts/categories/${categoryId}`, {
-				method: 'GET',
-				headers: {
-					'Content-Type': 'application/json'
-				}
-			});
 
-		} else {
-			categorySearch = 'Alle';
-			res = await fetch(`${$page.data.API_HOST}/posts`, {
-				method: 'GET',
-				headers: {
-					'Content-Type': 'application/json'
-				}
-			});
-		}
-		posts = await res.json();
-
+	let postInputs = {
+		brand: "",
+		model: "",
+		categoryId: "",
+		search: ""
 	}
 
-	async function getPostsByLicensPlate (){
-		let res;
-		if(data.car && data.categoryId){
-			res = await fetch(`${$page.data.API_HOST}/posts/categories/${data.categoryId}/${data.car.brandnavn}/${data.car.modelnavn}`, {
-				method: 'GET',
-				headers: {
-					'Content-Type': 'application/json'
-				}
-			});
-		}
-		else if(data.car){
-			res = await fetch(`${$page.data.API_HOST}/posts/cars/${data.car.brandnavn}/${data.car.modelnavn}`, {
-				method: 'GET',
-				headers: {
-					'Content-Type': 'application/json'
-				}
-			});
-		}
-		else{
-			categorySearch = 'Alle';
-			res = await fetch(`${$page.data.API_HOST}/posts`, {
-				method: 'GET',
-				headers: {
-					'Content-Type': 'application/json'
-				}
-			});
-			
-		}
+	async function getPostsByInput() {
+		// Initialize an array to hold the query parameters
+		let queryParams = [];
+
+		// Conditionally add parameters to the queryParams array if they are defined
+		if (postInputs.brand !== undefined) queryParams.push(`brand=${postInputs.brand}`);
+		if (postInputs.model !== undefined) queryParams.push(`model=${postInputs.model}`);
+		if (postInputs.categoryId !== undefined) queryParams.push(`category_id=${postInputs.categoryId}`);
+		if (postInputs.search !== undefined) queryParams.push(`search=${postInputs.search}`);
+
+		// Join the query parameters with '&' to form the query string
+		let queryString = queryParams.length ? `?${queryParams.join('&')}` : '';
+
+		let res = await fetch(`${$page.data.API_HOST}/posts/${queryString}`, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		});		
+
 		posts = await res.json();
 	}
 </script>
 
-<PostSearchAdd bind:car={data.car} handleLicensePlate={getPostsByLicensPlate} bind:categories={data.categories} handleCategory={getPostsByCategoryId} />
+<PostSearchAdd bind:postInputs={postInputs} {getPostsByInput} categories={data.categories} />
 
 <PostList {posts} {categorySearch} />

@@ -1,17 +1,22 @@
 <script>
 	import CategorySelector from "./CategorySelector.svelte";
 	import LicensePlateSearch from "./LicensePlateSearch.svelte";
+	import Search from './Search.svelte'
 
-	export let car;
-	export let handleLicensePlate;
+	let car;
 	export let categories;
-	export let handleCategory;
+	export let postInputs;
+
+	export let getPostsByInput;
 </script>
 
+
+
 <div class="mx-4">
-	<div class="flex flex-col sm:flex-row justify-evenly max-w-2xl mx-auto h-auto sm:h-24 rounded-full bg-white sm:border sm:border-gray-200 p-4 sm:p-0">
+	<Search bind:postInputs={postInputs} {getPostsByInput} />
+	<div class="flex flex-col sm:flex-row justify-evenly max-w-2xl mx-auto h-auto sm:h-24  p-4 sm:p-0">
 		<div class="flex items-center justify-center w-full sm:w-1/3 mb-4 sm:mb-0">
-			<LicensePlateSearch bind:car={car} handle={handleLicensePlate} />
+			<LicensePlateSearch bind:postInputs={postInputs} {getPostsByInput} bind:car={car} />
 		</div>
 		<div class="flex items-center justify-center mb-4 sm:mb-0">
 			<a href="/posts/add" class="inline-flex items-center justify-center w-12 h-12 font-medium bg-green-600 rounded-full hover:bg-green-700 group focus:ring-4 focus:ring-green-300 focus:outline-none">
@@ -21,7 +26,7 @@
 			</a>
 		</div>
 		<div class="flex items-center justify-center w-full sm:w-1/3">
-			<CategorySelector bind:categories={categories} handle={handleCategory} />
+			<CategorySelector bind:postInputs={postInputs} {getPostsByInput} categories={categories} />
 		</div>
 	</div>
 </div>

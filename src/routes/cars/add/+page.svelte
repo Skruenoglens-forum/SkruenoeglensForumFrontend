@@ -1,6 +1,12 @@
 <script>
 	let imageUrl = '';
-	let car;
+	let car= {brandnavn:"",
+		modelnavn: "",
+		køretøjVariantnavn:"",
+		drivkaftType:"",
+		førsteRegistreringDato:"",
+		stelnummer: ""
+	};
 	let licenseplateInput
 	function handleFileUpload(event) {
 		const file = event.target.files[0];
@@ -13,7 +19,7 @@
 		}
 	}
 	async function getCarByLicensePlate(licenseplate) {
-		carIsLoading = true;
+		console.log("triggered")
 		let res = await fetch(`https://lp.skruenøglen.dk/getcarbylp?licenseplate=${licenseplate}`, {
 			method: 'GET',
 			headers: {
@@ -24,9 +30,7 @@
 		if (res.status == 200) {
 			car = await res.json();
 			console.log(car);
-		}
-		else{
-			car= undefined
+			car.førsteRegistreringDato = new Date(car.førsteRegistreringDato).toISOString().substring(0,10);
 		}
 	}
 </script>
@@ -66,7 +70,6 @@
 						>
 						<input 
 							bind:value={licenseplateInput}
-
 							on:change={getCarByLicensePlate(licenseplateInput)}
 							type="text"
 							name="licensePlate"
@@ -79,6 +82,7 @@
 					<div>
 						<label for="brand" class="block mb-2 text-sm font-medium text-gray-900">Mærke</label>
 						<input
+							bind:value={car.brandnavn}
 							type="text"
 							name="brand"
 							id="brand"
@@ -90,6 +94,7 @@
 					<div>
 						<label for="model" class="block mb-2 text-sm font-medium text-gray-900">Model</label>
 						<input
+							bind:value={car.modelnavn}
 							type="text"
 							name="model"
 							id="model"
@@ -101,6 +106,7 @@
 					<div>
 						<label for="motor" class="block mb-2 text-sm font-medium text-gray-900">Motor</label>
 						<input
+							bind:value={car.køretøjVariantnavn}
 							type="text"
 							name="motor"
 							id="motor"
@@ -113,6 +119,7 @@
 						<label for="type" class="block mb-2 text-sm font-medium text-gray-900">Drivmiddel</label
 						>
 						<input
+						bind:value={car.drivkaftType}
 							type="text"
 							name="type"
 							id="type"
@@ -126,6 +133,7 @@
 							>Første Registrering</label
 						>
 						<input
+							bind:value={car.førsteRegistreringDato}
 							type="date"
 							name="firstRegistration"
 							id="firstRegistration"
@@ -137,6 +145,7 @@
 					<div>
 						<label for="vin" class="block mb-2 text-sm font-medium text-gray-900">Stelnummer</label>
 						<input
+							bind:value={car.stelnummer}
 							type="text"
 							name="vin"
 							id="vin"

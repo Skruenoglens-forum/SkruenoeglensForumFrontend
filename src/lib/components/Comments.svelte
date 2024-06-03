@@ -5,29 +5,17 @@
 	export let post;
 
 	function toggleDropdown(commentId) {
-		dropdownVisible = {
-			...dropdownVisible,
-			[commentId]: !dropdownVisible[commentId]
-		};
+		dropdownVisible = {[commentId]: !dropdownVisible[commentId]};
 
-		commentEditTextFieldVisible = {
-			...commentEditTextFieldVisible,
-			[commentId]: false
-		};
+		commentEditTextFieldVisible = {[commentId]: false};
 	}
 
 	function toggleCommentReplyTextField(commentId) {
-		commentReplyTextFieldVisible = {
-			...commentReplyTextFieldVisible,
-			[commentId]: !commentReplyTextFieldVisible[commentId]
-		};
+		commentReplyTextFieldVisible = {[commentId]: !commentReplyTextFieldVisible[commentId]};
 	}
 
 	function toggleCommentEditTextField(commentId) {
-		commentEditTextFieldVisible = {
-			...commentEditTextFieldVisible,
-			[commentId]: !commentEditTextFieldVisible[commentId]
-		};
+		commentEditTextFieldVisible = {[commentId]: !commentEditTextFieldVisible[commentId]};
 	}
 
 	let dropdownVisible = {};
@@ -60,149 +48,6 @@
 			{/if}
 		</div>
 		<p class="{!commentEditTextFieldVisible[comment.id] ? '' : 'hidden'} text-sm font-normal py-2.5 text-gray-900">{comment.description}</p>
-			{#if $page.data.loggedInUser}
-			<button
-				on:click={() => toggleCommentReplyTextField(comment.id)}
-				type="button"
-				class="{!commentEditTextFieldVisible[comment.id] ? '' : 'hidden'} flex items-center text-sm text-gray-500 hover:underline font-medium"
-			>
-				<svg
-					class="mr-1.5 w-3.5 h-3.5"
-					aria-hidden="true"
-					xmlns="http://www.w3.org/2000/svg"
-					fill="none"
-					viewBox="0 0 20 18"
-				>
-					<path
-						stroke="currentColor"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="2"
-						d="M5 5h5M5 8h2m6-3h2m-5 3h6m2-7H2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3v5l5-5h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z"
-					/>
-				</svg>
-				Svar
-			</button>
-			{/if}
-			{#if !$page.data.loggedInUser}
-			<a href="/login" class="flex items-center text-sm text-gray-500 hover:underline font-medium">
-				<svg
-					class="mr-1.5 w-3.5 h-3.5"
-					aria-hidden="true"
-					xmlns="http://www.w3.org/2000/svg"
-					fill="none"
-					viewBox="0 0 20 18"
-				>
-					<path
-						stroke="currentColor"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="2"
-						d="M5 5h5M5 8h2m6-3h2m-5 3h6m2-7H2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3v5l5-5h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z"
-					/>
-				</svg>
-				Svar
-			</a>
-			{/if}
-			<form
-		action="?/editComment"
-		method="POST"
-		class="{commentEditTextFieldVisible[comment.id] ? '' : 'hidden'} mt-10"
-	>
-		<div class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200">
-			<input type="hidden" name="commentId" value={comment.id} />
-			<textarea
-				name="description"
-				id="description"
-				rows="6"
-				class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none"
-				value={comment.description}
-				required
-			></textarea>
-		</div>
-		<button
-			type="submit"
-			class="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-			>Rediger kommentar</button
-		>
-	</form>
-		<form
-			action="?/addComment"
-			method="POST"
-			class="{commentReplyTextFieldVisible[comment.id] ? '' : 'hidden'} mt-10"
-		>
-			<div class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200">
-				<input type="hidden" name="parentId" value={comment.id} />
-				<textarea
-					name="description"
-					id="description"
-					rows="6"
-					class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none"
-					placeholder="Skriv en kommentar..."
-					required
-				></textarea>
-			</div>
-			<button
-				type="submit"
-				class="mt-4 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-				>Svar {comment.name}</button
-			>
-		</form>
-	</div>
-	<!-- Comment Settings visible for owner of post, owner of comment and admin -->
-	{#if $page.data.loggedInUser?.uid == comment.user_id || $page.data.loggedInUser?.uid == post.user_id || $page.data.loggedInUser?.roleId == 1}
-	<button on:click={() => toggleDropdown(comment.id)} id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots" data-dropdown-placement="bottom-start" class="inline-flex self-center items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50" type="button">
-		<svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 4 15">
-			<path d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/>
-		</svg>
-	</button>
-	{/if}
-	<div id="dropdownDots" class="{dropdownVisible[comment.id] ? '' : 'hidden'} z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-40">
-		<ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownMenuIconButton">
-			<!-- Solution visible for owner of post and admin -->
-			{#if $page.data.loggedInUser?.uid == post.user_id || $page.data.loggedInUser?.roleId == 1}
-			<li>
-				{#if !comment.solution}
-					<form
-						action="?/markCommentAsSolution"
-						method="POST"
-						class="block px-4 text-green-600 py-2 px-4 hover:bg-gray-100"
-					>
-						<input type="hidden" name="commentId" value={comment.id} />
-						<button type="submit">Løsning</button>
-					</form>
-				{/if}
-				{#if comment.solution}
-					<form
-						action="?/removeCommentAsSolution"
-						method="POST"
-						class="block px-4 text-green-600 py-2 px-4 hover:bg-gray-100"
-					>
-						<input type="hidden" name="commentId" value={comment.id} />
-						<button type="submit">Fjern løsning</button>
-					</form>
-				{/if}
-			</li>
-			{/if}
-			<!-- Edit and delete visible for owner of comment and admin -->
-			{#if $page.data.loggedInUser?.uid == comment.user_id || $page.data.loggedInUser?.roleId == 1}
-			<li>
-				<div class="block text-blue-600 py-2 px-4 hover:bg-gray-100">
-					<button on:click={() => toggleCommentEditTextField(comment.id)}>Rediger</button>
-				</div>
-			</li>
-			<li>
-				<form
-					action="?/deleteComment"
-					method="POST"
-					class="block text-red-600 py-2 px-4 hover:bg-gray-100"
-				>
-					<input type="hidden" name="commentId" value={comment.id} />
-					<button type="submit">Slet</button>
-				</form>
-			</li>
-			{/if}
-		</ul>
 	</div>
 </div>
 {/if}

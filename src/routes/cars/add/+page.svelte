@@ -1,4 +1,5 @@
 <script>
+	import Spinner from "../../../lib/components/Spinner.svelte";
 	let imageUrl = '';
 	let car= {brandnavn:"",
 		modelnavn: "",
@@ -18,8 +19,10 @@
 			reader.readAsDataURL(file);
 		}
 	}
+
+	let carIsLoading;
 	async function getCarByLicensePlate(licenseplate) {
-		console.log("triggered")
+		carIsLoading = true;
 		let res = await fetch(`https://lp.skruenøglen.dk/getcarbylp?licenseplate=${licenseplate}`, {
 			method: 'GET',
 			headers: {
@@ -32,6 +35,7 @@
 			console.log(car);
 			car.førsteRegistreringDato = new Date(car.førsteRegistreringDato).toISOString().substring(0,10);
 		}
+		carIsLoading = false;		
 	}
 </script>
 
@@ -65,9 +69,10 @@
 						/>
 					</div>
 					<div>
-						<label for="licensePlate" class="block mb-2 text-sm font-medium text-gray-900"
-							>Nummerplade</label
-						>
+						<div class="flex gap-2">
+							<label for="licensePlate" class="block mb-2 text-sm font-medium text-gray-900">Nummerplade</label>
+							{#if carIsLoading}<Spinner />{/if}
+						</div>
 						<input 
 							bind:value={licenseplateInput}
 							on:change={getCarByLicensePlate(licenseplateInput)}

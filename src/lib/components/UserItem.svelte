@@ -39,6 +39,7 @@
 						<input type="hidden" name="userID" value={user.id} />
 						<button
 							type="submit"
+							onclick="event.stopPropagation(); event.preventDefault(); this.closest('form').submit();"
 							class="bg-yellow-500 hover:bg-yellow-700 text-white font-semibold py-2 px-4 rounded-md transition duration-300 ease-in-out"
 							>Ban</button
 						>
@@ -50,6 +51,7 @@
 						<input type="hidden" name="userID" value={user.id} />
 						<button
 							type="submit"
+							onclick="event.stopPropagation(); event.preventDefault(); this.closest('form').submit();"
 							class="bg-yellow-500 hover:bg-yellow-700 text-white font-semibold py-2 px-4 rounded-md transition duration-300 ease-in-out"
 							>Unban</button
 						>
@@ -61,6 +63,7 @@
 						<input type="hidden" name="userID" value={user.id} />
 						<button
 							type="submit"
+							onclick="event.stopPropagation(); event.preventDefault(); this.closest('form').submit();"
 							class="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md transition duration-300 ease-in-out"
 							>Slet</button
 						>

@@ -27,10 +27,18 @@
 {#each comments as comment}
 {#if comment.solution}
 <div class="{!comment.parent_id ? '' : 'mb-3 ml-6 lg:ml-12'} flex items-start gap-2.5">
-	<img class="w-8 h-8 rounded-full" src="{$page.data.API_HOST}/users/{comment.user_id}/image" alt="user">
+	{#if comment.user_id}
+		<img class="w-8 h-8 rounded-full" src="{$page.data.API_HOST}/users/{comment.user_id}/image" alt="user">
+	{:else}
+		<img class="w-8 h-8 rounded-full" src="/user.png" alt="user">
+	{/if}
 	<div class="flex flex-col w-full max-w-[320px] leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl mb-6">
 		<div class="flex items-center space-x-2 rtl:space-x-reverse">
+			{#if comment.name}
 			<span class="text-sm font-semibold text-gray-900">{comment.name}</span>
+			{:else}
+			<span class="text-sm font-semibold text-gray-900">Slettet Bruger</span>
+			{/if}
 			<span class="text-sm font-normal text-gray-500">{getDateTime(comment.created_at)}</span>
 			{#if comment.solution}
 			<svg
@@ -57,10 +65,18 @@
 <div class="max-w-2xl mx-auto px-4">
 	{#each comments as comment}
 	<div class="{!comment.parent_id ? '' : 'mb-3 ml-6 lg:ml-12'} flex items-start gap-2.5">
-		<img class="w-8 h-8 rounded-full" src="{$page.data.API_HOST}/users/{comment.user_id}/image" alt="user">
+		{#if comment.user_id}
+			<img class="w-8 h-8 rounded-full" src="{$page.data.API_HOST}/users/{comment.user_id}/image" alt="user">
+		{:else}
+			<img class="w-8 h-8 rounded-full" src="/user.png" alt="user">
+		{/if}
 		<div class="flex flex-col w-full max-w-[320px] leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl mb-6">
 			<div class="flex items-center space-x-2 rtl:space-x-reverse">
+				{#if comment.name}
 				<span class="text-sm font-semibold text-gray-900">{comment.name}</span>
+				{:else}
+				<span class="text-sm font-semibold text-gray-900">Slettet Bruger</span>
+				{/if}
 				<span class="text-sm font-normal text-gray-500">{getDateTime(comment.created_at)}</span>
 				{#if comment.solution}
 				<svg
@@ -163,7 +179,7 @@
 				<button
 					type="submit"
 					class="mt-4 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-					>Svar {comment.name}</button
+					>Svar {#if comment.name} {comment.name}{:else}Slettet Bruger{/if}</button
 				>
 			</form>
 		</div>

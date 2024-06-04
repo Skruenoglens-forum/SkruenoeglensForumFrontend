@@ -60,7 +60,13 @@
 					<span class="text-gray-600">Kategori: {post.category_name}</span>
 				</li>
 				<li class="text-gray-400">
-					<span class="text-gray-600">Opretter: <a href="/users/{post.user_id}" class="text-blue-500 underline">{post.user_name}</a></span>
+					<span class="text-gray-600">Opretter:
+						{#if post.user_name}
+						<a href="/users/{post.user_id}" class="text-blue-500 underline">{post.user_name}</a>
+						{:else}
+						<p>Slettet Bruger</p>
+						{/if}
+					</span>
 				</li>
 			</ul>
 		</div>

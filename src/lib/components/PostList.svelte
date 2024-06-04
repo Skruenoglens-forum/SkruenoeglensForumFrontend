@@ -43,12 +43,22 @@
 				<div class="mt-4 flex justify-between px-2">
 					<div class="flex items-center">
 						<p class="inline-flex items-center mr-3 text-sm text-gray-900">
+							{#if post.user_id}
 							<img
 								class="mr-2 w-6 h-6 rounded-full"
 								src="{$page.data.API_HOST}/users/{post.user_id}/image"
 								alt="user"
 							/>
 							{post.user_name}
+							{:else}
+							<img
+								class="mr-2 w-6 h-6 rounded-full"
+								src="/user.png"
+								alt="user"
+							/>
+							Slettet Bruger
+							{/if}
+							
 						</p>
 					</div>
 					<div class="flex items-center">

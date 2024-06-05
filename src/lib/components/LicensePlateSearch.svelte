@@ -38,12 +38,12 @@
     <input
         disabled={carIsLoading}
         bind:value={licensplateInput}
-        class="bg-white border border-t uppercase border-b border-l border-red-200 text-gray-900 sm:text-sm rounded-l-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 h-10"
+        class="bg-gray-50 border border-t border-b border-l border-gray-300 text-gray-900 sm:text-sm rounded-l-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-10"
         type="text"
         placeholder="AB 12 123"
     />
     <button
-        class="bg-blue-400 text-white text-xs px-4 h-10 rounded-r-lg font-bold uppercase border-red-500 border-t border-b border-r"
+        class="bg-blue-400 text-white text-xs px-4 h-10 rounded-r-lg font-bold uppercase border-gray-300 border-t border-b border-r"
         on:click={getCarByLicensePlate(licensplateInput)}>{#if !carIsLoading}Søg{:else}<Spinner />{/if}</button
     >
 </form>

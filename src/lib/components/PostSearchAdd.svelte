@@ -10,16 +10,15 @@
 	export let getPostsByInput;
 </script>
 
-
-
 <div class="mx-4">
-	<div class="flex flex-col sm:flex-row justify-evenly max-w-2xl mx-auto h-auto p-4 sm:p-0 mb-4">
+	<div class="flex flex-col sm:flex-row justify-evenly mx-auto h-auto p-4 sm:p-0 mb-4">
 		<div class="flex items-center justify-center w-full">
 			<Search bind:postInputs={postInputs} {getPostsByInput} />
 		</div>
 	</div>
 	<div class="flex flex-col sm:flex-row justify-evenly max-w-2xl mx-auto h-auto p-4 sm:p-0">
-		<div class="flex items-center justify-center w-full sm:w-1/3 mb-4 sm:mb-0">
+		<div class="flex flex-col items-center justify-center w-full sm:w-1/3 mb-4 sm:mb-0">
+			<p class="text-base leading-relaxed tracking-wide text-gray-700">Nummerplade</p>
 			<LicensePlateSearch bind:postInputs={postInputs} {getPostsByInput} bind:car={car} />
 		</div>
 		<div class="flex items-center justify-center mb-4 sm:mb-0">
@@ -29,7 +28,8 @@
 				</svg>
 			</a>
 		</div>
-		<div class="flex items-center justify-center w-full sm:w-1/3">
+		<div class="flex flex-col items-center justify-center w-full sm:w-1/3">
+			<p class="text-base leading-relaxed tracking-wide text-gray-700">Kategori</p>
 			<CategorySelector bind:postInputs={postInputs} {getPostsByInput} categories={categories} />
 		</div>
 	</div>

@@ -1,8 +1,8 @@
 <script>
 	import { page } from '$app/stores';
 
+	import PostFilter from '../lib/components/PostFilter.svelte';
 	import PostList from '../lib/components/PostList.svelte';
-	import PostSearchAdd from '../lib/components/PostSearchAdd.svelte';
 
 	export let data;
 
@@ -41,6 +41,6 @@
 	}
 </script>
 
-<PostSearchAdd bind:postInputs={postInputs} {getPostsByInput} categories={data.categories} />
+<PostFilter bind:postInputs={postInputs} {getPostsByInput} categories={data.categories} />
 
 <PostList {posts} {categorySearch} />

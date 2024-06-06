@@ -16,6 +16,9 @@
 		</a>
 
 		<div class="hidden lg:flex items-center space-x-6 ml-5">
+			<a href="/posts/add" class="hover:opacity-70">
+				<img class="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300" src="/addPost.png" alt="addPost" />
+			</a>
 			<a href="/about" class="hover:opacity-70">
 				<img class="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300" src="/about.png" alt="about" />
 			</a>

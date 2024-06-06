@@ -41,7 +41,7 @@
     </button>
         
     <!-- Dropdown menu -->
-    <div class="z-10 {isDropdownVisible ? '' : 'hidden'} relative mx-auto w-full md:w-1/4">
+    <div class="{isDropdownVisible ? '' : 'hidden'} relative mx-auto w-full md:w-1/4">
         <div class="rounded overflow-hidden shadow-md mx-4">
             <div id="accordion-nested-parent" data-accordion="collapse">
                 <h2 id="accordion-collapse-heading-1">

@@ -6,18 +6,17 @@ WORKDIR /usr/src/app
 COPY . .
 
 # Installér afhængigheder og byg Svelte-appen
-RUN npm install
+RUN yarn
 
 # manually install jsonwebtoken
-RUN npm install jsonwebtoken
+RUN yarn add jsonwebtoken
 
 # remove potential security issues
-RUN npm audit fix
 
-RUN npm run build
+RUN yarn build
 
 # Eksponér port 8888
 EXPOSE 8888
 
 # Start SvelteKit-appen
-CMD ["npm", "run", "preview", "--", "--port", "8888", "--host", "0.0.0.0"]
+CMD ["yarn", "preview", "--", "--port", "8888", "--host", "0.0.0.0"]

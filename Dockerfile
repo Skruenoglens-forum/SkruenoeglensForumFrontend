@@ -1,22 +1,23 @@
-# Brug Node.js som baseimage
+# Use official Node.js image as base
 FROM node:latest
 
-# Opret arbejdsmappe og kopier SvelteKit-appen derind
+# Set working directory inside the container
 WORKDIR /usr/src/app
+
+# Copy package.json and package-lock.json files
 COPY . .
 
-# Installér afhængigheder og byg Svelte-appen
+# Install dependencies
 RUN yarn
 
-# manually install jsonwebtoken
+# Manually install jsonwebtoken
 RUN yarn add jsonwebtoken
 
-# remove potential security issues
-
+# Copy the rest of the application code
 RUN yarn build
 
-# Eksponér port 8888
+# Expose port 8888 to the outside world
 EXPOSE 8888
 
-# Start SvelteKit-appen
+# Command to run the application
 CMD ["yarn", "preview", "--", "--port", "8888", "--host", "0.0.0.0"]

@@ -1,38 +1,82 @@
-# create-svelte
+# SkruenøglensForum Frontend
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+Dette er SkruenøglensForum Frontend
 
-## Creating a project
+Skruenøglens Forum er et forum for bilentusiaster, der kan lide at reparere deres egne biler. Formålet er at skabe et fællesskab, hvor medlemmer kan stille spørgsmål og finde svar på deres bilrelaterede udfordringer ved at udveksle erfaringer og viden med andre.
+Dette forum skal fremme samarbejde og støtte blandt bilnørder, så de kan hjælpe hinanden.
 
-If you're seeing this, you've probably already done this step. Congrats!
+Vi præsenterer en dynamisk hjemmeside skabt til bilentusiaster, hvor brugervenlighed og tilgængelighed er i centrum. Hjemmesiden er designet til at være responsive, hvilket betyder, at den automatisk tilpasser sig enhver skærmstørrelse, fra desktop til mobile enheder.
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+## Funktioner
+-   **Registering:** Opret bruger konto
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+-   **Sikker log ind:** Log ind for bruger og admin.
 
-## Developing
+-   **Søgning og filtrering:** Brugere kan nemt søge efter specifikke opslag ved hjælp af en søgefunktion. Det er også muligt at filtrere opslag efter kategorier eller ved at slå en nummerplade op for at finde relevante opslag.
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+-   **Brugerfunktionaliteter:**
+Brugere kan redigere deres egen profil og tilføje et profilbillede. Når de er logget ind, kan de tilføje og administrere deres biler, redigere og slette dem.
 
-```bash
-npm run dev
+-   **Opslag og kommentarer:**
+Brugere kan oprette opslag, de kan tilføje en af deres biler til opslaget og tilføje en kategori og billeder. Når et opslag er oprettet, kan andre brugere kommentere direkte på opslaget eller svare på eksisterende kommentarer. Ejeren af opslaget kan også markere kommentarer som løsning, hvilket fremhæver dem under opslaget.
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+-   **Administratorrolle:**
+En admin har fuld kontrol over platformen. Administratoren kan se, redigere og slette alle brugere, opslag og biler. Derudover kan administratorer bandlyse brugere.
 
-## Building
+-   **Sikkerhed og adgang:**
+For at interagere fuldt ud med platformen skal brugere være logget ind. Dette sikrer, at kun registrerede brugere kan udføre handlinger som at oprette, redigere og slette opslag samt kommentarer.
 
-To create a production version of your app:
+## Teknologi
 
-```bash
-npm run build
-```
+-   **Frontend**: SvelteKit
+-   **Backend**: Node.js
+-   **Database**: MySql
+-   **Deployment**: Docker
 
-You can preview the production build with `npm run preview`.
+## Projekt Opsætning
+### Lokalt:
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+1. **Klon Repositoriet**
+
+    ```
+    git clone https://github.com/Skruenoglens-forum/SkruenoeglensForumFrontend.git
+    ```
+
+2. change directory to the project folder
+
+    ```
+    cd SkruenoeglensForumFrontend
+    ```
+
+3. **Installer Dependencies**
+
+    ```
+    npm install
+    ```
+4. **Env Variable**
+
+    Hvis du vil køre projektet lokalt, skal du først omdøbe filen `.env.example` til `.env` og derefter udfylde de nødvendige felter.
+
+5. **Køre Skruenøglens API
+
+    https://github.com/Skruenoglens-forum/skruenoeglensbackend_api**
+
+6. **Starte Projektet Lokalt**
+
+    ```
+    npm run dev
+    ```
+
+### Docker:
+For at bygge og køre projektet ved hjælp af Docker, følg disse trin:
+1. **Byg Docker Image**
+    ```
+    docker build -t skruenoeglen_frontend .
+    ```
+2. **Kør Containeren**
+    ```
+    docker run -p 8888:8888 skruenoeglen_frontend
+    ```
+    Herefter er applikationen tilgængelig på `localhost:8888`.
+
+© Emil Storgaard Andersen, 2024.

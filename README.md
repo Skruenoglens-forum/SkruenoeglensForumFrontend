@@ -59,7 +59,7 @@ For at interagere fuldt ud med platformen skal brugere være logget ind. Dette s
 
 5. **Køre Skruenøglens API**
 
-    https://github.com/Skruenoglens-forum/skruenoeglensbackend_api**
+    https://github.com/Skruenoglens-forum/skruenoeglensbackend_api
 
 6. **Starte Projektet Lokalt**
 

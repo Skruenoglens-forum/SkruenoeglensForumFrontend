@@ -57,7 +57,7 @@ For at interagere fuldt ud med platformen skal brugere være logget ind. Dette s
 
     Hvis du vil køre projektet lokalt, skal du først omdøbe filen `.env.example` til `.env` og derefter udfylde de nødvendige felter.
 
-5. **Køre Skruenøglens API
+5. **Køre Skruenøglens API**
 
     https://github.com/Skruenoglens-forum/skruenoeglensbackend_api**
 

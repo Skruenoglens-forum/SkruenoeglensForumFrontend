@@ -2,27 +2,8 @@ import { redirect } from '@sveltejs/kit';
 import { API_HOST } from '$env/static/private';
 
 export const load = async () => {
-	let posts = [];
-
-	let res = await fetch(`${API_HOST}/posts`, {
-		method: 'GET',
-		headers: {
-			'Content-Type': 'application/json'
-		}
-	});
-
-	posts = await res.json();
-
-	let categories = [];
-
-	res = await fetch(`${API_HOST}/categories`, {
-		method: 'GET',
-		headers: {
-			'Content-Type': 'application/json'
-		}
-	});
-
-	categories = await res.json();
+	let posts = await getPosts();
+	let categories = await getCategories();
 
 	return {
 		posts,
@@ -30,11 +11,32 @@ export const load = async () => {
 	};
 };
 
+const getPosts = async () => {
+	const res = await fetch(`${API_HOST}/posts`, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	});
+
+	return await res.json();
+};
+
+const getCategories = async () => {
+	const res = await fetch(`${API_HOST}/categories`, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	});
+
+	return await res.json();
+};
+
 const deletePost = async ({ request, locals }) => {
 	const data = await request.formData();
 	const postId = data.get('postId');
 
-	// MAKE DELETE REQUEST
 	await fetch(`${API_HOST}/posts/${postId}`, {
 		method: 'DELETE',
 		headers: {
@@ -43,7 +45,6 @@ const deletePost = async ({ request, locals }) => {
 		}
 	});
 
-	// redirect the user
 	throw redirect(302, `/`);
 };
 

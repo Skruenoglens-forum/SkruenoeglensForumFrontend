@@ -1,4 +1,6 @@
 <script>
+	import { enhance } from "$app/forms"
+
 	export let data;
 
 	let imageUrl = `${data.API_HOST}/users/${data.user.id}/image`;
@@ -7,7 +9,7 @@
 		const file = event.target.files[0];
 		if (file) {
 			const reader = new FileReader();
-			reader.onload = (e) => {
+			reader.onload = () => {
 				imageUrl = reader.result;
 			};
 			reader.onerror = (error) => {
@@ -30,6 +32,7 @@
 					method="POST"
 					enctype="multipart/form-data"
 					class="space-y-4 md:space-y-6"
+					use:enhance
 				>
 					<div
 						class="w-32 h-32 rounded-full overflow-hidden bg-gray-200 flex items-center justify-center mx-auto"
@@ -56,7 +59,7 @@
 							id="name"
 							class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
 							placeholder="John Doe"
-							required=""
+							required
 						/>
 					</div>
 					<div>
@@ -68,7 +71,7 @@
 							id="email"
 							class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
 							placeholder="name@company.com"
-							required=""
+							required
 						/>
 					</div>
 					<div>
@@ -82,7 +85,7 @@
 							id="description"
 							class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
 							placeholder="Skriv lidt om dig selv"
-							required=""
+							required
 						/>
 					</div>
 
@@ -104,7 +107,7 @@
 				<h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
 					Skift Password
 				</h1>
-				<form action="?/newpassword" method="POST" class="space-y-4 md:space-y-6">
+				<form action="?/newpassword" method="POST" class="space-y-4 md:space-y-6" use:enhance>
 					<div>
 						<label for="new-password" class="block mb-2 text-sm font-medium text-gray-900"
 							>Nyt Password</label
@@ -115,7 +118,7 @@
 							id="new-password"
 							placeholder="••••••••"
 							class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
-							required=""
+							required
 						/>
 					</div>
 					<button

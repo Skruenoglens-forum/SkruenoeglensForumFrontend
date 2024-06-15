@@ -1,5 +1,6 @@
 <script>
-	import ErrorMessage from "../../../lib/components/ErrorMessage.svelte";
+	import { enhance } from "$app/forms"
+	import ErrorMessage from "$lib/components/ErrorMessage.svelte";
 
 	export let form;
 
@@ -35,6 +36,7 @@
 					action="?/signup"
 					method="POST"
 					enctype="multipart/form-data"
+					use:enhance
 				>
 					<div
 						class="w-32 h-32 rounded-full overflow-hidden bg-gray-200 flex items-center justify-center mx-auto"

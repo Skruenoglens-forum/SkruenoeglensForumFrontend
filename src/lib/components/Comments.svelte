@@ -1,4 +1,5 @@
 <script>
+	import { enhance } from "$app/forms"
 	import { page } from '$app/stores';
 	import { getDateTime } from '../utils/utils';
 	export let comments = [];
@@ -139,10 +140,11 @@
 				</a>
 				{/if}
 				<form
-			action="?/editComment"
-			method="POST"
-			class="{commentEditTextFieldVisible[comment.id] ? '' : 'hidden'} mt-10"
-		>
+					action="?/editComment"
+					method="POST"
+					class="{commentEditTextFieldVisible[comment.id] ? '' : 'hidden'} mt-10"
+					use:enhanc
+				>
 			<div class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200">
 				<input type="hidden" name="commentId" value={comment.id} />
 				<textarea
@@ -164,6 +166,7 @@
 				action="?/addComment"
 				method="POST"
 				class="{commentReplyTextFieldVisible[comment.id] ? '' : 'hidden'} mt-10"
+				use:enhanc
 			>
 				<div class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200">
 					<input type="hidden" name="parentId" value={comment.id} />
@@ -201,6 +204,7 @@
 							action="?/markCommentAsSolution"
 							method="POST"
 							class="block px-4 text-green-600 py-2 px-4 hover:bg-gray-100"
+							use:enhanc
 						>
 							<input type="hidden" name="commentId" value={comment.id} />
 							<button type="submit">Løsning</button>
@@ -211,6 +215,7 @@
 							action="?/removeCommentAsSolution"
 							method="POST"
 							class="block px-4 text-green-600 py-2 px-4 hover:bg-gray-100"
+							use:enhanc
 						>
 							<input type="hidden" name="commentId" value={comment.id} />
 							<button type="submit">Fjern løsning</button>
@@ -230,6 +235,7 @@
 						action="?/deleteComment"
 						method="POST"
 						class="block text-red-600 py-2 px-4 hover:bg-gray-100"
+						use:enhanc
 					>
 						<input type="hidden" name="commentId" value={comment.id} />
 						<button type="submit">Slet</button>

@@ -1,9 +1,10 @@
 <script>
-	import { getDate } from '../../../lib/utils/utils';
+	import { getDate } from '$lib/utils/utils';
+	import { enhance } from "$app/forms"
+	
 	export let data;
 
 	let car = {};
-
 	let imageUrls = [];
 
 	function handleFileUpload(event) {
@@ -34,6 +35,7 @@
 				method="POST"
 				class="space-y-4 md:space-y-6"
 				enctype="multipart/form-data"
+				use:enhance
 			>
 				<div class="max-h-80 overflow-y-scroll flex gap-4">
 					{#each imageUrls as imageUrl (imageUrl)}
@@ -80,7 +82,7 @@
 						id="title"
 						class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
 						placeholder="Titel..."
-						required=""
+						required
 					/>
 				</div>
 				<div>
@@ -93,7 +95,7 @@
 						id="description"
 						class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
 						placeholder="Beskrivelse..."
-						required=""
+						required
 					/>
 				</div>
 				<div>
@@ -106,7 +108,7 @@
 						id="carBrand"
 						class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
 						placeholder="VW"
-						required=""
+						required
 					/>
 				</div>
 				<div>
@@ -119,7 +121,7 @@
 						id="carModel"
 						class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
 						placeholder="UP"
-						required=""
+						required
 					/>
 				</div>
 				<div>
@@ -133,7 +135,7 @@
 						id="carMotor"
 						class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
 						placeholder="1.4"
-						required=""
+						required
 					/>
 				</div>
 				<div>
@@ -147,7 +149,7 @@
 						id="carType"
 						class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
 						placeholder="Benzin"
-						required=""
+						required
 					/>
 				</div>
 				<div>
@@ -161,7 +163,7 @@
 						id="carFirstRegistration"
 						class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
 						placeholder="2000.23.12"
-						required=""
+						required
 					/>
 				</div>
 				<div>
@@ -172,7 +174,7 @@
 						name="categoryId"
 						id="categoryId"
 						class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
-						required=""
+						required
 					>
 						<option value="" disabled selected>Vælg en kategori</option>
 						{#each data.categories as category}

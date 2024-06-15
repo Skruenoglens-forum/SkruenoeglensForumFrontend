@@ -1,14 +1,18 @@
 <script>
-	import Spinner from "../../../lib/components/Spinner.svelte";
+	import { enhance } from "$app/forms"
+	import Spinner from "$lib/components/Spinner.svelte";
+
 	let imageUrl = '';
-	let car= {brandnavn:"",
+	let licenseplateInput = '';
+	let car= {
+		brandnavn:"",
 		modelnavn: "",
 		køretøjVariantnavn:"",
 		drivkaftType:"",
 		førsteRegistreringDato:"",
 		stelnummer: ""
 	};
-	let licenseplateInput
+
 	function handleFileUpload(event) {
 		const file = event.target.files[0];
 		if (file) {
@@ -51,6 +55,7 @@
 					method="POST"
 					class="space-y-4 md:space-y-6"
 					enctype="multipart/form-data"
+					use:enhance
 				>
 					<div
 						class="w-32 h-32 rounded-full overflow-hidden bg-gray-200 flex items-center justify-center mx-auto"
@@ -81,7 +86,7 @@
 							id="licensePlate"
 							class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
 							placeholder="AB12345"
-							required=""
+							required
 						/>
 					</div>
 					<div>
@@ -93,7 +98,7 @@
 							id="brand"
 							class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
 							placeholder="VW"
-							required=""
+							required
 						/>
 					</div>
 					<div>
@@ -105,7 +110,7 @@
 							id="model"
 							class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
 							placeholder="UP"
-							required=""
+							required
 						/>
 					</div>
 					<div>
@@ -117,7 +122,7 @@
 							id="motor"
 							class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
 							placeholder="1.4"
-							required=""
+							required
 						/>
 					</div>
 					<div>
@@ -130,7 +135,7 @@
 							id="type"
 							class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
 							placeholder="Benzin"
-							required=""
+							required
 						/>
 					</div>
 					<div>
@@ -144,7 +149,7 @@
 							id="firstRegistration"
 							class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
 							placeholder="2014.10.10"
-							required=""
+							required
 						/>
 					</div>
 					<div>
@@ -156,7 +161,7 @@
 							id="vin"
 							class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
 							placeholder="HSDJ2782RUA"
-							required=""
+							required
 						/>
 					</div>
 

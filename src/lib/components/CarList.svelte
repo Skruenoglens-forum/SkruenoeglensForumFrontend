@@ -1,4 +1,5 @@
 <script>
+	import { enhance } from "$app/forms"
 	import { page } from '$app/stores';
 	import { getDate, getDateTime } from '../utils/utils';
 	export let cars = [];
@@ -83,7 +84,7 @@
 						class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4"
 						>Rediger</a
 					>
-					<form action="?/deleteCar" method="POST">
+					<form action="?/deleteCar" method="POST" use:enhance>
 						<input type="hidden" name="carID" value={car.id} />
 						<button
 							type="submit"

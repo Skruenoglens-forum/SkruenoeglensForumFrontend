@@ -1,6 +1,8 @@
 <script>
+	import { enhance } from "$app/forms"
 	import { page } from '$app/stores';
 	import { getDateTime } from '../utils/utils';
+	
 	export let user;
 </script>
 
@@ -38,7 +40,7 @@
 					href="/users/{user.id}/edit"
 					class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4">Rediger</a
 				>
-				<form action="?/deleteUser" method="POST">
+				<form action="?/deleteUser" method="POST" use:enhance>
 					<input type="hidden" name="userID" value={user.id} />
 					<button
 						type="submit"

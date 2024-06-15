@@ -1,10 +1,11 @@
 <script>
+	import { enhance } from "$app/forms"
 	import { page } from '$app/stores';
 </script>
 
 <div class="mt-4 lg:row-span-3 lg:mt-0">
 	<p class="text-3xl tracking-tight text-gray-900">Skriv en kommentar</p>
-	<form action="?/addComment" method="POST" class="mt-10">
+	<form action="?/addComment" method="POST" class="mt-10" use:enhance>
 		{#if !$page.data.loggedInUser}
 		<p class="text-sm text-gray-500">Du skal være logget ind for at skrive en kommentar</p>
 		{/if}

@@ -1,6 +1,8 @@
 <script>
+	import { enhance } from "$app/forms"
 	import { page } from '$app/stores';
 	import { getDate } from '../utils/utils.js';
+
 	export let post;
 </script>
 
@@ -18,7 +20,7 @@
 			>
 		</span>
 		<span class="text-sm text-gray-500">
-			<form action="?/deletePost" method="POST">
+			<form action="?/deletePost" method="POST" use:enhance>
 				<button
 					type="submit"
 					class="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md transition duration-300 ease-in-out"

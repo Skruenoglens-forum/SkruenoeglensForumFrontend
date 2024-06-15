@@ -1,5 +1,6 @@
 <script>
-	import ErrorMessage from "../../../lib/components/ErrorMessage.svelte";
+	import { enhance } from "$app/forms"
+	import ErrorMessage from "$lib/components/ErrorMessage.svelte";
 
 	export let form;
 </script>
@@ -16,7 +17,7 @@
 			<h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
 				Log ind
 			</h1>
-			<form class="space-y-4 md:space-y-6" action="?/login" method="POST">
+			<form class="space-y-4 md:space-y-6" action="?/login" method="POST" use:enhance>
 				<div>
 					<label for="email" class="block mb-2 text-sm font-medium text-gray-900">Email</label>
 					<input
@@ -25,7 +26,7 @@
 						id="email"
 						class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
 						placeholder="jens@jensen.com"
-						required=""
+						required
 					/>
 				</div>
 				<div>
@@ -36,7 +37,7 @@
 						id="password"
 						placeholder="••••••••"
 						class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5"
-						required=""
+						required
 					/>
 				</div>
 				<button type="submit" class="w-full button login-button">Log ind</button>

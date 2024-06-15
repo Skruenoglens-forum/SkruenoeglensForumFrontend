@@ -1,4 +1,5 @@
 <script>
+	import { enhance } from "$app/forms"
 	import { page } from '$app/stores';
 
 	let isMenuOpen = false;
@@ -37,7 +38,7 @@
 				<a href="/login" class="button login-button">Log ind</a>
 			{/if}
 			{#if $page.data.loggedInUser}
-				<form action="/logout" method="POST">
+				<form action="/logout" method="POST" use:enhance>
 					<button type="submit" class="h-10 button logout-button">Log ud</button>
 				</form>
 			{/if}
@@ -159,7 +160,7 @@
 							</div>
 						{/if}
 						{#if $page.data.loggedInUser}
-							<form action="/logout" method="POST" class="flex-1 flex justify-center">
+							<form action="/logout" method="POST" class="flex-1 flex justify-center" use:enhance>
 								<button type="submit" class="w-full max-w-md block button logout-button"
 									>Log ud</button
 								>

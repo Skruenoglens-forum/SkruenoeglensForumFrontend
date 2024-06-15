@@ -9,15 +9,13 @@
 
 	export let getPostsByInput;
 
-    // Reactive variable to track dropdown visibility
     let isDropdownVisible = false;
 
-    // Function to handle filter toggle
     function toggleFilter() {
         isDropdownVisible = !isDropdownVisible;
     }
 
-    	// Function to handle accordion toggle
+    // Function to handle accordion toggle
 	function toggleAccordion(event) {
 		const button = event.currentTarget;
 		const bodyId = button.getAttribute('data-accordion-target');

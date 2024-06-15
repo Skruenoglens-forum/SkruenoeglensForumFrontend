@@ -1,8 +1,8 @@
 <script>
-	import CommentSection from '../../../lib/components/CommentSection.svelte';
-	import Comments from '../../../lib/components/Comments.svelte';
-	import ImageGallery from '../../../lib/components/ImageGallery.svelte';
-	import PostDetails from '../../../lib/components/PostDetails.svelte';
+	import CommentSection from '$lib/components/CommentSection.svelte';
+	import Comments from '$lib/components/Comments.svelte';
+	import ImageGallery from '$lib/components/ImageGallery.svelte';
+	import PostDetails from '$lib/components/PostDetails.svelte';
 
 	export let data;
 </script>

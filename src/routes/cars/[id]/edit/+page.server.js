@@ -8,21 +8,8 @@ export const load = async ({ locals, params }) => {
 			throw redirect(302, '/login');
 		}
 
-		let car = [];
+		const car = await getCar(params.id)
 
-		const res = await fetch(`${API_HOST}/cars/${params.id}`, {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${locals.user.jwt}`
-			}
-		});
-
-		if (!res.ok) {
-			throw new Error('Failed to fetch car data');
-		}
-
-		car = await res.json();
 		// Check if logged in user owns this car
 		if (locals.user.uid != car.user_id && locals.user.roleId != 1) {
 			throw redirect(302, `/`);
@@ -36,29 +23,34 @@ export const load = async ({ locals, params }) => {
 	}
 };
 
+const getCar = async (id) => {
+	const res = await fetch(`${API_HOST}/cars/${id}`, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	});
+
+	if (!res.ok) {
+		throw new Error('Kunne ikke hente bil');
+	}
+
+	return await res.json();
+}
+
 const edit = async ({ locals, request, params }) => {
 	const data = await request.formData();
-	const carImage = data.get('carImage');
-	const licensePlate = data.get('licensePlate');
-	const brand = data.get('brand');
-	const model = data.get('model');
-	const motor = data.get('motor');
-	const type = data.get('type');
-	const firstRegistration = data.get('firstRegistration');
-	const vin = data.get('vin');
 
-	// Create form data
 	const formData = new FormData();
-	formData.append('file', carImage);
-	formData.append('licensePlate', licensePlate);
-	formData.append('brand', brand);
-	formData.append('model', model);
-	formData.append('motor', motor);
-	formData.append('type', type);
-	formData.append('firstRegistration', firstRegistration);
-	formData.append('vin', vin);
+	formData.append('file', data.get('carImage'));
+	formData.append('licensePlate', data.get('licensePlate'));
+	formData.append('brand', data.get('brand'));
+	formData.append('model', data.get('model'));
+	formData.append('motor', data.get('motor'));
+	formData.append('type', data.get('type'));
+	formData.append('firstRegistration', data.get('firstRegistration'));
+	formData.append('vin', data.get('vin'));
 
-	// MAKE PUT REQUEST
 	const response = await fetch(`${API_HOST}/cars/${params.id}`, {
 		method: 'PUT',
 		headers: {

@@ -1,4 +1,5 @@
 <script>
+	import { enhance } from "$app/forms"
 	import { page } from '$app/stores';
 	import { getDateTime } from '../utils/utils';
 
@@ -35,7 +36,7 @@
 				</span>
 				{#if user.role_id != 3}
 				<span class="text-sm text-gray-500">
-					<form action="?/banUser" method="POST">
+					<form action="?/banUser" method="POST" use:enhance>
 						<input type="hidden" name="userID" value={user.id} />
 						<button
 							type="submit"
@@ -47,7 +48,7 @@
 				</span>
 				{:else}
 				<span class="text-sm text-gray-500">
-					<form action="?/unbanUser" method="POST">
+					<form action="?/unbanUser" method="POST" use:enhance>
 						<input type="hidden" name="userID" value={user.id} />
 						<button
 							type="submit"
@@ -59,7 +60,7 @@
 				</span>
 				{/if}
 				<span class="text-sm text-gray-500">
-					<form action="?/deleteUser" method="POST">
+					<form action="?/deleteUser" method="POST" use:enhance>
 						<input type="hidden" name="userID" value={user.id} />
 						<button
 							type="submit"

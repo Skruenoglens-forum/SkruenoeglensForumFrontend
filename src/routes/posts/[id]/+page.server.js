@@ -2,38 +2,9 @@ import { redirect } from '@sveltejs/kit';
 import { API_HOST } from '$env/static/private';
 
 export const load = async ({ params }) => {
-	let post = [];
-
-	let res = await fetch(`${API_HOST}/posts/${params.id}`, {
-		method: 'GET',
-		headers: {
-			'Content-Type': 'application/json'
-		}
-	});
-
-	post = await res.json();
-
-	let images = [];
-
-	res = await fetch(`${API_HOST}/posts/${params.id}/images`, {
-		method: 'GET',
-		headers: {
-			'Content-Type': 'application/json'
-		}
-	});
-
-	images = await res.json();
-
-	let comments = [];
-
-	res = await fetch(`${API_HOST}/comments/posts/${params.id}`, {
-		method: 'GET',
-		headers: {
-			'Content-Type': 'application/json'
-		}
-	});
-
-	comments = await res.json();
+	const post = await getPost(params.id)
+	const images = await getImages(params.id)
+	const comments = await getComments(params.id)
 
 	return {
 		post,
@@ -41,6 +12,39 @@ export const load = async ({ params }) => {
 		comments
 	};
 };
+
+const getPost = async (id) => {
+	const res = await fetch(`${API_HOST}/posts/${id}`, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	});
+
+	return await res.json();
+}
+
+const getImages = async (id) => {
+	const res = await fetch(`${API_HOST}/posts/${id}/images`, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	});
+
+	return await res.json();
+}
+
+const getComments = async (id) => {
+	const res = await fetch(`${API_HOST}/comments/posts/${id}`, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	});
+
+	return await res.json();
+}
 
 const addComment = async ({ request, locals, params }) => {
 	const data = await request.formData();
@@ -52,7 +56,6 @@ const addComment = async ({ request, locals, params }) => {
 		throw redirect(302, '/login');
 	}
 
-	// MAKE POST REQUEST
 	await fetch(`${API_HOST}/comments/posts/${params.id}`, {
 		method: 'POST',
 		headers: {
@@ -62,7 +65,6 @@ const addComment = async ({ request, locals, params }) => {
 		body: JSON.stringify({ description, parentId })
 	});
 
-	// redirect the user
 	throw redirect(302, `/posts/${params.id}`);
 };
 
@@ -76,7 +78,6 @@ const editComment = async ({ request, locals, params }) => {
 		throw redirect(302, '/login');
 	}
 
-	// MAKE PUT REQUEST
 	await fetch(`${API_HOST}/comments/${commentId}`, {
 		method: 'PUT',
 		headers: {
@@ -86,7 +87,6 @@ const editComment = async ({ request, locals, params }) => {
 		body: JSON.stringify({ description })
 	});
 
-	// redirect the user
 	throw redirect(302, `/posts/${params.id}`);
 };
 
@@ -94,7 +94,6 @@ const markCommentAsSolution = async ({ request, locals, params }) => {
 	const data = await request.formData();
 	const commentId = data.get('commentId');
 
-	// MAKE PUT REQUEST
 	await fetch(`${API_HOST}/comments/${commentId}/solution/1`, {
 		method: 'PUt',
 		headers: {
@@ -103,7 +102,6 @@ const markCommentAsSolution = async ({ request, locals, params }) => {
 		}
 	});
 
-	// redirect the user
 	throw redirect(302, `/posts/${params.id}`);
 };
 
@@ -111,7 +109,6 @@ const removeCommentAsSolution = async ({ request, locals, params }) => {
 	const data = await request.formData();
 	const commentId = data.get('commentId');
 
-	// MAKE PUT REQUEST
 	await fetch(`${API_HOST}/comments/${commentId}/solution/0`, {
 		method: 'PUt',
 		headers: {
@@ -120,7 +117,6 @@ const removeCommentAsSolution = async ({ request, locals, params }) => {
 		}
 	});
 
-	// redirect the user
 	throw redirect(302, `/posts/${params.id}`);
 };
 
@@ -128,7 +124,6 @@ const deleteComment = async ({ request, locals, params }) => {
 	const data = await request.formData();
 	const commentId = data.get('commentId');
 
-	// MAKE DELETE REQUEST
 	await fetch(`${API_HOST}/comments/${commentId}`, {
 		method: 'DELETE',
 		headers: {
@@ -137,12 +132,10 @@ const deleteComment = async ({ request, locals, params }) => {
 		}
 	});
 
-	// redirect the user
 	throw redirect(302, `/posts/${params.id}`);
 };
 
 const deletePost = async ({ locals, params }) => {
-	// MAKE DELETE REQUEST
 	await fetch(`${API_HOST}/posts/${params.id}`, {
 		method: 'DELETE',
 		headers: {
@@ -151,7 +144,6 @@ const deletePost = async ({ locals, params }) => {
 		}
 	});
 
-	// redirect the user
 	throw redirect(302, `/`);
 };
 

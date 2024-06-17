@@ -36,8 +36,6 @@ const banUser = async ({ request, locals }) => {
 			Authorization: `Bearer ${locals.user.jwt}`
 		}
 	});
-
-	throw redirect(302, '/admin');
 };
 
 const unbanUser = async ({ request, locals }) => {
@@ -51,8 +49,6 @@ const unbanUser = async ({ request, locals }) => {
 			Authorization: `Bearer ${locals.user.jwt}`
 		}
 	});
-
-	throw redirect(302, '/admin');
 };
 
 const deleteUser = async ({ request, locals, cookies }) => {
@@ -78,8 +74,6 @@ const deleteUser = async ({ request, locals, cookies }) => {
 		});
 
 		throw redirect(302, '/signup');
-	} else {
-		throw redirect(302, '/admin');
 	}
 };
 

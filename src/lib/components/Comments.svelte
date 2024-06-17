@@ -158,6 +158,9 @@
 			</div>
 			<button
 				type="submit"
+				on:click={() => {
+					toggleCommentEditTextField(comment.id)
+				}}
 				class="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
 				>Rediger kommentar</button
 			>
@@ -194,7 +197,7 @@
 			</svg>
 		</button>
 		{/if}
-		<div id="dropdownDots" class="{dropdownVisible[comment.id] ? '' : 'hidden'} z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-40">
+		<div id="dropdownDots" class="{dropdownVisible[comment.id] ? '' : 'hidden'} {!commentEditTextFieldVisible[comment.id] ? '' : 'hidden'} z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-40">
 			<ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownMenuIconButton">
 				<!-- Solution visible for owner of post and admin -->
 				{#if $page.data.loggedInUser?.uid == post.user_id || $page.data.loggedInUser?.roleId == 1}
@@ -227,7 +230,10 @@
 				{#if $page.data.loggedInUser?.uid == comment.user_id || $page.data.loggedInUser?.roleId == 1}
 				<li>
 					<div class="block text-blue-600 py-2 px-4 hover:bg-gray-100">
-						<button on:click={() => toggleCommentEditTextField(comment.id)}>Rediger</button>
+						<button on:click={() => {
+							toggleCommentEditTextField(comment.id)
+							toggleCommentReplyTextField(comment.id)
+						}}>Rediger</button>
 					</div>
 				</li>
 				<li>

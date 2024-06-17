@@ -143,7 +143,7 @@
 					action="?/editComment"
 					method="POST"
 					class="{commentEditTextFieldVisible[comment.id] ? '' : 'hidden'} mt-10"
-					use:enhanc
+					use:enhance
 				>
 			<div class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200">
 				<input type="hidden" name="commentId" value={comment.id} />
@@ -166,7 +166,7 @@
 				action="?/addComment"
 				method="POST"
 				class="{commentReplyTextFieldVisible[comment.id] ? '' : 'hidden'} mt-10"
-				use:enhanc
+				use:enhance
 			>
 				<div class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200">
 					<input type="hidden" name="parentId" value={comment.id} />
@@ -187,7 +187,7 @@
 			</form>
 		</div>
 		<!-- Comment Settings visible for owner of post, owner of comment and admin -->
-		{#if $page.data.loggedInUser?.uid == comment.user_id || $page.data.loggedInUser?.uid == post.user_id || $page.data.loggedInUser?.roleId == 1}
+		{#if ($page.data.loggedInUser?.uid == comment.user_id || $page.data.loggedInUser?.uid == post.user_id || $page.data.loggedInUser?.roleId == 1) && $page.data.loggedInUser}
 		<button on:click={() => toggleDropdown(comment.id)} id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots" data-dropdown-placement="bottom-start" class="inline-flex self-center items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50" type="button">
 			<svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 4 15">
 				<path d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/>
@@ -204,7 +204,7 @@
 							action="?/markCommentAsSolution"
 							method="POST"
 							class="block px-4 text-green-600 py-2 px-4 hover:bg-gray-100"
-							use:enhanc
+							use:enhance
 						>
 							<input type="hidden" name="commentId" value={comment.id} />
 							<button type="submit">Løsning</button>
@@ -215,7 +215,7 @@
 							action="?/removeCommentAsSolution"
 							method="POST"
 							class="block px-4 text-green-600 py-2 px-4 hover:bg-gray-100"
-							use:enhanc
+							use:enhance
 						>
 							<input type="hidden" name="commentId" value={comment.id} />
 							<button type="submit">Fjern løsning</button>
@@ -235,7 +235,7 @@
 						action="?/deleteComment"
 						method="POST"
 						class="block text-red-600 py-2 px-4 hover:bg-gray-100"
-						use:enhanc
+						use:enhance
 					>
 						<input type="hidden" name="commentId" value={comment.id} />
 						<button type="submit">Slet</button>

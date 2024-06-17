@@ -10,7 +10,7 @@
 	<h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl mb-4">
 		{post.title}
 	</h1>
-	{#if $page.data.loggedInUser?.uid == post.user_id || $page.data.loggedInUser?.roleId == 1}
+	{#if ($page.data.loggedInUser?.uid == post.user_id || $page.data.loggedInUser?.roleId == 1) && $page.data.loggedInUser}
 	<div class="mt-4 sm:mt-0 sm:ml-auto flex items-center space-x-4">
 		<span class="text-sm text-gray-500">
 			<a

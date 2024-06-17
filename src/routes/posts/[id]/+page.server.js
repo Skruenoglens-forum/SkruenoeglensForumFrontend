@@ -64,11 +64,9 @@ const addComment = async ({ request, locals, params }) => {
 		},
 		body: JSON.stringify({ description, parentId })
 	});
-
-	throw redirect(302, `/posts/${params.id}`);
 };
 
-const editComment = async ({ request, locals, params }) => {
+const editComment = async ({ request, locals }) => {
 	const data = await request.formData();
 	const description = data.get('description');
 	const commentId = data.get('commentId');
@@ -86,11 +84,9 @@ const editComment = async ({ request, locals, params }) => {
 		},
 		body: JSON.stringify({ description })
 	});
-
-	throw redirect(302, `/posts/${params.id}`);
 };
 
-const markCommentAsSolution = async ({ request, locals, params }) => {
+const markCommentAsSolution = async ({ request, locals }) => {
 	const data = await request.formData();
 	const commentId = data.get('commentId');
 
@@ -101,11 +97,9 @@ const markCommentAsSolution = async ({ request, locals, params }) => {
 			Authorization: `Bearer ${locals.user.jwt}`
 		}
 	});
-
-	throw redirect(302, `/posts/${params.id}`);
 };
 
-const removeCommentAsSolution = async ({ request, locals, params }) => {
+const removeCommentAsSolution = async ({ request, locals }) => {
 	const data = await request.formData();
 	const commentId = data.get('commentId');
 
@@ -116,11 +110,9 @@ const removeCommentAsSolution = async ({ request, locals, params }) => {
 			Authorization: `Bearer ${locals.user.jwt}`
 		}
 	});
-
-	throw redirect(302, `/posts/${params.id}`);
 };
 
-const deleteComment = async ({ request, locals, params }) => {
+const deleteComment = async ({ request, locals }) => {
 	const data = await request.formData();
 	const commentId = data.get('commentId');
 
@@ -131,8 +123,6 @@ const deleteComment = async ({ request, locals, params }) => {
 			Authorization: `Bearer ${locals.user.jwt}`
 		}
 	});
-
-	throw redirect(302, `/posts/${params.id}`);
 };
 
 const deletePost = async ({ locals, params }) => {

@@ -64,7 +64,7 @@ const add = async ({ locals, request }) => {
 		console.log(response.status);
 	}
 
-	throw redirect(303, `/users/${locals.user.uid}`);
+	throw redirect(302, `/users/${locals.user.uid}`);
 };
 
 export const actions = { add };

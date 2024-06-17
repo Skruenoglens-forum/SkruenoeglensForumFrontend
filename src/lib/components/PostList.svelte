@@ -73,7 +73,7 @@
 						class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4"
 						>Rediger</a
 					>
-					<form action="?/deletePost" method="POST" use:enhance>
+					<form action="?/deletePost" method="POST">
 						<input type="hidden" name="postId" value={post.id} />
 						<button
 							type="submit"

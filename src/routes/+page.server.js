@@ -1,5 +1,5 @@
-import { redirect } from '@sveltejs/kit';
 import { API_HOST } from '$env/static/private';
+import { redirect } from '@sveltejs/kit';
 
 export const load = async () => {
 	let posts = await getPosts();
@@ -45,7 +45,7 @@ const deletePost = async ({ request, locals }) => {
 		}
 	});
 
-	throw redirect(302, `/`);
+	throw redirect(302, "/")
 };
 
 export const actions = { deletePost };

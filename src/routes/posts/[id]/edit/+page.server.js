@@ -74,7 +74,7 @@ const edit = async ({ locals, request, params }) => {
 		console.log(response.status);
 	}
 
-	throw redirect(303, `/`);
+	throw redirect(303, `/posts/${params.id}`);
 };
 
 export const actions = { edit };

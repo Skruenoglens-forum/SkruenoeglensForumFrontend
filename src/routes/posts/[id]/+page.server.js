@@ -134,7 +134,7 @@ const deletePost = async ({ locals, params }) => {
 		}
 	});
 
-	throw redirect(302, `/`);
+	throw redirect(303, `/users/${locals.user.uid}`);
 };
 
 export const actions = {

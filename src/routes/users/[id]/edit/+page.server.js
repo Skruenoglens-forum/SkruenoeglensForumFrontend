@@ -52,7 +52,7 @@ const edit = async ({ locals, request, params }) => {
 		return fail(400, { user: true });
 	}
 
-	throw redirect(303, `/users/${params.id}`);
+	throw redirect(302, `/users/${params.id}`);
 };
 
 const newpassword = async ({ locals, request, params }) => {
@@ -77,7 +77,7 @@ const newpassword = async ({ locals, request, params }) => {
 		return fail(400, { user: true });
 	}
 
-	throw redirect(303, `/`);
+	throw redirect(302, `/users/${params.id}`);
 };
 
 export const actions = { edit, newpassword };
